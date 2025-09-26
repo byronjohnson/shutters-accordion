@@ -1,40 +1,23 @@
 /* Shutters CSS Accordion - Core Functionality */
-/* Critical CSS for accordion functionality - keep under 50 lines */
+.shutters-accordion { display: block; }
+.shutters-item { border-bottom: 1px solid #ccc; }
+.shutters-toggle { display: none; }
+.shutters-header { cursor: pointer; display: block; padding: 1rem; user-select: none; }
 
-.shutters-accordion {
-  display: block;
-}
-
-.shutters-item {
-  border-bottom: 1px solid #ccc;
-}
-
-.shutters-toggle {
-  display: none;
-}
-
-.shutters-header {
-  cursor: pointer;
-  display: block;
-  padding: 1rem;
-  user-select: none;
-}
-
-/* CSS Flexbox-based expand/collapse mechanism */
+/* CSS Grid-based expand/collapse mechanism for smooth 60fps animations */
 .shutters-content {
-  display: flex;
-  flex-direction: column;
-  max-height: 0;
+  display: grid;
+  grid-template-rows: 0fr;
   overflow: hidden;
-  transition: max-height 0.3s ease-in-out;
+  transition: grid-template-rows 0.3s ease-in-out;
 }
+.shutters-body { min-height: 0; overflow: hidden; }
 
-.shutters-body {
-  flex: 1;
-  overflow: hidden;
-}
+/* Expanded state using CSS Grid animation */
+.shutters-toggle:checked + .shutters-header + .shutters-content { grid-template-rows: 1fr; }
 
-/* Expanded state using flexbox animation */
-.shutters-toggle:checked + .shutters-header + .shutters-content {
-  max-height: 1000px;
+/* Fallback for browsers without CSS Grid support */
+@supports not (display: grid) {
+  .shutters-content { display: block; max-height: 0; transition: max-height 0.3s ease-in-out; }
+  .shutters-toggle:checked + .shutters-header + .shutters-content { max-height: 1000px; }
 }
