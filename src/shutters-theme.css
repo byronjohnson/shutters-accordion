@@ -38,7 +38,7 @@
   justify-content: space-between;
   padding: 1rem;
   transition: background-color var(--shutters-transition-duration) var(--shutters-transition-easing);
-  width: 100%;
+  max-width: 100%;
 
   &:hover {
     background-color: var(--shutters-hover-bg);
