@@ -21,10 +21,10 @@
 
 .shutters-item {
   border-bottom: 1px solid var(--shutters-border-color);
-}
 
-.shutters-item:last-child {
-  border-bottom: none;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .shutters-header {
@@ -38,29 +38,29 @@
   justify-content: space-between;
   max-width: 100%;
   padding: 1rem;
-  transform: translateZ(0); /* Hardware acceleration */
+  transform: translateZ(0);
   transition: background-color var(--shutters-transition-duration) var(--shutters-transition-easing),
               transform var(--shutters-transition-duration) var(--shutters-transition-easing);
-}
 
-.shutters-header:hover {
-  background-color: var(--shutters-hover-bg);
-}
+  &:hover {
+    background-color: var(--shutters-hover-bg);
+  }
 
-.shutters-header:focus {
-  background-color: var(--shutters-hover-bg);
-  outline: 2px solid var(--shutters-focus-color);
-  outline-offset: -2px;
-}
+  &:focus {
+    background-color: var(--shutters-hover-bg);
+    outline: 2px solid var(--shutters-focus-color);
+    outline-offset: -2px;
+  }
 
-.shutters-header:focus-visible {
-  outline: 2px solid var(--shutters-focus-color);
-  outline-offset: -2px;
-}
+  &:focus-visible {
+    outline: 2px solid var(--shutters-focus-color);
+    outline-offset: -2px;
+  }
 
-.shutters-header:active {
-  background-color: var(--shutters-hover-bg);
-  transform: translateZ(0) translateY(1px);
+  &:active {
+    background-color: var(--shutters-hover-bg);
+    transform: translateZ(0) translateY(1px);
+  }
 }
 
 .shutters-title {
@@ -71,13 +71,13 @@
 .shutters-icon {
   color: var(--shutters-text-color);
   font-size: 1.2rem;
-  transform: translateZ(0); /* Hardware acceleration */
+  transform: translateZ(0);
   transition: transform var(--shutters-transition-duration) var(--shutters-transition-easing);
-  will-change: transform; /* Optimize for transform animations */
-}
+  will-change: transform;
 
-.shutters-icon::before {
-  content: '+';
+  &::before {
+    content: '+';
+  }
 }
 
 .shutters-toggle:checked + .shutters-header .shutters-icon {
@@ -88,33 +88,32 @@
   color: var(--shutters-text-color);
   line-height: 1.6;
   padding: 0 1rem 1rem 1rem;
-}
 
-.shutters-body p {
-  margin: 0 0 1rem 0;
-}
+  p {
+    margin: 0 0 1rem 0;
 
-.shutters-body p:last-child {
-  margin-bottom: 0;
-}
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 
-.shutters-body ul,
-.shutters-body ol {
-  margin: 0 0 1rem 0;
-  padding-left: 1.5rem;
-}
+  ul,
+  ol {
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
 
-.shutters-body ul:last-child,
-.shutters-body ol:last-child {
-  margin-bottom: 0;
-}
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 
-.shutters-body li {
-  margin-bottom: 0.25rem;
-}
+  li {
+    margin-bottom: 0.25rem;
 
-.shutters-body li:last-child {
-  margin-bottom: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 /* Responsive typography */

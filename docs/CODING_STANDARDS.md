@@ -14,7 +14,7 @@ This document outlines the coding standards and conventions for the Share Bounce
 ### Property Organization
 - **Alphabetize properties**: All CSS properties within a rule should be listed in alphabetical order
 - **Use nesting**: Leverage CSS nesting for better organization and reduced repetition
-- **Prefer flexbox**: Use flexbox for layout solutions when appropriate
+- **flexbox required**: Use flexbox for layout solutions when appropriate
 
 ### CSS Structure Example
 ```css

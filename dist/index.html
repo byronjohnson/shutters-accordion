@@ -1,216 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shutters CSS Accordion Utility - Demo</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      margin: 0;
-      padding: 2rem;
-      background-color: #f9f9f9;
-    }
-    
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    h1, h2 {
-      color: #333;
-    }
-    
-    .demo-section {
-      margin: 2rem 0;
-    }
-    
-    .demo-accordion {
-      margin: 1rem 0;
-    }
-  </style>
-  <script type="module" crossorigin src="/assets/main-qBKBMYgk.js"></script>
-  <link rel="stylesheet" crossorigin href="/css/shutters-core.BKur70dE.css">
-  <link rel="stylesheet" crossorigin href="/css/shutters-theme.BIXeh5Or.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Shutters CSS Accordion Utility</h1>
-    <p>A lightweight, developer-friendly accordion component that prioritizes simplicity and customization.</p>
-    
-    <section class="demo-section">
-      <h2 id="basic-demo-heading">Basic Accordion Demo</h2>
-      <div class="shutters-accordion demo-accordion" 
-           data-shutters='{"autoClose": false}'
-           role="region" 
-           aria-labelledby="basic-demo-heading">
-        <div class="shutters-item">
-          <input type="checkbox" 
-                 id="shutters-item-1" 
-                 class="shutters-toggle"
-                 aria-describedby="shutters-desc-1">
-          <label for="shutters-item-1" 
-                 class="shutters-header"
-                 role="button"
-                 aria-expanded="false"
-                 aria-controls="shutters-content-1"
-                 tabindex="0">
-            <span class="shutters-title">What is the Shutters CSS Accordion?</span>
-            <span class="shutters-icon" aria-hidden="true"></span>
-          </label>
-          <div class="shutters-content" 
-               id="shutters-content-1"
-               role="region"
-               aria-labelledby="shutters-item-1">
-            <div class="shutters-body">
-              <p id="shutters-desc-1">The Shutters CSS Accordion is a lightweight utility that provides accordion functionality using primarily CSS with minimal JavaScript. It's designed for easy integration into any web project.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shutters CSS Accordion Utility - Demo</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 2rem;
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1,
+      h2 {
+        color: #333;
+      }
+
+      .demo-section {
+        margin: 2rem 0;
+      }
+
+      .demo-accordion {
+        margin: 1rem 0;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/main-DPIAJjCO.js"></script>
+    <link rel="stylesheet" crossorigin href="/css/shutters-core.CJiWQnDz.css">
+    <link rel="stylesheet" crossorigin href="/css/shutters-theme.DviIcxWG.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Shutters CSS Accordion Utility</h1>
+      <p>
+        A lightweight, developer-friendly accordion component that prioritizes
+        simplicity and customization.
+      </p>
+
+      <section class="demo-section">
+        <h2 id="basic-demo-heading">Basic Accordion Demo</h2>
+        <div
+          class="shutters-accordion demo-accordion"
+          data-shutters='{"autoClose": false}'
+          role="region"
+          aria-labelledby="basic-demo-heading"
+        >
+          <div class="shutters-item">
+            <input
+              type="checkbox"
+              id="shutters-item-1"
+              class="shutters-toggle"
+              aria-describedby="shutters-desc-1"
+            />
+            <label
+              for="shutters-item-1"
+              class="shutters-header"
+              role="button"
+              aria-expanded="false"
+              aria-controls="shutters-content-1"
+              tabindex="0"
+            >
+              <span class="shutters-title"
+                >What is the Shutters CSS Accordion?</span
+              >
+              <span class="shutters-icon" aria-hidden="true"></span>
+            </label>
+            <div
+              class="shutters-content"
+              id="shutters-content-1"
+              role="region"
+              aria-labelledby="shutters-item-1"
+            >
+              <div class="shutters-body">
+                <p id="shutters-desc-1">
+                  The Shutters CSS Accordion is a lightweight utility that
+                  provides accordion functionality using primarily CSS with
+                  minimal JavaScript. It's designed for easy integration into
+                  any web project.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="shutters-item">
+            <input
+              type="checkbox"
+              id="shutters-item-2"
+              class="shutters-toggle"
+              aria-describedby="shutters-desc-2"
+            />
+            <label
+              for="shutters-item-2"
+              class="shutters-header"
+              role="button"
+              aria-expanded="false"
+              aria-controls="shutters-content-2"
+              tabindex="0"
+            >
+              <span class="shutters-title">How does it work?</span>
+              <span class="shutters-icon" aria-hidden="true"></span>
+            </label>
+            <div
+              class="shutters-content"
+              id="shutters-content-2"
+              role="region"
+              aria-labelledby="shutters-item-2"
+            >
+              <div class="shutters-body">
+                <p id="shutters-desc-2">
+                  The accordion uses the CSS checkbox hack combined with CSS
+                  Grid for smooth animations. Hidden checkbox inputs control the
+                  expand/collapse states through CSS sibling selectors.
+                </p>
+                <ul>
+                  <li>
+                    Pure CSS functionality with optional JavaScript enhancements
+                  </li>
+                  <li>CSS Grid animations for smooth transitions</li>
+                  <li>Fallback support for older browsers</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="shutters-item">
+            <input
+              type="checkbox"
+              id="shutters-item-3"
+              class="shutters-toggle"
+              aria-describedby="shutters-desc-3"
+            />
+            <label
+              for="shutters-item-3"
+              class="shutters-header"
+              role="button"
+              aria-expanded="false"
+              aria-controls="shutters-content-3"
+              tabindex="0"
+            >
+              <span class="shutters-title">What are the key features?</span>
+              <span class="shutters-icon" aria-hidden="true"></span>
+            </label>
+            <div
+              class="shutters-content"
+              id="shutters-content-3"
+              role="region"
+              aria-labelledby="shutters-item-3"
+            >
+              <div class="shutters-body">
+                <p id="shutters-desc-3">Key features include:</p>
+                <ul>
+                  <li>
+                    <strong>Lightweight:</strong> Less than 50 lines of critical
+                    CSS
+                  </li>
+                  <li>
+                    <strong>Modular:</strong> Separate core functionality from
+                    presentation styles
+                  </li>
+                  <li>
+                    <strong>Accessible:</strong> Keyboard navigation and screen
+                    reader support
+                  </li>
+                  <li>
+                    <strong>Customizable:</strong> Black and white theme with
+                    CSS custom properties
+                  </li>
+                  <li>
+                    <strong>Compatible:</strong> Works with Vite and modern
+                    build tools
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="shutters-item">
-          <input type="checkbox" 
-                 id="shutters-item-2" 
-                 class="shutters-toggle"
-                 aria-describedby="shutters-desc-2">
-          <label for="shutters-item-2" 
-                 class="shutters-header"
-                 role="button"
-                 aria-expanded="false"
-                 aria-controls="shutters-content-2"
-                 tabindex="0">
-            <span class="shutters-title">How does it work?</span>
-            <span class="shutters-icon" aria-hidden="true"></span>
-          </label>
-          <div class="shutters-content" 
-               id="shutters-content-2"
-               role="region"
-               aria-labelledby="shutters-item-2">
-            <div class="shutters-body">
-              <p id="shutters-desc-2">The accordion uses the CSS checkbox hack combined with CSS Grid for smooth animations. Hidden checkbox inputs control the expand/collapse states through CSS sibling selectors.</p>
-              <ul>
-                <li>Pure CSS functionality with optional JavaScript enhancements</li>
-                <li>CSS Grid animations for smooth transitions</li>
-                <li>Fallback support for older browsers</li>
-              </ul>
+      </section>
+
+      <section class="demo-section">
+        <h2 id="auto-close-demo-heading">Auto-Close Accordion Demo</h2>
+        <div
+          class="shutters-accordion demo-accordion"
+          data-shutters='{"autoClose": true}'
+          role="region"
+          aria-labelledby="auto-close-demo-heading"
+        >
+          <div class="shutters-item">
+            <input
+              type="checkbox"
+              id="shutters-auto-1"
+              class="shutters-toggle"
+              aria-describedby="shutters-auto-desc-1"
+            />
+            <label
+              for="shutters-auto-1"
+              class="shutters-header"
+              role="button"
+              aria-expanded="false"
+              aria-controls="shutters-auto-content-1"
+              tabindex="0"
+            >
+              <span class="shutters-title">Section One</span>
+              <span class="shutters-icon" aria-hidden="true"></span>
+            </label>
+            <div
+              class="shutters-content"
+              id="shutters-auto-content-1"
+              role="region"
+              aria-labelledby="shutters-auto-1"
+            >
+              <div class="shutters-body">
+                <p id="shutters-auto-desc-1">
+                  This accordion has auto-close enabled. Opening one section
+                  will automatically close others.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="shutters-item">
+            <input
+              type="checkbox"
+              id="shutters-auto-2"
+              class="shutters-toggle"
+              aria-describedby="shutters-auto-desc-2"
+            />
+            <label
+              for="shutters-auto-2"
+              class="shutters-header"
+              role="button"
+              aria-expanded="false"
+              aria-controls="shutters-auto-content-2"
+              tabindex="0"
+            >
+              <span class="shutters-title">Section Two</span>
+              <span class="shutters-icon" aria-hidden="true"></span>
+            </label>
+            <div
+              class="shutters-content"
+              id="shutters-auto-content-2"
+              role="region"
+              aria-labelledby="shutters-auto-2"
+            >
+              <div class="shutters-body">
+                <p id="shutters-auto-desc-2">
+                  Click this section to see the auto-close behavior in action.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="shutters-item">
+            <input
+              type="checkbox"
+              id="shutters-auto-3"
+              class="shutters-toggle"
+              aria-describedby="shutters-auto-desc-3"
+            />
+            <label
+              for="shutters-auto-3"
+              class="shutters-header"
+              role="button"
+              aria-expanded="false"
+              aria-controls="shutters-auto-content-3"
+              tabindex="0"
+            >
+              <span class="shutters-title">Section Three</span>
+              <span class="shutters-icon" aria-hidden="true"></span>
+            </label>
+            <div
+              class="shutters-content"
+              id="shutters-auto-content-3"
+              role="region"
+              aria-labelledby="shutters-auto-3"
+            >
+              <div class="shutters-body">
+                <p id="shutters-auto-desc-3">
+                  Only one section can be open at a time with auto-close
+                  enabled.
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        
-        <div class="shutters-item">
-          <input type="checkbox" 
-                 id="shutters-item-3" 
-                 class="shutters-toggle"
-                 aria-describedby="shutters-desc-3">
-          <label for="shutters-item-3" 
-                 class="shutters-header"
-                 role="button"
-                 aria-expanded="false"
-                 aria-controls="shutters-content-3"
-                 tabindex="0">
-            <span class="shutters-title">What are the key features?</span>
-            <span class="shutters-icon" aria-hidden="true"></span>
-          </label>
-          <div class="shutters-content" 
-               id="shutters-content-3"
-               role="region"
-               aria-labelledby="shutters-item-3">
-            <div class="shutters-body">
-              <p id="shutters-desc-3">Key features include:</p>
-              <ul>
-                <li><strong>Lightweight:</strong> Less than 50 lines of critical CSS</li>
-                <li><strong>Modular:</strong> Separate core functionality from presentation styles</li>
-                <li><strong>Accessible:</strong> Keyboard navigation and screen reader support</li>
-                <li><strong>Customizable:</strong> Black and white theme with CSS custom properties</li>
-                <li><strong>Compatible:</strong> Works with Vite and modern build tools</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section class="demo-section">
-      <h2 id="auto-close-demo-heading">Auto-Close Accordion Demo</h2>
-      <div class="shutters-accordion demo-accordion" 
-           data-shutters='{"autoClose": true}'
-           role="region" 
-           aria-labelledby="auto-close-demo-heading">
-        <div class="shutters-item">
-          <input type="checkbox" 
-                 id="shutters-auto-1" 
-                 class="shutters-toggle"
-                 aria-describedby="shutters-auto-desc-1">
-          <label for="shutters-auto-1" 
-                 class="shutters-header"
-                 role="button"
-                 aria-expanded="false"
-                 aria-controls="shutters-auto-content-1"
-                 tabindex="0">
-            <span class="shutters-title">Section One</span>
-            <span class="shutters-icon" aria-hidden="true"></span>
-          </label>
-          <div class="shutters-content" 
-               id="shutters-auto-content-1"
-               role="region"
-               aria-labelledby="shutters-auto-1">
-            <div class="shutters-body">
-              <p id="shutters-auto-desc-1">This accordion has auto-close enabled. Opening one section will automatically close others.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="shutters-item">
-          <input type="checkbox" 
-                 id="shutters-auto-2" 
-                 class="shutters-toggle"
-                 aria-describedby="shutters-auto-desc-2">
-          <label for="shutters-auto-2" 
-                 class="shutters-header"
-                 role="button"
-                 aria-expanded="false"
-                 aria-controls="shutters-auto-content-2"
-                 tabindex="0">
-            <span class="shutters-title">Section Two</span>
-            <span class="shutters-icon" aria-hidden="true"></span>
-          </label>
-          <div class="shutters-content" 
-               id="shutters-auto-content-2"
-               role="region"
-               aria-labelledby="shutters-auto-2">
-            <div class="shutters-body">
-              <p id="shutters-auto-desc-2">Click this section to see the auto-close behavior in action.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="shutters-item">
-          <input type="checkbox" 
-                 id="shutters-auto-3" 
-                 class="shutters-toggle"
-                 aria-describedby="shutters-auto-desc-3">
-          <label for="shutters-auto-3" 
-                 class="shutters-header"
-                 role="button"
-                 aria-expanded="false"
-                 aria-controls="shutters-auto-content-3"
-                 tabindex="0">
-            <span class="shutters-title">Section Three</span>
-            <span class="shutters-icon" aria-hidden="true"></span>
-          </label>
-          <div class="shutters-content" 
-               id="shutters-auto-content-3"
-               role="region"
-               aria-labelledby="shutters-auto-3">
-            <div class="shutters-body">
-              <p id="shutters-auto-desc-3">Only one section can be open at a time with auto-close enabled.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-  
-</body>
+      </section>
+    </div>
+
+  </body>
 </html>
