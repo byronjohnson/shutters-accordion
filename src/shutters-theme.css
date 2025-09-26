@@ -1,9 +1,10 @@
 /* Shutters CSS Accordion - Presentation Theme */
-/* Black and white theme styling */
+/* Black and white theme styling with accessibility compliance */
 
 :root {
-  --shutters-border-color: #000;
   --shutters-bg-color: #fff;
+  --shutters-border-color: #000;
+  --shutters-focus-color: #0066cc;
   --shutters-hover-bg: #f5f5f5;
   --shutters-text-color: #000;
   --shutters-transition-duration: 0.3s;
@@ -14,20 +15,23 @@
   background-color: var(--shutters-bg-color);
   border: 1px solid var(--shutters-border-color);
   font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  max-width: 100%;
 }
 
 .shutters-item {
   border-bottom: 1px solid var(--shutters-border-color);
-}
 
-.shutters-item:last-child {
-  border-bottom: none;
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .shutters-header {
   background-color: var(--shutters-bg-color);
   border: none;
   color: var(--shutters-text-color);
+  cursor: pointer;
   display: flex;
   font-size: 1rem;
   font-weight: 500;
@@ -35,16 +39,26 @@
   padding: 1rem;
   transition: background-color var(--shutters-transition-duration) var(--shutters-transition-easing);
   width: 100%;
-}
 
-.shutters-header:hover {
-  background-color: var(--shutters-hover-bg);
-}
+  &:hover {
+    background-color: var(--shutters-hover-bg);
+  }
 
-.shutters-header:focus {
-  background-color: var(--shutters-hover-bg);
-  outline: 2px solid var(--shutters-text-color);
-  outline-offset: -2px;
+  &:focus {
+    background-color: var(--shutters-hover-bg);
+    outline: 2px solid var(--shutters-focus-color);
+    outline-offset: -2px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--shutters-focus-color);
+    outline-offset: -2px;
+  }
+
+  &:active {
+    background-color: var(--shutters-hover-bg);
+    transform: translateY(1px);
+  }
 }
 
 .shutters-title {
@@ -56,10 +70,10 @@
   color: var(--shutters-text-color);
   font-size: 1.2rem;
   transition: transform var(--shutters-transition-duration) var(--shutters-transition-easing);
-}
 
-.shutters-icon::before {
-  content: '+';
+  &::before {
+    content: '+';
+  }
 }
 
 .shutters-toggle:checked + .shutters-header .shutters-icon {
@@ -68,5 +82,60 @@
 
 .shutters-body {
   color: var(--shutters-text-color);
+  line-height: 1.6;
   padding: 0 1rem 1rem 1rem;
+
+  p {
+    margin: 0 0 1rem 0;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ul, ol {
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  li {
+    margin-bottom: 0.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  .shutters-header {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .shutters-body {
+    font-size: 0.9rem;
+    padding: 0 0.75rem 0.75rem 0.75rem;
+  }
+
+  .shutters-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shutters-header {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .shutters-body {
+    font-size: 0.85rem;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+  }
 }
