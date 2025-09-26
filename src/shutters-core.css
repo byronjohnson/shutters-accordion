@@ -20,43 +20,21 @@
   user-select: none;
 }
 
-/* CSS Grid-based expand/collapse mechanism */
+/* CSS Flexbox-based expand/collapse mechanism */
 .shutters-content {
-  display: grid;
-  grid-template-rows: 0fr;
+  display: flex;
+  flex-direction: column;
+  max-height: 0;
   overflow: hidden;
-  transition: grid-template-rows 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out;
 }
 
 .shutters-body {
-  min-height: 0;
+  flex: 1;
   overflow: hidden;
 }
 
-/* Expanded state using CSS Grid animation */
+/* Expanded state using flexbox animation */
 .shutters-toggle:checked + .shutters-header + .shutters-content {
-  grid-template-rows: 1fr;
-}
-
-/* Fallback for browsers without CSS Grid support (IE11+) */
-@supports not (display: grid) {
-  .shutters-content {
-    display: block;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease-in-out;
-  }
-  
-  .shutters-toggle:checked + .shutters-header + .shutters-content {
-    max-height: 1000px;
-  }
-  
-  .shutters-body {
-    overflow: hidden;
-    padding: 0;
-  }
-  
-  .shutters-toggle:checked + .shutters-header + .shutters-content .shutters-body {
-    padding: 1rem;
-  }
+  max-height: 1000px;
 }
