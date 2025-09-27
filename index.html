@@ -102,7 +102,7 @@
 
     <section class="demo-section">
       <h2>Auto-Close Accordion Demo</h2>
-      <div class="shutters-accordion demo-accordion">
+      <div class="shutters-accordion demo-accordion shutters-autoclose">
         <div class="shutters-item">
           <label class="shutters-header">
             <input type="checkbox" class="shutters-toggle" />
@@ -163,10 +163,10 @@
       duration: 500
     });
 
-    // You can programmatically control accordion items by index:
-    // accordion.open(0); // Open first item
-    // accordion.close(1); // Close second item
-    // accordion.toggle(2); // Toggle third item
+    // You can programmatically control accordion items by global index:
+    // accordion.open(0); // Open first item across all accordions
+    // accordion.close(3); // Close fourth item across all accordions
+    // accordion.toggle(5); // Toggle sixth item across all accordions
   </script>
 </body>
 

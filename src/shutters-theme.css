@@ -38,6 +38,7 @@
 .shutters-header {
   background-color: var(--shutters-bg-color);
   border: none;
+  border-bottom: solid 1px transparent;
   color: var(--shutters-text-color);
   cursor: pointer;
   display: flex;
@@ -48,6 +49,7 @@
   padding: 1rem;
   transform: translateZ(0);
   transition: background-color var(--shutters-transition-duration) var(--shutters-transition-easing),
+              border-bottom var(--shutters-transition-duration) var(--shutters-transition-easing),
               transform var(--shutters-transition-duration) var(--shutters-transition-easing);
 
   &:hover {
