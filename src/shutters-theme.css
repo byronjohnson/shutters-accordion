@@ -25,6 +25,14 @@
   &:last-child {
     border-bottom: none;
   }
+
+}
+
+.shutters-item.opened {
+  .shutters-header {
+    background-color: var(--shutters-hover-bg);
+    border-bottom: solid 1px #ccc;
+  }
 }
 
 .shutters-header {
@@ -87,7 +95,7 @@
 .shutters-body {
   color: var(--shutters-text-color);
   line-height: 1.6;
-  padding: 0 1rem 1rem 1rem;
+  padding: 1rem;
 
   p {
     margin: 0 0 1rem 0;

@@ -1,0 +1,25 @@
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 2rem;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1,
+h2 {
+    color: #333;
+}
+
+.demo-section {
+    margin: 2rem 0;
+}
+
+.demo-accordion {
+    margin: 1rem 0;
+}
