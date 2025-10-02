@@ -101,24 +101,24 @@
 .shutters-body {
   color: var(--shutters-text-color);
   line-height: 1.6;
-  padding: 1rem 0;
+
+  > *:first-child {
+    margin-top: 1rem;
+  }
+
+  > *:last-child {
+    margin-bottom: 1rem;
+  }
 
   p {
     margin: 0 0 1rem 0;
 
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   ul,
   ol {
     margin: 0 0 1rem 0;
     padding-left: 1.5rem;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
   li {
