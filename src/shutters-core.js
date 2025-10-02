@@ -1,3 +1,6 @@
+// Import CSS - Vite will bundle this automatically
+import './shutters-core.css';
+
 /**
  * ShuttersAccordion - A simple, configurable accordion component
  * Minimal framework for building accordion interfaces
