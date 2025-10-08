@@ -7,15 +7,34 @@
   border-bottom: 1px solid #ccc;
 }
 
-.shutters-toggle {
-  display: none;
-}
-
 .shutters-header {
   cursor: pointer;
-  display: block;
+  display: flex;
+  justify-content: space-between;
   padding: 1rem;
   user-select: none;
+
+  &:focus {
+    outline: none
+  }
+}
+
+.shutters-icon {
+  color: var(--shutters-text-color);
+  font-size: 1.2rem;
+
+  &::before {
+    content: '+';
+    display: inline-block;
+    transform: translateZ(0);
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+  }
+}
+
+
+.opened .shutters-icon::before {
+  transform: translateZ(0) rotate(45deg);
 }
 
 /* Grid-based expand/collapse mechanism for smooth 60fps animations */
@@ -24,7 +43,9 @@
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.3s ease-in-out, opacity 0.3s ease-in-out;
   opacity: 0;
+  padding: 0 1rem;
 }
+
 
 .shutters-body {
   min-height: 0;

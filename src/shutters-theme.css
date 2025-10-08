@@ -13,7 +13,7 @@
 
 .shutters-accordion {
   background-color: var(--shutters-bg-color);
-  border: 1px solid var(--shutters-border-color);
+  /* border: 1px solid var(--shutters-border-color); */
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   max-width: 100%;
@@ -31,25 +31,21 @@
 .shutters-item.opened {
   .shutters-header {
     background-color: var(--shutters-hover-bg);
-    border-bottom: solid 1px #ccc;
   }
 }
 
 .shutters-header {
   background-color: var(--shutters-bg-color);
   border: none;
-  border-bottom: solid 1px transparent;
   color: var(--shutters-text-color);
   cursor: pointer;
   display: flex;
   font-size: 1rem;
   font-weight: 500;
-  justify-content: space-between;
   max-width: 100%;
   padding: 1rem;
   transform: translateZ(0);
   transition: background-color var(--shutters-transition-duration) var(--shutters-transition-easing),
-              border-bottom var(--shutters-transition-duration) var(--shutters-transition-easing),
               transform var(--shutters-transition-duration) var(--shutters-transition-easing);
 
   &:hover {
@@ -78,25 +74,9 @@
   text-align: left;
 }
 
-.shutters-icon {
-  color: var(--shutters-text-color);
-  font-size: 1.2rem;
-  transform: translateZ(0);
-  transition: transform var(--shutters-transition-duration) var(--shutters-transition-easing);
-  will-change: transform;
 
-  &::before {
-    content: '+';
-  }
-}
 
-.shutters-toggle:checked + .shutters-header .shutters-icon {
-  transform: translateZ(0) rotate(45deg);
-}
 
-.shutters-content {
-  padding: 0 1rem;
-}
 
 .shutters-body {
   color: var(--shutters-text-color);
@@ -139,7 +119,6 @@
 
   .shutters-body {
     font-size: 0.9rem;
-    padding: 0.75rem;
   }
 
   .shutters-icon {
