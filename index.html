@@ -147,6 +147,110 @@
         </div>
       </div>
     </section>
+
+    <section class="how-to-use">
+      <h2>How to Use</h2>
+      
+      <div class="guide-section">
+        <h3>1. Installation</h3>
+        <p>Include the necessary CSS and JavaScript files in your project:</p>
+        <pre><code>&lt;link rel="stylesheet" href="shutters-core.css" /&gt;
+&lt;link rel="stylesheet" href="shutters-theme.css" /&gt;
+&lt;script type="module" src="shutters-core.js"&gt;&lt;/script&gt;</code></pre>
+      </div>
+
+      <div class="guide-section">
+        <h3>2. HTML Structure</h3>
+        <p>Create your accordion with the following HTML structure:</p>
+        <pre><code>&lt;div class="shutters-accordion"&gt;
+  &lt;div class="shutters-item"&gt;
+    &lt;div class="shutters-header" role="button" tabindex="0" 
+         aria-expanded="false" aria-controls="panel-1"&gt;
+      &lt;span class="shutters-title"&gt;Section Title&lt;/span&gt;
+      &lt;span class="shutters-icon"&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="shutters-content" id="panel-1"&gt;
+      &lt;div class="shutters-body"&gt;
+        &lt;p&gt;Your content goes here&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <div class="guide-section">
+        <h3>3. Initialize JavaScript</h3>
+        <p>Initialize the accordion with optional configuration:</p>
+        <pre><code>import { ShuttersAccordion } from './shutters-core.js';
+
+const accordion = new ShuttersAccordion({
+  container: '.shutters-accordion',
+  animationDuration: 300,
+  animationEasing: 'ease-in-out',
+  defaultOpen: 'none'
+});</code></pre>
+      </div>
+
+      <div class="guide-section">
+        <h3>4. Configuration Options</h3>
+        <div class="options-table">
+          <div class="option-row">
+            <div class="option-name"><code>container</code></div>
+            <div class="option-desc">CSS selector, element, or array of containers (default: <code>'.shutters-accordion'</code>)</div>
+          </div>
+          <div class="option-row">
+            <div class="option-name"><code>animationDuration</code></div>
+            <div class="option-desc">Animation speed in milliseconds (default: <code>300</code>)</div>
+          </div>
+          <div class="option-row">
+            <div class="option-name"><code>animationEasing</code></div>
+            <div class="option-desc">CSS easing function (default: <code>'ease-in-out'</code>)</div>
+          </div>
+          <div class="option-row">
+            <div class="option-name"><code>defaultOpen</code></div>
+            <div class="option-desc">Default open items: <code>'first'</code>, <code>'all'</code>, <code>'none'</code>, or array like <code>[0, 2]</code></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-section">
+        <h3>5. Programmatic Control</h3>
+        <p>Control accordion items programmatically using the API:</p>
+        <pre><code>// Open specific item by index
+accordion.open(0);
+
+// Close specific item by index
+accordion.close(2);
+
+// Toggle specific item by index
+accordion.toggle(1);
+
+// Destroy the accordion instance
+accordion.destroy();</code></pre>
+      </div>
+
+      <div class="guide-section">
+        <h3>6. Auto-Close Mode</h3>
+        <p>Add the <code>shutters-autoclose</code> class to enable auto-close behavior:</p>
+        <pre><code>&lt;div class="shutters-accordion shutters-autoclose"&gt;
+  &lt;!-- Only one item can be open at a time --&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <div class="guide-section">
+        <h3>7. Customization</h3>
+        <p>Override CSS custom properties to customize the appearance:</p>
+        <pre><code>.shutters-accordion {
+  --shutters-bg-color: #fff;
+  --shutters-border-color: #000;
+  --shutters-focus-color: #0066cc;
+  --shutters-hover-bg: #f5f5f5;
+  --shutters-text-color: #000;
+  --shutters-animation-duration: 0.5s;
+  --shutters-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}</code></pre>
+      </div>
+    </section>
   </div>
 
   <script type="module" src="./src/shutters-core.js"></script>
