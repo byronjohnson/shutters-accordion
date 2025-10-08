@@ -1,6 +1,8 @@
 /* Shutters CSS Accordion - Core Functionality */
 .shutters-accordion {
   display: block;
+  --shutters-animation-duration: 0.3s;
+  --shutters-animation-easing: ease-in-out;
 }
 
 .shutters-item {
@@ -27,7 +29,7 @@
     content: '+';
     display: inline-block;
     transform: translateZ(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform var(--shutters-animation-duration) var(--shutters-animation-easing);
     will-change: transform;
   }
 }
@@ -41,7 +43,8 @@
 .shutters-content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: grid-template-rows var(--shutters-animation-duration) var(--shutters-animation-easing), 
+              opacity var(--shutters-animation-duration) var(--shutters-animation-easing);
   opacity: 0;
   padding: 0 1rem;
 }

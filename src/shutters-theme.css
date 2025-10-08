@@ -7,7 +7,8 @@
   --shutters-focus-color: #0066cc;
   --shutters-hover-bg: #f5f5f5;
   --shutters-text-color: #000;
-  --shutters-transition-duration: 0.3s;
+  /* Theme-specific transitions for hover/focus effects */
+  --shutters-transition-duration: 0.15s;
   --shutters-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 

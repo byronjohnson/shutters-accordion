@@ -9,16 +9,27 @@ export class ShuttersAccordion {
    * Create a new ShuttersAccordion instance
    * @param {Object} options - Configuration options
    * @param {string|Element|NodeList|Array} options.container - Container element(s) or selector
+   * @param {number} options.animationDuration - Animation duration in milliseconds (default: 300)
+   * @param {string} options.animationEasing - CSS easing function (default: 'ease-in-out')
+   * @param {Array|string} options.defaultOpen - Default open items: array of indices, 'first', 'all', or 'none'
    */
   constructor(options = {}) {
-    this.options = { container: '.shutters-accordion', ...options };
+    this.options = { 
+      container: '.shutters-accordion',
+      animationDuration: 300,
+      animationEasing: 'ease-in-out',
+      defaultOpen: 'none',
+      ...options 
+    };
     this.containers = this._getContainers();
     
     if (this.containers.length === 0) {
       throw new Error(`No containers found: ${this.options.container}`);
     }
     
+    this._applyAnimationSettings();
     this.init();
+    this._applyDefaultOpen();
   }
 
   /**
@@ -35,6 +46,51 @@ export class ShuttersAccordion {
       return Array.from(container);
     }
     return [container];
+  }
+
+  /**
+   * Apply animation settings to containers via CSS custom properties
+   * @private
+   */
+  _applyAnimationSettings() {
+    const { animationDuration, animationEasing } = this.options;
+    const durationInSeconds = animationDuration / 1000;
+    
+    this.containers.forEach(container => {
+      container.style.setProperty('--shutters-animation-duration', `${durationInSeconds}s`);
+      container.style.setProperty('--shutters-animation-easing', animationEasing);
+    });
+  }
+
+  /**
+   * Apply default open state
+   * @private
+   */
+  _applyDefaultOpen() {
+    const { defaultOpen } = this.options;
+    
+    if (defaultOpen === 'none') return;
+    
+    // Get all items across all containers
+    let allIndices = [];
+    let totalItems = 0;
+    
+    this.containers.forEach(container => {
+      const itemCount = container.querySelectorAll('.shutters-header').length;
+      totalItems += itemCount;
+    });
+    
+    // Determine which indices to open
+    if (defaultOpen === 'first') {
+      allIndices = [0];
+    } else if (defaultOpen === 'all') {
+      allIndices = Array.from({ length: totalItems }, (_, i) => i);
+    } else if (Array.isArray(defaultOpen)) {
+      allIndices = defaultOpen.filter(i => i >= 0 && i < totalItems);
+    }
+    
+    // Open the specified items
+    allIndices.forEach(index => this.open(index));
   }
 
   /**

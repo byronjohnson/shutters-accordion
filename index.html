@@ -153,10 +153,12 @@
   <script type="module">
     import { ShuttersAccordion } from './src/shutters-core.js';
 
-    // Simple usage: just create a new ShuttersAccordion with options
+    // Create accordion with custom animation settings and default open state
     const accordion = new ShuttersAccordion({
       container: '.shutters-accordion',
-      duration: 500
+      animationDuration: 400,        // Animation speed in milliseconds
+      animationEasing: 'ease-in-out', // CSS easing function
+      defaultOpen: 'first'            // Options: 'first', 'all', 'none', or [0, 2, 3]
     });
 
     // You can programmatically control accordion items by global index:
