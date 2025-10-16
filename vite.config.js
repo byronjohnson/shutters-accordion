@@ -1,37 +1,28 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
   root: '.',
   build: {
+    lib: {
+      entry: resolve(__dirname, 'src/shutters-core.js'),
+      name: 'ShuttersAccordion',
+      fileName: (format) => `shutters.${format}.js`,
+      formats: ['es', 'umd']
+    },
     outDir: 'dist',
     rollupOptions: {
-      input: {
-        main: 'index.html'
-      },
+      // Externalize dependencies that shouldn't be bundled
+      external: [],
       output: {
+        // Provide global variable name for UMD build
+        globals: {},
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.');
-          const extType = info[info.length - 1];
-          if (/\.(css)$/.test(assetInfo.name)) {
-            // Separate core and theme CSS files for better caching
-            if (assetInfo.name.includes('shutters-core')) {
-              return `css/shutters-core.[hash].${extType}`;
-            }
-            if (assetInfo.name.includes('shutters-theme')) {
-              return `css/shutters-theme.[hash].${extType}`;
-            }
-            return `css/[name].[hash].${extType}`;
+          // Keep CSS files with simple names for npm package
+          if (/\.css$/.test(assetInfo.name)) {
+            return 'style.css';
           }
-          return `assets/[name].[hash].${extType}`;
-        },
-        // Optimize chunk splitting for better caching
-        manualChunks: (id) => {
-          if (id.includes('shutters-core.css')) {
-            return 'shutters-core';
-          }
-          if (id.includes('shutters-theme.css')) {
-            return 'shutters-theme';
-          }
+          return 'assets/[name].[ext]';
         }
       }
     },

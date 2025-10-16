@@ -1,0 +1,40 @@
+# Development files
+node_modules/
+.git/
+.vscode/
+.kiro/
+
+# Source files (already bundled in dist)
+src/
+index.html
+vite.config.js
+
+# Development and testing
+*.test.js
+*.spec.js
+coverage/
+.nyc_output/
+
+# Documentation source
+docs/
+
+# Build artifacts
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Backups
+backups/
+*.backup
+*.bak
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~

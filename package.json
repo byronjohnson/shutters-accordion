@@ -1,7 +1,45 @@
 {
-  "name": "shutters",
+  "name": "shutters-accordion",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A lightweight, developer-friendly accordion component that prioritizes simplicity and customization",
+  "main": "dist/shutters.umd.js",
+  "module": "dist/shutters.es.js",
+  "style": "dist/style.css",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/shutters.es.js",
+      "require": "./dist/shutters.umd.js"
+    },
+    "./css": "./dist/style.css",
+    "./style.css": "./dist/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/byronjohnson/shutters-accordion.git"
+  },
+  "bugs": {
+    "url": "https://github.com/byronjohnson/shutters-accordion/issues"
+  },
+  "homepage": "https://github.com/byronjohnson/shutters-accordion#readme",
+  "keywords": [
+    "accordion",
+    "collapse",
+    "toggle",
+    "ui",
+    "component",
+    "vanilla-js",
+    "css",
+    "accessible",
+    "lightweight"
+  ],
+  "author": "Byron Johnson",
+  "license": "MIT",
   "devDependencies": {
     "vite": "^6.3.5"
   },
@@ -11,10 +49,12 @@
     "build": "vite build",
     "build:analyze": "vite build --mode analyze",
     "preview": "vite preview",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "version:sync": "node scripts/sync-version.js",
+    "preversion": "npm run version:sync",
+    "prepublishOnly": "npm run clean && npm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "engines": {
+    "node": ">=14.0.0"
+  }
 }

@@ -3,8 +3,16 @@ import './shutters-core.css';
 
 /**
  * ShuttersAccordion - A simple, configurable accordion component
+ * @version 1.0.0
+ * @license MIT
  */
 export class ShuttersAccordion {
+  /**
+   * The current version of ShuttersAccordion
+   * @static
+   * @type {string}
+   */
+  static VERSION = '1.0.0';
   /**
    * Create a new ShuttersAccordion instance
    * @param {Object} options - Configuration options
@@ -14,6 +22,7 @@ export class ShuttersAccordion {
    * @param {Array|string} options.defaultOpen - Default open items: array of indices, 'first', 'all', or 'none'
    */
   constructor(options = {}) {
+    this.version = ShuttersAccordion.VERSION;
     this.options = { 
       container: '.shutters-accordion',
       animationDuration: 300,

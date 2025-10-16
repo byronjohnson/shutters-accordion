@@ -16,22 +16,31 @@ h2 {
     color: #333;
 }
 
+h2 {
+    font-size: 22px;
+}
+
 .project-logo {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0rem;
     animation: doorHinge 5s cubic-bezier(0.4, 0, 1, 1) infinite;
     transform-origin: center bottom;
 }
 
 .project-taglines {
+    border-bottom: solid 1px #cccccc;
+    padding-bottom: 15px;
+
     h2 {
-        margin-bottom: 0px;
+        font-size: 18px;
+        margin: 0;
     }
 
     p {
-        font-size: 16px;
-        margin-top: 0;
+        font-size: 14px;
+        font-weight: 200;
+        margin-top: -5px;
     }
 }
 
