@@ -1,0 +1,140 @@
+/* Shutters CSS Accordion - Presentation Theme */
+/* Black and white theme styling with accessibility compliance */
+
+:root {
+  --shutters-bg-color: #fff;
+  --shutters-border-color: #000;
+  --shutters-focus-color: #0066cc;
+  --shutters-hover-bg: #f5f5f5;
+  --shutters-text-color: #000;
+  /* Theme-specific transitions for hover/focus effects */
+  --shutters-transition-duration: 0.15s;
+  --shutters-transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shutters-accordion {
+  background-color: var(--shutters-bg-color);
+  /* border: 1px solid var(--shutters-border-color); */
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  max-width: 100%;
+}
+
+.shutters-item {
+  border-bottom: 1px solid var(--shutters-border-color);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+}
+
+.shutters-item.opened {
+  .shutters-header {
+    background-color: var(--shutters-hover-bg);
+  }
+}
+
+.shutters-header {
+  background-color: var(--shutters-bg-color);
+  border: none;
+  color: var(--shutters-text-color);
+  cursor: pointer;
+  display: flex;
+  font-size: 1rem;
+  font-weight: 500;
+  max-width: 100%;
+  padding: 1rem;
+  transform: translateZ(0);
+  transition: background-color var(--shutters-transition-duration) var(--shutters-transition-easing),
+              transform var(--shutters-transition-duration) var(--shutters-transition-easing);
+
+  &:hover {
+    background-color: var(--shutters-hover-bg);
+  }
+
+  &:focus {
+    background-color: var(--shutters-hover-bg);
+    outline: 2px solid var(--shutters-focus-color);
+    outline-offset: -2px;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--shutters-focus-color);
+    outline-offset: -2px;
+  }
+
+  &:active {
+    background-color: var(--shutters-hover-bg);
+    transform: translateZ(0) translateY(1px);
+  }
+}
+
+.shutters-title {
+  flex: 1;
+  text-align: left;
+}
+
+
+
+
+
+.shutters-body {
+  color: var(--shutters-text-color);
+  line-height: 1.6;
+
+  > *:first-child {
+    margin-top: 1rem;
+  }
+
+  > *:last-child {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin: 0 0 1rem 0;
+
+  }
+
+  ul,
+  ol {
+    margin: 0 0 1rem 0;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.25rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  .shutters-header {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+
+  .shutters-body {
+    font-size: 0.9rem;
+  }
+
+  .shutters-icon {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .shutters-header {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+
+  .shutters-body {
+    font-size: 0.85rem;
+    padding: 0.5rem;
+  }
+}

@@ -4,6 +4,9 @@ node_modules/
 .vscode/
 .kiro/
 
+# Demo directory (for GitHub Pages)
+demo/
+
 # Source files (already bundled in dist)
 src/
 index.html

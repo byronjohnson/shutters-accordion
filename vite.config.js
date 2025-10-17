@@ -3,6 +3,7 @@ import { resolve } from 'path';
 
 export default defineConfig({
   root: '.',
+  publicDir: false,  // Disable publicDir since demo is a source directory
   build: {
     lib: {
       entry: resolve(__dirname, 'src/shutters-core.js'),
@@ -54,7 +55,7 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true
+    open: '/demo/index.html'  // Open demo page when dev server starts
   },
   // Optimize dependencies
   optimizeDeps: {
