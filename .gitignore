@@ -3,3 +3,6 @@ backups
 docs
 .vscode
 .kiro
+
+# NPM config (may contain auth tokens - commit the template, not your personal .npmrc)
+# .npmrc

@@ -1,5 +1,5 @@
 {
-  "name": "shutters-accordion",
+  "name": "@byronjohnson/shutters-accordion",
   "version": "1.0.0",
   "description": "A lightweight, developer-friendly accordion component that prioritizes simplicity and customization",
   "main": "dist/shutters.umd.js",
@@ -19,6 +19,9 @@
     "./css": "./dist/style.css",
     "./style.css": "./dist/style.css"
   },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/byronjohnson/shutters-accordion.git"
@@ -26,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/byronjohnson/shutters-accordion/issues"
   },
-  "homepage": "https://github.com/byronjohnson/shutters-accordion#readme",
+  "homepage": "https://byronjohnson.github.io/shutters-accordion/demo",
   "keywords": [
     "accordion",
     "collapse",

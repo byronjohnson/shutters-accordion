@@ -7,10 +7,17 @@ A lightweight, developer-friendly accordion component that prioritizes simplicit
 
 ## Installation
 
-### npm
+### npm (Public Registry)
 
 ```bash
 npm install shutters-accordion
+```
+
+### GitHub Packages
+
+```bash
+# Configure .npmrc first (see GITHUB_PACKAGES.md)
+npm install @byronjohnson/shutters-accordion
 ```
 
 ### CDN
