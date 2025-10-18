@@ -49,10 +49,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
+    "dev:demo": "vite --config vite.config.demo.js",
     "build": "vite build",
+    "build:demo": "vite build --config vite.config.demo.js",
+    "build:all": "npm run build && npm run build:demo",
     "build:analyze": "vite build --mode analyze",
     "preview": "vite preview",
-    "clean": "rm -rf dist",
+    "preview:demo": "vite preview --config vite.config.demo.js",
+    "clean": "rm -rf dist dist-demo",
     "version:sync": "node scripts/sync-version.js",
     "preversion": "npm run version:sync",
     "prepublishOnly": "npm run clean && npm run build"
