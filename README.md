@@ -1,13 +1,51 @@
 # Shutters Accordion
 
+**A lightweight, accessible, dependency-free JavaScript accordion component with smooth CSS Grid animations.**
+
 [![npm version](https://img.shields.io/npm/v/shutters-accordion.svg)](https://www.npmjs.com/package/shutters-accordion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Bundle Size](https://img.shields.io/badge/gzip-<2KB-brightgreen.svg)](https://github.com/byronjohnson/shutters-accordion)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](https://github.com/byronjohnson/shutters-accordion)
+[![Accessibility](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-blue.svg)](https://github.com/byronjohnson/shutters-accordion)
 
-A lightweight, developer-friendly accordion component that prioritizes simplicity and customization.
+[Live Demo](https://byronjohnson.github.io/shutters-accordion/demo) · [GitHub Repository](https://github.com/byronjohnson/shutters-accordion) · [Report a Bug](https://github.com/byronjohnson/shutters-accordion/issues)
+
+---
+
+## Why Shutters?
+
+Shutters is the accordion component you reach for when you want something that **just works** — lightweight, accessible, and smooth — without pulling in a framework or a heavy UI library.
+
+| Feature | Shutters | jQuery UI Accordion | Native `<details>` | Framework-Specific |
+|---|---|---|---|---|
+| **Bundle Size** | < 2KB gzip | ~90KB (jQuery required) | 0KB (native) | Varies (framework required) |
+| **Dependencies** | Zero | jQuery | None | Framework runtime |
+| **Smooth Animations** | CSS Grid 60fps | JS-driven height calc | No animation | Varies |
+| **Auto-Close Mode** | Built-in | Built-in | Not available | Varies |
+| **Keyboard Accessible** | Full (Enter/Space) | Full | Partial | Varies |
+| **ARIA Support** | Complete | Complete | Partial | Varies |
+| **Programmatic API** | open/close/toggle/destroy | Full API | None | Varies |
+| **Framework Agnostic** | Yes | Yes (needs jQuery) | Yes | No |
+| **CSS Custom Properties** | Full theming | Limited | N/A | Varies |
+
+### Key Advantages
+
+- **Under 2KB gzipped** — one of the smallest accordion solutions available
+- **Zero dependencies** — no jQuery, no framework, pure vanilla JavaScript + CSS
+- **60fps CSS Grid animations** — uses `grid-template-rows` transitions instead of janky `max-height` hacks
+- **Fully accessible** — WAI-ARIA accordion pattern, keyboard navigation, screen reader support
+- **Auto-close mode** — optional single-panel-open behavior with one CSS class
+- **Framework agnostic** — works with vanilla HTML, React, Vue, Svelte, Angular, Astro, or any framework
+- **Customizable** — theme everything via CSS custom properties
+- **Programmatic control** — `open()`, `close()`, `toggle()`, `destroy()` API methods
+- **ES Module + UMD** — works with Vite, Webpack, Rollup, or a `<script>` tag
+- **Modular CSS** — separate core functionality from optional presentation theme
+
+---
 
 ## Installation
 
-### npm (Public Registry)
+### npm
 
 ```bash
 npm install shutters-accordion
@@ -16,7 +54,7 @@ npm install shutters-accordion
 ### GitHub Packages
 
 ```bash
-# Configure .npmrc first (see GITHUB_PACKAGES.md)
+# Configure .npmrc first (see docs/GITHUB_PACKAGES.md)
 npm install @byronjohnson/shutters-accordion
 ```
 
@@ -33,40 +71,44 @@ npm install @byronjohnson/shutters-accordion
 <link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.0.0/dist/style.css">
 ```
 
+### Direct Download
+
+Download `shutters-core.js` and `shutters-core.css` from the `src/` directory and include them in your project.
+
+---
+
 ## Quick Start
 
-### Basic HTML Structure
+### 1. Add the HTML Structure
 
 ```html
 <div class="shutters-accordion">
   <div class="shutters-item">
-    <input type="checkbox" id="shutters-item-1" class="shutters-toggle">
-    <label for="shutters-item-1" class="shutters-header">
+    <div class="shutters-header" role="button" tabindex="0"
+         aria-expanded="false" aria-controls="panel-1">
       <span class="shutters-title">Section Title</span>
       <span class="shutters-icon"></span>
-    </label>
-    <div class="shutters-content">
+    </div>
+    <div class="shutters-content" id="panel-1">
       <div class="shutters-body">
-        <!-- Your content here -->
+        <p>Your content goes here</p>
       </div>
     </div>
   </div>
 </div>
 ```
 
-### CSS Files
+### 2. Include the CSS
 
-Include the core CSS for functionality:
 ```html
-<link rel="stylesheet" href="./src/shutters-core.css">
+<!-- Core CSS (required) -->
+<link rel="stylesheet" href="shutters-core.css">
+
+<!-- Theme CSS (optional — provides default black-and-white styling) -->
+<link rel="stylesheet" href="shutters-theme.css">
 ```
 
-Optionally include the theme CSS for styling:
-```html
-<link rel="stylesheet" href="./src/shutters-theme.css">
-```
-
-### JavaScript Usage
+### 3. Initialize with JavaScript
 
 #### ES Module
 
@@ -77,12 +119,9 @@ import 'shutters-accordion/style.css';
 const accordion = new ShuttersAccordion({
   container: '.shutters-accordion',
   animationDuration: 300,
+  animationEasing: 'ease-in-out',
   defaultOpen: 'first'
 });
-
-// Check version
-console.log(ShuttersAccordion.VERSION); // "1.0.0"
-console.log(accordion.version); // "1.0.0"
 ```
 
 #### UMD (Browser Global)
@@ -98,52 +137,196 @@ console.log(accordion.version); // "1.0.0"
 </script>
 ```
 
-### API Methods
+---
+
+## Configuration Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `container` | `string \| Element \| NodeList \| Array` | `'.shutters-accordion'` | CSS selector, DOM element, or array of container elements |
+| `animationDuration` | `number` | `300` | Animation speed in milliseconds |
+| `animationEasing` | `string` | `'ease-in-out'` | CSS easing function for transitions |
+| `defaultOpen` | `string \| Array` | `'none'` | Which items to open initially: `'first'`, `'all'`, `'none'`, or an index array like `[0, 2]` |
+
+---
+
+## API Methods
 
 ```javascript
-// Open item by index
+const accordion = new ShuttersAccordion({
+  container: '.shutters-accordion'
+});
+
+// Open an accordion item by its zero-based index
 accordion.open(0);
 
-// Close item by index
+// Close an accordion item by index
 accordion.close(0);
 
-// Toggle item by index
+// Toggle an accordion item by index
 accordion.toggle(0);
 
-// Destroy instance and clean up
+// Destroy the instance and remove all event listeners
 accordion.destroy();
+
+// Access the version
+console.log(ShuttersAccordion.VERSION); // "1.0.0"
+console.log(accordion.version);         // "1.0.0"
 ```
 
-## Development
+---
 
-Start the development server:
-```bash
-npm run dev
+## Auto-Close Mode
+
+Add the `shutters-autoclose` class to your accordion container to ensure only one panel is open at a time:
+
+```html
+<div class="shutters-accordion shutters-autoclose">
+  <div class="shutters-item">
+    <!-- Only one item can be open at a time -->
+  </div>
+</div>
 ```
 
-Build for production:
-```bash
-npm run build
+This is perfect for FAQ sections, settings panels, and mobile navigation menus.
+
+---
+
+## Customization
+
+Shutters separates **core functionality CSS** from **presentation theme CSS**. The core CSS handles the expand/collapse mechanics, while the theme CSS provides visual styling.
+
+### CSS Custom Properties
+
+Override these custom properties to match your design system:
+
+```css
+.shutters-accordion {
+  --shutters-bg-color: #fff;
+  --shutters-border-color: #000;
+  --shutters-focus-color: #0066cc;
+  --shutters-hover-bg: #f5f5f5;
+  --shutters-text-color: #000;
+  --shutters-animation-duration: 0.3s;
+  --shutters-animation-easing: ease-in-out;
+}
 ```
 
-## Features
+### Dark Mode Example
 
-- **Lightweight**: Less than 50 lines of critical CSS
-- **Modular**: Separate core functionality from presentation styles  
-- **Accessible**: Keyboard navigation and screen reader support
-- **Customizable**: Black and white theme with CSS custom properties
-- **Compatible**: Works with Vite and modern build tools
+```css
+.shutters-accordion.dark-theme {
+  --shutters-bg-color: #1a1a2e;
+  --shutters-border-color: #333;
+  --shutters-focus-color: #4da6ff;
+  --shutters-hover-bg: #16213e;
+  --shutters-text-color: #e0e0e0;
+}
+```
+
+---
+
+## How the CSS Grid Animation Works
+
+Shutters uses the modern **CSS Grid `grid-template-rows` transition** technique — the same approach recommended by Google's web.dev team for animating content height. Instead of:
+
+- ❌ `max-height` hacks (janky, requires guessing a large value)
+- ❌ JavaScript-measured `scrollHeight` animations (causes layout thrashing)
+- ❌ `transform: scaleY()` (distorts content)
+
+Shutters does:
+
+- ✅ Transitions `grid-template-rows` from `0fr` to `1fr`
+- ✅ GPU-accelerated, 60fps smooth animations
+- ✅ Works with any dynamic content height
+- ✅ No layout thrashing or reflows
+
+```css
+/* Collapsed state */
+.shutters-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+}
+
+/* Expanded state */
+.opened .shutters-content {
+  grid-template-rows: 1fr;
+}
+```
+
+---
+
+## Accessibility
+
+Shutters implements the [WAI-ARIA Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) with:
+
+- `role="button"` on accordion headers
+- `aria-expanded="true|false"` reflecting open/closed state
+- `aria-controls` linking headers to their content panels
+- `tabindex="0"` for keyboard focusability
+- **Enter** and **Space** key activation
+- Visible focus indicators for keyboard users
+- Compatible with screen readers (NVDA, JAWS, VoiceOver)
+
+---
 
 ## Browser Support
 
-- Modern browsers with CSS Grid support
-- Fallback support for IE11+ using max-height animations
+| Browser | Version |
+|---|---|
+| Chrome | 57+ |
+| Firefox | 52+ |
+| Safari | 10.1+ |
+| Edge | 16+ |
+| iOS Safari | 10.3+ |
+| Chrome Android | 57+ |
+
+Requires CSS Grid support (`grid-template-rows` transitions).
+
+---
+
+## Use Cases
+
+Shutters Accordion is ideal for:
+
+- **FAQ sections** — organize frequently asked questions with auto-close mode
+- **Product feature lists** — expandable feature descriptions on landing pages
+- **Settings panels** — collapsible configuration groups in dashboards
+- **Documentation** — organize API references and guides into expandable sections
+- **Mobile navigation** — compact, accessible navigation menus
+- **Pricing tables** — expandable plan details and feature comparisons
+- **Content-heavy pages** — reduce visual clutter while keeping all content accessible
+
+---
+
+## Development
+
+```bash
+# Start development server
+npm run dev
+
+# Start demo development server
+npm run dev:demo
+
+# Build library for production
+npm run build
+
+# Build demo for deployment
+npm run build:demo
+
+# Build both library and demo
+npm run build:all
+
+# Preview production build
+npm run preview
+```
+
+---
 
 ## Versioning
 
 Current version: **1.0.0**
-
-### Version Access
 
 ```javascript
 // Static property
@@ -154,9 +337,9 @@ const accordion = new ShuttersAccordion();
 console.log(accordion.version); // "1.0.0"
 ```
 
-## Publishing
+---
 
-To publish a new version:
+## Publishing
 
 ```bash
 # Update version in package.json, VERSION file, and CHANGELOG.md
@@ -169,8 +352,38 @@ npm run build
 npm publish
 ```
 
+---
+
+## Frequently Asked Questions
+
+### Is Shutters Accordion free to use?
+
+Yes. Shutters is open-source software released under the [MIT License](LICENSE). You can use it in personal and commercial projects without restriction.
+
+### Does Shutters work with React / Vue / Svelte / Angular?
+
+Yes. Shutters is framework-agnostic. It works with any framework or plain HTML because it operates on standard DOM elements. Simply render the expected HTML structure and initialize Shutters in your component's mount lifecycle.
+
+### How small is Shutters compared to other accordion libraries?
+
+Shutters weighs under 2KB gzipped (JS + CSS combined). By comparison, jQuery UI Accordion requires jQuery (~90KB), and most framework-specific accordion components add to your existing framework bundle.
+
+### Can I have multiple accordions on the same page?
+
+Yes. Pass a CSS selector that matches multiple containers, or pass an array of DOM elements. Each container operates independently — you can mix auto-close and multi-open accordions on the same page.
+
+### Does Shutters support nested accordions?
+
+Shutters works with nested accordion structures. Each level should use its own `ShuttersAccordion` instance targeting the appropriate container.
+
+### How do I animate the accordion icon?
+
+Shutters includes a default `+` icon that rotates 45° (becoming `×`) when expanded. This is handled by the `.shutters-icon::before` CSS. You can override this with your own icon by modifying the CSS or replacing the icon element.
+
+---
+
 ## License
 
-MIT © Byron Johnson
+MIT © [Byron Johnson](https://github.com/byronjohnson)
 
 See [LICENSE](LICENSE) for details.
