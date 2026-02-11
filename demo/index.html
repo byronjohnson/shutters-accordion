@@ -75,7 +75,7 @@
         "name": "How does the Shutters Accordion work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Shutters uses modern JavaScript combined with CSS Grid's grid-template-rows transition for smooth expand and collapse animations. It applies proper ARIA attributes (aria-expanded, aria-controls) for screen reader support, handles keyboard interactions (Enter and Space keys), and supports both multi-open and auto-close (single-open) modes."
+          "text": "Shutters uses modern JavaScript with event delegation and CSS Grid's grid-template-rows transition for smooth expand and collapse animations. It automatically applies ARIA attributes (aria-expanded, role='button', tabindex) for screen reader support, handles full keyboard navigation (Enter, Space, Arrow Up/Down, Home/End keys), dispatches custom events (shutters:open, shutters:close), and supports both multi-open and auto-close (single-open) modes."
         }
       },
       {
@@ -83,7 +83,7 @@
         "name": "What are the key features of Shutters Accordion?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Key features include: (1) Lightweight — under 2KB gzipped with zero dependencies, (2) Accessible — full ARIA support and keyboard navigation, (3) Smooth Animations — CSS Grid-based 60fps transitions, (4) Auto-close mode — only one panel open at a time, (5) Customizable — theming via CSS custom properties, (6) Programmatic API — open(), close(), toggle(), openAll(), closeAll(), and destroy() methods, (7) Multiple containers support, (8) ES Module and UMD bundle formats."
+          "text": "Key features include: (1) Lightweight — under 2KB gzipped with zero dependencies, (2) Accessible — automatic ARIA setup, full keyboard navigation with Arrow/Home/End keys, and visible focus indicators, (3) Smooth Animations — CSS Grid-based 60fps transitions, (4) Auto-close mode — only one panel open at a time, (5) Customizable — theming via CSS custom properties, (6) Programmatic API — open(), close(), toggle(), openAll(), closeAll(), destroy(), on(), and off() methods, (7) Custom Events — shutters:open and shutters:close dispatched on containers, (8) Event Delegation — one listener per container for optimal performance, (9) ES Module and UMD bundle formats."
         }
       },
       {
@@ -226,10 +226,12 @@
               <div class="shutters-body">
                 <p>
                   Accessibility isn't an afterthought — it's built into the core of Shutters. The component
-                  implements the <strong>WAI-ARIA Accordion Pattern</strong> with proper <code>aria-expanded</code>,
-                  <code>aria-controls</code>, and <code>role="button"</code> attributes. Full keyboard navigation
-                  is supported via <kbd>Enter</kbd>, <kbd>Space</kbd>, <kbd>Arrow</kbd>, <kbd>Home</kbd>, and
-                  <kbd>End</kbd> keys, with visible focus indicators for keyboard users.
+                  automatically applies <strong>WAI-ARIA Accordion Pattern</strong> attributes — <code>role="button"</code>,
+                  <code>tabindex="0"</code>, and <code>aria-expanded</code> — on every header at initialization,
+                  so you never need to write them in your HTML. Full keyboard navigation
+                  is supported via <kbd>Enter</kbd>, <kbd>Space</kbd>, <kbd>Arrow Up</kbd>, <kbd>Arrow Down</kbd>,
+                  <kbd>Home</kbd>, and <kbd>End</kbd> keys, with visible <code>:focus-visible</code> indicators
+                  for keyboard users.
                 </p>
               </div>
             </div>
@@ -247,6 +249,8 @@
                   hack, Shutters leverages <strong>CSS Grid's <code>grid-template-rows</code> transition</strong>
                   for buttery-smooth expand and collapse animations at 60fps. This approach is GPU-accelerated,
                   avoids layout thrashing, and works with dynamic content heights — no fixed pixel values needed.
+                  On the JS side, Shutters uses <strong>event delegation</strong> — just one click listener
+                  per container instead of one per header — keeping memory usage minimal even with many panels.
                 </p>
               </div>
             </div>
@@ -264,7 +268,8 @@
                   and <strong>UMD bundle</strong> formats, so it works with Vite, Webpack, Rollup, or a simple
                   <code>&lt;script&gt;</code> tag. The programmatic API offers <code>open()</code>,
                   <code>close()</code>, <code>toggle()</code>, <code>openAll()</code>, <code>closeAll()</code>,
-                  and <code>destroy()</code> methods for full control.
+                  and <code>destroy()</code> methods for full control. Subscribe to state changes with
+                  <code>on('shutters:open', callback)</code> and <code>on('shutters:close', callback)</code>.
                 </p>
               </div>
             </div>
@@ -309,7 +314,9 @@
                 <ul>
                   <li>Vanilla JavaScript with zero dependencies</li>
                   <li>CSS Grid animations for smooth, jank-free transitions</li>
-                  <li>Full accessibility with ARIA attributes and keyboard support</li>
+                  <li>Full accessibility with auto ARIA setup and keyboard navigation (Arrow/Home/End)</li>
+                  <li>Event delegation — one listener per container for optimal performance</li>
+                  <li>Custom events (<code>shutters:open</code>/<code>shutters:close</code>) for reactive integrations</li>
                   <li>Works with dynamic content — no fixed heights needed</li>
                 </ul>
               </div>
@@ -345,6 +352,12 @@
                   </li>
                   <li>
                     <strong>Programmatic API:</strong> open(), close(), toggle(), openAll(), closeAll(), destroy() methods
+                  </li>
+                  <li>
+                    <strong>Custom Events:</strong> Subscribe to <code>shutters:open</code> and <code>shutters:close</code> via on()/off()
+                  </li>
+                  <li>
+                    <strong>Event Delegation:</strong> One listener per container — optimal performance at any scale
                   </li>
                   <li>
                     <strong>Universal:</strong> ES Module + UMD bundles — works with any build tool or plain HTML
@@ -558,8 +571,9 @@ accordion.on('shutters:close', (e) =&gt; {
                 <p>
                   The native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> elements provide
                   basic expand/collapse without JavaScript, but lack smooth animated transitions,
-                  auto-close behavior, and programmatic control. Shutters adds <strong>smooth CSS Grid
-                  animations</strong>, an auto-close mode, a full programmatic API, and consistent
+                  auto-close behavior, custom events, and programmatic control. Shutters adds <strong>smooth CSS Grid
+                  animations</strong>, an auto-close mode, custom events (<code>shutters:open</code>/<code>shutters:close</code>),
+                  a full programmatic API with <code>on()</code>/<code>off()</code> listeners, and consistent
                   cross-browser styling — while maintaining the same level of accessibility.
                 </p>
               </div>
