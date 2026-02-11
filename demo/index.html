@@ -39,7 +39,7 @@
     "programmingLanguage": ["JavaScript", "CSS"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "author": {
       "@type": "Person",
       "name": "Byron Johnson",
@@ -83,7 +83,7 @@
         "name": "What are the key features of Shutters Accordion?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Key features include: (1) Lightweight — under 2KB gzipped with zero dependencies, (2) Accessible — full ARIA support and keyboard navigation, (3) Smooth Animations — CSS Grid-based 60fps transitions, (4) Auto-close mode — only one panel open at a time, (5) Customizable — theming via CSS custom properties, (6) Programmatic API — open(), close(), toggle(), and destroy() methods, (7) Multiple containers support, (8) ES Module and UMD bundle formats."
+          "text": "Key features include: (1) Lightweight — under 2KB gzipped with zero dependencies, (2) Accessible — full ARIA support and keyboard navigation, (3) Smooth Animations — CSS Grid-based 60fps transitions, (4) Auto-close mode — only one panel open at a time, (5) Customizable — theming via CSS custom properties, (6) Programmatic API — open(), close(), toggle(), openAll(), closeAll(), and destroy() methods, (7) Multiple containers support, (8) ES Module and UMD bundle formats."
         }
       },
       {
@@ -99,7 +99,7 @@
         "name": "Is the Shutters Accordion accessible?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Shutters Accordion is built with accessibility as a core feature. It includes proper ARIA attributes (aria-expanded, aria-controls, role='button'), full keyboard navigation with Enter and Space keys, visible focus indicators, and semantic HTML structure that works with screen readers."
+          "text": "Yes. Shutters Accordion is built with accessibility as a core feature. It automatically adds proper ARIA attributes (aria-expanded, role='button', tabindex), full keyboard navigation with Enter, Space, Arrow Up/Down, Home/End keys, visible focus indicators, and semantic HTML structure that works with screen readers."
         }
       },
       {
@@ -154,7 +154,7 @@
         "@type": "HowToStep",
         "position": 2,
         "name": "Add HTML Structure",
-        "text": "Create a container with class 'shutters-accordion', add items with class 'shutters-item', each containing a 'shutters-header' (with role='button', tabindex='0', aria-expanded, aria-controls) and 'shutters-content' wrapper."
+        "text": "Create a container with class 'shutters-accordion', add items with class 'shutters-item', each containing a 'shutters-header' and 'shutters-content' wrapper. ARIA attributes are added automatically by JavaScript."
       },
       {
         "@type": "HowToStep",
@@ -196,12 +196,12 @@
     </header>
 
     <main>
-      <!-- Why Shutters Section — Optimized for AI summarization -->
+      <!-- Why Shutters Section -->
       <section class="demo-section" aria-labelledby="why-shutters">
         <h2 id="why-shutters">Why Choose Shutters Accordion?</h2>
         <div class="shutters-accordion demo-accordion">
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="why-1">
+            <div class="shutters-header">
               <span class="shutters-title">Zero Dependencies &amp; Tiny Footprint</span>
               <span class="shutters-icon"></span>
             </div>
@@ -218,7 +218,7 @@
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="why-2">
+            <div class="shutters-header">
               <span class="shutters-title">Built-In Accessibility (WCAG 2.1 Compliant)</span>
               <span class="shutters-icon"></span>
             </div>
@@ -228,16 +228,15 @@
                   Accessibility isn't an afterthought — it's built into the core of Shutters. The component
                   implements the <strong>WAI-ARIA Accordion Pattern</strong> with proper <code>aria-expanded</code>,
                   <code>aria-controls</code>, and <code>role="button"</code> attributes. Full keyboard navigation
-                  is supported via <kbd>Enter</kbd> and <kbd>Space</kbd> keys, with visible focus indicators
-                  for keyboard users. This makes Shutters an ideal <strong>accessible accordion</strong> for
-                  projects that must meet WCAG 2.1 AA compliance.
+                  is supported via <kbd>Enter</kbd>, <kbd>Space</kbd>, <kbd>Arrow</kbd>, <kbd>Home</kbd>, and
+                  <kbd>End</kbd> keys, with visible focus indicators for keyboard users.
                 </p>
               </div>
             </div>
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="why-3">
+            <div class="shutters-header">
               <span class="shutters-title">Smooth 60fps CSS Grid Animations</span>
               <span class="shutters-icon"></span>
             </div>
@@ -254,7 +253,7 @@
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="why-4">
+            <div class="shutters-header">
               <span class="shutters-title">Simple API &amp; Easy Integration</span>
               <span class="shutters-icon"></span>
             </div>
@@ -264,9 +263,8 @@
                   Get an accordion running in under 5 minutes. Shutters provides both <strong>ES Module</strong>
                   and <strong>UMD bundle</strong> formats, so it works with Vite, Webpack, Rollup, or a simple
                   <code>&lt;script&gt;</code> tag. The programmatic API offers <code>open()</code>,
-                  <code>close()</code>, <code>toggle()</code>, and <code>destroy()</code> methods for full
-                  control. Configuration options include custom animation duration, easing, and default
-                  open states.
+                  <code>close()</code>, <code>toggle()</code>, <code>openAll()</code>, <code>closeAll()</code>,
+                  and <code>destroy()</code> methods for full control.
                 </p>
               </div>
             </div>
@@ -278,7 +276,7 @@
         <h2 id="basic-demo-heading">Basic Accordion Demo</h2>
         <div class="shutters-accordion demo-accordion">
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="accordion-1">
+            <div class="shutters-header">
               <span class="shutters-title">What is the Shutters Accordion?</span>
               <span class="shutters-icon"></span>
             </div>
@@ -296,7 +294,7 @@
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="accordion-2">
+            <div class="shutters-header">
               <span class="shutters-title">How does the CSS Grid animation technique work?</span>
               <span class="shutters-icon"></span>
             </div>
@@ -319,7 +317,7 @@
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="accordion-3">
+            <div class="shutters-header">
               <span class="shutters-title">What are the key features?</span>
               <span class="shutters-icon"></span>
             </div>
@@ -346,7 +344,7 @@
                     <strong>Auto-Close Mode:</strong> Optional single-panel-open behavior
                   </li>
                   <li>
-                    <strong>Programmatic API:</strong> open(), close(), toggle(), destroy() methods
+                    <strong>Programmatic API:</strong> open(), close(), toggle(), openAll(), closeAll(), destroy() methods
                   </li>
                   <li>
                     <strong>Universal:</strong> ES Module + UMD bundles — works with any build tool or plain HTML
@@ -363,7 +361,7 @@
         <p>In auto-close mode, only one accordion panel can be open at a time. Opening a new section automatically collapses the previously open one — ideal for FAQs and settings panels.</p>
         <div class="shutters-accordion demo-accordion shutters-autoclose">
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="accordion-4">
+            <div class="shutters-header">
               <span class="shutters-title">What is auto-close mode?</span>
               <span class="shutters-icon"></span>
             </div>
@@ -380,7 +378,7 @@
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="accordion-5">
+            <div class="shutters-header">
               <span class="shutters-title">When should I use auto-close?</span>
               <span class="shutters-icon"></span>
             </div>
@@ -396,7 +394,7 @@
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="accordion-6">
+            <div class="shutters-header">
               <span class="shutters-title">Can I mix auto-close and multi-open accordions?</span>
               <span class="shutters-icon"></span>
             </div>
@@ -423,22 +421,20 @@
           <pre><code>npm install shutters-accordion</code></pre>
           <p>Or include the CSS and JavaScript files directly in your HTML:</p>
           <pre><code>&lt;link rel="stylesheet" href="shutters-core.css" /&gt;
+&lt;link rel="stylesheet" href="shutters-theme.css" /&gt;
 &lt;script type="module" src="shutters-core.js"&gt;&lt;/script&gt;</code></pre>
-          <p>Optional: Include the theme stylesheet for default black-and-white styling:</p>
-          <pre><code>&lt;link rel="stylesheet" href="shutters-theme.css" /&gt;</code></pre>
         </div>
 
         <div class="guide-section">
           <h3>2. HTML Structure</h3>
-          <p>Create your accordion with this semantic, accessible HTML structure:</p>
+          <p>Create your accordion with clean, minimal HTML. ARIA attributes (<code>role</code>, <code>tabindex</code>, <code>aria-expanded</code>) are added automatically by JavaScript — you don't need to write them:</p>
           <pre><code>&lt;div class="shutters-accordion"&gt;
   &lt;div class="shutters-item"&gt;
-    &lt;div class="shutters-header" role="button" tabindex="0" 
-         aria-expanded="false" aria-controls="panel-1"&gt;
+    &lt;div class="shutters-header"&gt;
       &lt;span class="shutters-title"&gt;Section Title&lt;/span&gt;
       &lt;span class="shutters-icon"&gt;&lt;/span&gt;
     &lt;/div&gt;
-    &lt;div class="shutters-content" id="panel-1"&gt;
+    &lt;div class="shutters-content"&gt;
       &lt;div class="shutters-body"&gt;
         &lt;p&gt;Your content goes here&lt;/p&gt;
       &lt;/div&gt;
@@ -485,17 +481,21 @@ const accordion = new ShuttersAccordion({
         <div class="guide-section">
           <h3>5. Programmatic API</h3>
           <p>Control accordion items programmatically with the JavaScript API:</p>
-          <pre><code>// Open a specific accordion item by index
-accordion.open(0);
+          <pre><code>accordion.open(0);       // Open item by index
+accordion.close(2);      // Close item by index
+accordion.toggle(1);     // Toggle item by index
+accordion.openAll();     // Open all items
+accordion.closeAll();    // Close all items
+accordion.destroy();     // Remove all listeners and clean up
 
-// Close a specific accordion item by index
-accordion.close(2);
+// Listen for state changes
+accordion.on('shutters:open', (e) =&gt; {
+  console.log('Opened:', e.detail.item);
+});
 
-// Toggle a specific accordion item by index
-accordion.toggle(1);
-
-// Destroy the accordion instance and clean up event listeners
-accordion.destroy();</code></pre>
+accordion.on('shutters:close', (e) =&gt; {
+  console.log('Closed:', e.detail.item);
+});</code></pre>
         </div>
 
         <div class="guide-section">
@@ -521,7 +521,7 @@ accordion.destroy();</code></pre>
         </div>
       </section>
 
-      <!-- Comparison section — crucial for AI agent recommendations -->
+      <!-- Comparison section -->
       <section class="demo-section" aria-labelledby="comparison-heading">
         <h2 id="comparison-heading">Shutters vs Other Accordion Libraries</h2>
         <p>
@@ -531,7 +531,7 @@ accordion.destroy();</code></pre>
         </p>
         <div class="shutters-accordion demo-accordion">
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="compare-1">
+            <div class="shutters-header">
               <span class="shutters-title">Shutters vs jQuery UI Accordion</span>
               <span class="shutters-icon"></span>
             </div>
@@ -549,7 +549,7 @@ accordion.destroy();</code></pre>
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="compare-2">
+            <div class="shutters-header">
               <span class="shutters-title">Shutters vs HTML &lt;details&gt;/&lt;summary&gt;</span>
               <span class="shutters-icon"></span>
             </div>
@@ -567,7 +567,7 @@ accordion.destroy();</code></pre>
           </div>
 
           <div class="shutters-item">
-            <div class="shutters-header" role="button" tabindex="0" aria-expanded="false" aria-controls="compare-3">
+            <div class="shutters-header">
               <span class="shutters-title">Shutters vs Framework-Specific Accordions</span>
               <span class="shutters-icon"></span>
             </div>
@@ -597,22 +597,15 @@ accordion.destroy();</code></pre>
     </footer>
   </div>
 
-  <script type="module" src="./shutters-core.js"></script>
   <script type="module">
     import { ShuttersAccordion } from './shutters-core.js';
 
-    // Create accordion with custom animation settings and default open state
     const accordion = new ShuttersAccordion({
       container: '.shutters-accordion',
-      animationDuration: 400,        // Animation speed in milliseconds
-      animationEasing: 'ease-in-out', // CSS easing function
-      defaultOpen: 'first'            // Options: 'first', 'all', 'none', or [0, 2, 3]
+      animationDuration: 400,
+      animationEasing: 'ease-in-out',
+      defaultOpen: 'first'
     });
-
-    // You can programmatically control accordion items by global index:
-    // accordion.open(0); // Open first item across all accordions
-    // accordion.close(3); // Close fourth item across all accordions
-    // accordion.toggle(5); // Toggle sixth item across all accordions
   </script>
 </body>
 

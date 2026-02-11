@@ -1,259 +1,241 @@
-// Import CSS - Vite will bundle this automatically
-import './shutters-core.css';
-
 /**
- * ShuttersAccordion - A simple, configurable accordion component
- * @version 1.0.0
+ * ShuttersAccordion - A minimal, accessible accordion component
  * @license MIT
  */
 export class ShuttersAccordion {
   /**
-   * The current version of ShuttersAccordion
-   * @static
-   * @type {string}
+   * @param {Object} opts
+   * @param {string|Element|NodeList|Array} opts.container - Container(s) or selector
+   * @param {number} opts.animationDuration - Duration in ms (default: 300)
+   * @param {string} opts.animationEasing - CSS easing (default: 'ease-in-out')
+   * @param {Array|string} opts.defaultOpen - 'first', 'all', 'none', or index array
    */
-  static VERSION = '1.0.0';
-  /**
-   * Create a new ShuttersAccordion instance
-   * @param {Object} options - Configuration options
-   * @param {string|Element|NodeList|Array} options.container - Container element(s) or selector
-   * @param {number} options.animationDuration - Animation duration in milliseconds (default: 300)
-   * @param {string} options.animationEasing - CSS easing function (default: 'ease-in-out')
-   * @param {Array|string} options.defaultOpen - Default open items: array of indices, 'first', 'all', or 'none'
-   */
-  constructor(options = {}) {
-    this.version = ShuttersAccordion.VERSION;
-    this.options = { 
+  constructor(opts = {}) {
+    this.options = {
       container: '.shutters-accordion',
       animationDuration: 300,
       animationEasing: 'ease-in-out',
       defaultOpen: 'none',
-      ...options 
+      ...opts
     };
-    this.containers = this._getContainers();
-    
-    if (this.containers.length === 0) {
-      throw new Error(`No containers found: ${this.options.container}`);
+    this._handlers = [];
+    this.containers = this._resolve(this.options.container);
+
+    if (!this.containers.length) {
+      throw new Error(`Shutters: no containers found for "${this.options.container}"`);
     }
-    
-    this._applyAnimationSettings();
-    this.init();
+
+    this._applyTiming();
+    this._init();
     this._applyDefaultOpen();
   }
 
-  /**
-   * Get container elements from various input types
-   * @private
-   */
-  _getContainers() {
-    const { container } = this.options;
-    
-    if (typeof container === 'string') {
-      return Array.from(document.querySelectorAll(container));
-    }
-    if (container instanceof NodeList || Array.isArray(container)) {
-      return Array.from(container);
-    }
-    return [container];
+  /* ---- internal helpers ---- */
+
+  /** Resolve container option to an array of elements */
+  _resolve(c) {
+    if (typeof c === 'string') return [...document.querySelectorAll(c)];
+    if (c instanceof NodeList || Array.isArray(c)) return [...c];
+    return [c];
   }
 
-  /**
-   * Apply animation settings to containers via CSS custom properties
-   * @private
-   */
-  _applyAnimationSettings() {
-    const { animationDuration, animationEasing } = this.options;
-    const durationInSeconds = animationDuration / 1000;
-    
-    this.containers.forEach(container => {
-      container.style.setProperty('--shutters-animation-duration', `${durationInSeconds}s`);
-      container.style.setProperty('--shutters-animation-easing', animationEasing);
-    });
+  /** Set animation CSS custom properties on each container */
+  _applyTiming() {
+    const dur = `${this.options.animationDuration / 1000}s`;
+    const ease = this.options.animationEasing;
+    for (const el of this.containers) {
+      el.style.setProperty('--shutters-animation-duration', dur);
+      el.style.setProperty('--shutters-animation-easing', ease);
+    }
   }
 
-  /**
-   * Apply default open state
-   * @private
-   */
+  /** Set up ARIA attributes and attach delegated listeners */
+  _init() {
+    for (const container of this.containers) {
+      // Auto-setup ARIA on every header
+      for (const header of container.querySelectorAll('.shutters-header')) {
+        header.setAttribute('role', 'button');
+        header.setAttribute('tabindex', '0');
+        const item = header.closest('.shutters-item');
+        header.setAttribute('aria-expanded', item?.classList.contains('opened') ? 'true' : 'false');
+      }
+
+      // One delegated click listener per container
+      const onClick = (e) => {
+        const header = e.target.closest('.shutters-header');
+        if (header && container.contains(header)) this._toggle(header, container);
+      };
+
+      // One delegated keydown listener per container
+      const onKey = (e) => {
+        const header = e.target.closest('.shutters-header');
+        if (!header || !container.contains(header)) return;
+
+        const headers = [...container.querySelectorAll('.shutters-header')];
+
+        switch (e.key) {
+          case 'Enter':
+          case ' ':
+            e.preventDefault();
+            this._toggle(header, container);
+            break;
+          case 'ArrowDown':
+            e.preventDefault();
+            headers[(headers.indexOf(header) + 1) % headers.length]?.focus();
+            break;
+          case 'ArrowUp':
+            e.preventDefault();
+            headers[(headers.indexOf(header) - 1 + headers.length) % headers.length]?.focus();
+            break;
+          case 'Home':
+            e.preventDefault();
+            headers[0]?.focus();
+            break;
+          case 'End':
+            e.preventDefault();
+            headers[headers.length - 1]?.focus();
+            break;
+        }
+      };
+
+      container.addEventListener('click', onClick);
+      container.addEventListener('keydown', onKey);
+      this._handlers.push({ container, onClick, onKey });
+    }
+  }
+
+  /** Open default items after initialization */
   _applyDefaultOpen() {
     const { defaultOpen } = this.options;
-    
     if (defaultOpen === 'none') return;
-    
-    // Get all items across all containers
-    let allIndices = [];
-    let totalItems = 0;
-    
-    this.containers.forEach(container => {
-      const itemCount = container.querySelectorAll('.shutters-header').length;
-      totalItems += itemCount;
-    });
-    
-    // Determine which indices to open
-    if (defaultOpen === 'first') {
-      allIndices = [0];
-    } else if (defaultOpen === 'all') {
-      allIndices = Array.from({ length: totalItems }, (_, i) => i);
+    if (defaultOpen === 'first') { this.open(0); return; }
+
+    const total = this._totalItems();
+    if (defaultOpen === 'all') {
+      for (let i = 0; i < total; i++) this.open(i);
     } else if (Array.isArray(defaultOpen)) {
-      allIndices = defaultOpen.filter(i => i >= 0 && i < totalItems);
+      for (const i of defaultOpen) if (i >= 0 && i < total) this.open(i);
     }
-    
-    // Open the specified items
-    allIndices.forEach(index => this.open(index));
   }
 
-  /**
-   * Initialize the accordion
-   */
-  init() {
-    this.containers.forEach(container => {
-      const headers = container.querySelectorAll('.shutters-header');
-      
-      headers.forEach(header => {
-        // Combined event handler for both click and keyboard
-        const handleActivation = (e) => {
-          if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
-          if (e.type === 'keydown') e.preventDefault();
-          this._toggleItem(header, container);
-        };
-        
-        header.addEventListener('click', handleActivation);
-        header.addEventListener('keydown', handleActivation);
-        
-        // Set initial ARIA state
-        const item = header.closest('.shutters-item');
-        if (item?.classList.contains('opened')) {
-          header.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
+  /** Count total header items across all containers */
+  _totalItems() {
+    let n = 0;
+    for (const c of this.containers) n += c.querySelectorAll('.shutters-header').length;
+    return n;
   }
 
-  /**
-   * Close other items in auto-close containers
-   * @private
-   */
-  _closeOtherItems(currentHeader, container) {
-    if (!container.classList.contains('shutters-autoclose')) return;
-    
-    container.querySelectorAll('.shutters-header').forEach(header => {
-      if (header !== currentHeader) {
-        const item = header.closest('.shutters-item');
-        if (item?.classList.contains('opened')) {
-          item.classList.remove('opened');
-          header.setAttribute('aria-expanded', 'false');
-        }
-      }
-    });
-  }
-
-  /**
-   * Update item state
-   * @private
-   */
-  _updateItemState(item, header, isOpen) {
-    item.classList.toggle('opened', isOpen);
-    header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  }
-
-  /**
-   * Toggle an accordion item
-   * @private
-   */
-  _toggleItem(header, container) {
+  /** Toggle a specific header within its container */
+  _toggle(header, container) {
     const item = header.closest('.shutters-item');
     if (!item) return;
-    
-    const isOpened = item.classList.contains('opened');
-    
-    if (!isOpened) {
-      this._closeOtherItems(header, container);
-    }
-    
-    this._updateItemState(item, header, !isOpened);
+
+    const opening = !item.classList.contains('opened');
+    if (opening) this._closeOthers(header, container);
+    this._setState(item, header, opening);
+    this._emit(container, opening ? 'shutters:open' : 'shutters:close', header, item);
   }
 
-  /**
-   * Get accordion item by global index
-   * @private
-   */
-  _getItemByIndex(index) {
-    let currentIndex = 0;
-    
+  /** In auto-close containers, close every item except the current one */
+  _closeOthers(currentHeader, container) {
+    if (!container.classList.contains('shutters-autoclose')) return;
+    for (const h of container.querySelectorAll('.shutters-header')) {
+      if (h === currentHeader) continue;
+      const item = h.closest('.shutters-item');
+      if (item?.classList.contains('opened')) {
+        this._setState(item, h, false);
+        this._emit(container, 'shutters:close', h, item);
+      }
+    }
+  }
+
+  /** Apply open/closed state to an item */
+  _setState(item, header, isOpen) {
+    item.classList.toggle('opened', isOpen);
+    header.setAttribute('aria-expanded', String(isOpen));
+  }
+
+  /** Dispatch a custom event on a container */
+  _emit(container, type, header, item) {
+    container.dispatchEvent(new CustomEvent(type, {
+      bubbles: true,
+      detail: { header, item }
+    }));
+  }
+
+  /** Locate an item by global index across all containers */
+  _byIndex(index) {
+    let offset = 0;
     for (const container of this.containers) {
       const headers = container.querySelectorAll('.shutters-header');
-      
-      if (index < currentIndex + headers.length) {
-        const header = headers[index - currentIndex];
-        return header ? {
-          item: header.closest('.shutters-item'),
-          header,
-          container
-        } : null;
+      if (index < offset + headers.length) {
+        const header = headers[index - offset];
+        return header ? { item: header.closest('.shutters-item'), header, container } : null;
       }
-      
-      currentIndex += headers.length;
+      offset += headers.length;
     }
-    
     return null;
   }
 
-  /**
-   * Set accordion item state by index
-   * @private
-   */
-  _setItemStateByIndex(index, opened) {
-    const result = this._getItemByIndex(index);
-    if (!result) return;
-    
-    const { item, header, container } = result;
-    
-    if (opened) {
-      this._closeOtherItems(header, container);
-    }
-    
-    this._updateItemState(item, header, opened);
-  }
+  /* ---- public API ---- */
 
-  /**
-   * Open an accordion item by index
-   * @param {number} index - Zero-based index across all containers
-   */
+  /** Open an item by index */
   open(index) {
-    this._setItemStateByIndex(index, true);
+    const r = this._byIndex(index);
+    if (!r) return;
+    if (r.item.classList.contains('opened')) return;
+    this._closeOthers(r.header, r.container);
+    this._setState(r.item, r.header, true);
+    this._emit(r.container, 'shutters:open', r.header, r.item);
   }
 
-  /**
-   * Close an accordion item by index
-   * @param {number} index - Zero-based index across all containers
-   */
+  /** Close an item by index */
   close(index) {
-    this._setItemStateByIndex(index, false);
+    const r = this._byIndex(index);
+    if (!r) return;
+    if (!r.item.classList.contains('opened')) return;
+    this._setState(r.item, r.header, false);
+    this._emit(r.container, 'shutters:close', r.header, r.item);
   }
 
-  /**
-   * Toggle an accordion item by index
-   * @param {number} index - Zero-based index across all containers
-   */
+  /** Toggle an item by index */
   toggle(index) {
-    const result = this._getItemByIndex(index);
-    if (result) {
-      const isOpened = result.item.classList.contains('opened');
-      this._setItemStateByIndex(index, !isOpened);
-    }
+    const r = this._byIndex(index);
+    if (!r) return;
+    r.item.classList.contains('opened') ? this.close(index) : this.open(index);
   }
 
-  /**
-   * Destroy the accordion instance
-   */
+  /** Open every item in all containers */
+  openAll() {
+    for (let i = 0, n = this._totalItems(); i < n; i++) this.open(i);
+  }
+
+  /** Close every item in all containers */
+  closeAll() {
+    for (let i = 0, n = this._totalItems(); i < n; i++) this.close(i);
+  }
+
+  /** Subscribe to accordion events ('shutters:open' | 'shutters:close') */
+  on(event, callback) {
+    for (const c of this.containers) c.addEventListener(event, callback);
+    return this;
+  }
+
+  /** Unsubscribe from accordion events */
+  off(event, callback) {
+    for (const c of this.containers) c.removeEventListener(event, callback);
+    return this;
+  }
+
+  /** Tear down: remove listeners and clean up state */
   destroy() {
-    this.containers.forEach(container => {
-      container.querySelectorAll('.shutters-header').forEach(header => {
-        header.replaceWith(header.cloneNode(true));
-      });
-    });
+    for (const { container, onClick, onKey } of this._handlers) {
+      container.removeEventListener('click', onClick);
+      container.removeEventListener('keydown', onKey);
+      container.style.removeProperty('--shutters-animation-duration');
+      container.style.removeProperty('--shutters-animation-easing');
+    }
+    this._handlers = [];
+    this.containers = [];
   }
 }
-
-// Make ShuttersAccordion available globally
-window.ShuttersAccordion = ShuttersAccordion;
