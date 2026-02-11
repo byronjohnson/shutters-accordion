@@ -6,7 +6,7 @@ export default defineConfig({
   publicDir: false,  // Disable publicDir since demo is a source directory
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/shutters-core.js'),
+      entry: resolve(__dirname, 'index.js'),
       name: 'ShuttersAccordion',
       fileName: (format) => `shutters.${format}.js`,
       formats: ['es', 'umd']

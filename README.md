@@ -64,14 +64,14 @@ npm install @byronjohnson/shutters-accordion
 ### CDN
 
 ```html
-<!-- ES Module -->
+<!-- ES Module (CSS must be linked separately) -->
 <script type="module">
-  import { ShuttersAccordion } from 'https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.es.js';
+  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.es.js';
 </script>
-
-<!-- UMD (for browsers) -->
-<script src="https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.umd.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.1.0/dist/style.css">
+
+<!-- UMD (CSS is auto-injected by the script) -->
+<script src="https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.umd.js"></script>
 ```
 
 ### Direct Download
@@ -117,7 +117,8 @@ Download `shutters-core.js` and `shutters-core.css` from the `src/` directory an
 #### ES Module
 
 ```javascript
-import { ShuttersAccordion } from 'shutters-accordion';
+import ShuttersAccordion from 'shutters-accordion';
+import 'shutters-accordion/style.css';
 
 const accordion = new ShuttersAccordion({
   container: '.shutters-accordion',
@@ -130,11 +131,11 @@ const accordion = new ShuttersAccordion({
 #### UMD (Browser Global)
 
 ```html
+<!-- UMD script auto-injects CSS — no separate stylesheet needed -->
 <script src="path/to/shutters.umd.js"></script>
-<link rel="stylesheet" href="path/to/style.css">
 
 <script>
-  const accordion = new window.ShuttersAccordion({
+  const accordion = new ShuttersAccordion({
     container: '.shutters-accordion'
   });
 </script>

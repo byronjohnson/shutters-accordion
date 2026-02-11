@@ -170,6 +170,11 @@ class a {
     this._handlers = [], this.containers = [];
   }
 }
+/**
+ * Shutters Accordion
+ * @module shutters-accordion
+ * @license MIT
+ */
 export {
-  a as ShuttersAccordion
+  a as default
 };
