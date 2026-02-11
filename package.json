@@ -1,6 +1,6 @@
 {
   "name": "@byronjohnson/shutters-accordion",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shutters — a lightweight, accessible, dependency-free JavaScript accordion component with smooth CSS Grid animations, ARIA support, keyboard navigation, auto-close mode, and full customization via CSS custom properties. Under 2KB gzipped.",
   "main": "dist/shutters.umd.js",
   "module": "dist/shutters.es.js",

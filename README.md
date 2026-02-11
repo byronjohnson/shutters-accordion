@@ -63,12 +63,12 @@ npm install @byronjohnson/shutters-accordion
 ```html
 <!-- ES Module -->
 <script type="module">
-  import { ShuttersAccordion } from 'https://unpkg.com/shutters-accordion@1.0.0/dist/shutters.es.js';
+  import { ShuttersAccordion } from 'https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.es.js';
 </script>
 
 <!-- UMD (for browsers) -->
-<script src="https://unpkg.com/shutters-accordion@1.0.0/dist/shutters.umd.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.0.0/dist/style.css">
+<script src="https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.umd.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.1.0/dist/style.css">
 ```
 
 ### Direct Download
@@ -170,8 +170,8 @@ accordion.toggle(0);
 accordion.destroy();
 
 // Access the version
-console.log(ShuttersAccordion.VERSION); // "1.0.0"
-console.log(accordion.version);         // "1.0.0"
+console.log(ShuttersAccordion.VERSION); // "1.1.0"
+console.log(accordion.version);         // "1.1.0"
 ```
 
 ---
@@ -326,15 +326,15 @@ npm run preview
 
 ## Versioning
 
-Current version: **1.0.0**
+Current version: **1.1.0**
 
 ```javascript
 // Static property
-console.log(ShuttersAccordion.VERSION); // "1.0.0"
+console.log(ShuttersAccordion.VERSION); // "1.1.0"
 
 // Instance property
 const accordion = new ShuttersAccordion();
-console.log(accordion.version); // "1.0.0"
+console.log(accordion.version); // "1.1.0"
 ```
 
 ---
