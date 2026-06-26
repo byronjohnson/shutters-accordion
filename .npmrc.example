@@ -1,0 +1,7 @@
+# Default npm registry for this project.
+# Copy to .npmrc locally if needed (.npmrc is gitignored).
+registry=https://registry.npmjs.org
+
+# GitHub Packages (optional) — see docs/GITHUB_PACKAGES.md
+# @byronjohnson:registry=https://npm.pkg.github.com
+# //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN

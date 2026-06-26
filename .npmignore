@@ -1,43 +1,65 @@
-# Development files
-node_modules/
-.git/
-.vscode/
-.kiro/
+# Everything not in package.json "files" should stay off npm.
+# Whitelist: dist/, src/, README.md, LICENSE
 
-# Demo directory (for GitHub Pages)
+# Repository & CI (GitHub only)
+.git/
+.github/
+.gitignore
+.npmignore
+
+# Agent & internal dev context
+AGENTS.md
+.cursor/
+docs/
+scripts/
+
+# Demo site (GitHub Pages only)
 demo/
 
-# Source files (already bundled in dist)
-src/
-index.html
+# Build tooling & config
 vite.config.js
+vite.config.demo.js
+index.html
 
-# Development and testing
+# Version & changelog (consumers use npm version / registry metadata)
+VERSION
+CHANGELOG.md
+
+# Development & testing
+node_modules/
 *.test.js
 *.spec.js
 coverage/
 .nyc_output/
 
-# Documentation source
-docs/
+# Environment & secrets
+.env
+.env.*
+.npmrc
+.npmrc.local
+*.pem
+*.key
+secrets/
 
-# Build artifacts
+# Logs & backups
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# Backups
 backups/
 *.backup
 *.bak
 
-# OS files
+# IDE & OS
+.vscode/
+.idea/
+.kiro/
 .DS_Store
 Thumbs.db
-
-# IDE
-.idea/
 *.swp
 *.swo
 *~
+
+# Local artifacts
+*.tgz
+dist-demo/
