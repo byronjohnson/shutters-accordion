@@ -1,0 +1,33 @@
+---
+description: Shutters CSS layers — core mechanics vs theme, grid animation, custom properties
+globs: "**/*.css"
+alwaysApply: false
+---
+
+# CSS Layers
+
+| File | Contains | Must NOT contain |
+|---|---|---|
+| `src/shutters-core.css` | Grid animation, opacity, icon rotation, header flex, cursor | Colors, borders, padding, fonts |
+| `src/shutters-theme.css` | Colors, borders, padding, typography, `:focus-visible` | Grid mechanics duplication |
+| `demo/shutters-demo.css` | Demo page layout only | Library styles |
+
+## Animation pattern (do not change approach)
+
+```css
+.shutters-content { display: grid; grid-template-rows: 0fr; opacity: 0; }
+.opened .shutters-content { grid-template-rows: 1fr; opacity: 1; }
+.shutters-body { min-height: 0; overflow: hidden; }
+```
+
+## Theme custom properties
+
+`--shutters-bg-color`, `--shutters-border-color`, `--shutters-focus-color`, `--shutters-hover-bg`, `--shutters-text-color`
+
+JS also sets `--shutters-animation-duration` and `--shutters-animation-easing` inline on containers.
+
+## After CSS changes
+
+- [ ] Sync matching file to `demo/` if it's a library CSS file
+- [ ] `npm run build` and visually check demo
+- [ ] `npm run agent:sync`

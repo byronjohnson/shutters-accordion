@@ -1,0 +1,31 @@
+---
+description: ShuttersAccordion JS patterns — API, events, delegation, JSDoc
+globs: src/**/*.js,index.js,demo/shutters-core.js
+alwaysApply: false
+---
+
+# Library JavaScript
+
+Reference: `src/shutters-core.js` — copy patterns from existing methods.
+
+## Class structure
+
+- Private helpers prefixed `_` (e.g. `_toggle`, `_setState`, `_emit`)
+- Public API: `open`, `close`, `toggle`, `openAll`, `closeAll`, `on`, `off`, `destroy`
+- Custom events: `shutters:open`, `shutters:close` on container with `detail: { header, item }`
+- Index `_byIndex()` flattens headers across all managed containers in DOM order
+
+## Adding a public method checklist
+
+- [ ] Implement in `src/shutters-core.js` with JSDoc
+- [ ] Copy `src/shutters-core.js` → `demo/shutters-core.js`
+- [ ] Document in root `README.md` API section
+- [ ] Add `CHANGELOG.md` entry
+- [ ] `npm run build` — verify bundle size
+- [ ] `npm run agent:sync`
+
+## Gotchas
+
+- `open()` calls `_closeOthers` when container has `shutters-autoclose`
+- `destroy()` must remove listeners AND inline CSS custom properties on containers
+- Constructor throws if no containers match selector

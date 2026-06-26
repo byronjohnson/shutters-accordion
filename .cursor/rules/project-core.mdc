@@ -1,0 +1,37 @@
+---
+description: Shutters core constraints — zero deps, CSS/JS split, a11y, bundle size
+alwaysApply: true
+---
+
+# Shutters — Project Core
+
+Vanilla JS + CSS accordion library. **No framework, no runtime deps.** Node ≥ 14, Vite 6 dev-only, ES2020 target.
+
+## Source of truth
+
+- JS class: `src/shutters-core.js`
+- Library entry: `index.js` (imports CSS for Vite; re-exports class)
+- CSS mechanics: `src/shutters-core.css`
+- CSS theme: `src/shutters-theme.css`
+- Demo copies in `demo/` must stay identical to `src/` library files
+
+## Hard constraints
+
+- Never add runtime npm dependencies
+- Never `import './shutters-core.css'` inside `shutters-core.js`
+- Never set `window.ShuttersAccordion` in ES module code (UMD build handles globals)
+- Event delegation only: one click + one keydown listener per container
+- Animate with CSS Grid `grid-template-rows: 0fr/1fr` — not max-height or scrollHeight JS
+- JS auto-applies ARIA (`role="button"`, `tabindex="0"`, `aria-expanded`)
+- Keep `:focus-visible` visible — never `outline: none` without replacement
+
+## After structural changes
+
+```bash
+npm run agent:sync
+npm run build
+```
+
+## Deep context
+
+Read `AGENTS.md` first, then `docs/PROJECT_BRAIN.md` for architecture and history.

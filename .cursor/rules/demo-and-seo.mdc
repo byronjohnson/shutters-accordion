@@ -1,0 +1,42 @@
+---
+description: Demo site — HTML structure, JSON-LD, SEO, GitHub Pages build
+globs: demo/**
+alwaysApply: false
+---
+
+# Demo & SEO
+
+Reference: `demo/index.html` — follow existing section patterns.
+
+## HTML accordion markup
+
+Authors omit ARIA — JS adds it. Required classes: `shutters-accordion`, `shutters-item`, `shutters-header`, `shutters-title`, `shutters-icon`, `shutters-content`, `shutters-body`.
+
+## Init pattern
+
+```html
+<script type="module">
+  import { ShuttersAccordion } from './shutters-core.js';
+  new ShuttersAccordion({ container: '.shutters-accordion', ... });
+</script>
+```
+
+- **Never** load `shutters-core.js` twice (no duplicate script tag + import)
+- One instance per independent auto-close group if behavior must differ
+
+## SEO blocks in demo/index.html
+
+- Primary meta, Open Graph, Twitter Card
+- JSON-LD: `SoftwareSourceCode` + `FAQPage`
+- Update JSON-LD `version` on release
+
+## Build & deploy
+
+- Dev: `npm run dev:demo`
+- Production: `npm run build:demo` → `dist-demo/`
+- Deploy: push to `main`/`master` triggers `.github/workflows/deploy-demo.yml`
+
+## After demo changes
+
+- [ ] `npm run build:demo`
+- [ ] `npm run agent:sync`

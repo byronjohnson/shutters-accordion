@@ -89,6 +89,7 @@
     "preview": "vite preview",
     "preview:demo": "vite preview --config vite.config.demo.js",
     "clean": "rm -rf dist dist-demo",
+    "agent:sync": "node scripts/generate-agent-context.mjs",
     "version:sync": "node scripts/sync-version.js",
     "preversion": "npm run version:sync",
     "prepublishOnly": "npm run clean && npm run build"
