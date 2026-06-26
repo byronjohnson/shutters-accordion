@@ -4,10 +4,37 @@ All notable changes to this project will be documented in this file.
 
 ## [1.2.1] - 2026-06-26
 
+Patch release — CSS layout fixes only. No JavaScript or API changes. Safe upgrade from 1.2.0 or 1.1.x.
+
 ### Fixed
-- Accordion content area spans full width of the header (shared padding vars, `border-box`)
-- Removed extra vertical gap below closed panels and below open panel content
-- Theme content spacing no longer stacks body padding with last-child margins
+
+**Panel width alignment**
+- Content panels now span the full width of the header bar. Horizontal padding moved from `.shutters-content` to `.shutters-body` so backgrounds align edge-to-edge while text stays aligned with the title.
+- Headers no longer overflow their container: the accordion tree uses `box-sizing: border-box`, fixing `width: 100%` plus padding extending past the panel on default `content-box` sizing.
+
+**Vertical spacing**
+- Closed panels no longer show a visible gap below the header. Open-only margins are scoped to `.opened` so the grid collapse to `0fr` reaches true zero height when collapsed.
+- Open panels no longer stack redundant bottom space from body `padding-bottom` plus duplicate last-child margin rules. The final paragraph keeps `1rem` bottom margin in the theme for balanced spacing within the content area.
+
+**Theme (`theme.css`)**
+- Open-state top spacing (`margin-top` on first child) is scoped to `.opened .shutters-body` so it cannot affect collapsed panels.
+- Last list and list item keep zero bottom margin when they are the final element; last paragraph retains `1rem` bottom margin for visual balance.
+
+### Changed
+
+**Padding tokens (core + theme)**
+- Introduced shared custom properties on `.shutters-accordion`:
+  - `--shutters-padding-x` (core default: `0.25rem`; theme override: `clamp(0.5rem, 2vw, 1rem)`)
+  - `--shutters-padding-y` (core default: `0.75rem`; theme override: `clamp(0.5rem, 2vw, 1rem)`)
+- Header and body both consume these variables for consistent horizontal alignment.
+
+**Release tooling**
+- `npm run version:sync` now updates the README version footer, demo version badge, and CDN pins (previously only JSON-LD and unpkg URLs were synced).
+
+### Upgrade notes
+
+- Replace imports of `core.css` and/or `theme.css` — no HTML or JavaScript changes required.
+- If you overrode `.shutters-content` padding in custom CSS, move horizontal padding to `.shutters-body` or override `--shutters-padding-x` / `--shutters-padding-y` on `.shutters-accordion` instead.
 
 ---
 
