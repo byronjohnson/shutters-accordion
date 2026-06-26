@@ -341,16 +341,11 @@ footer code {
 .panel-core-only .shutters-header {
     background: transparent !important;
     font-weight: inherit !important;
-    padding: 0.75rem 0.25rem !important;
 }
 
 .panel-core-only .shutters-header:hover {
     background: transparent !important;
     opacity: 0.85;
-}
-
-.panel-core-only .shutters-content {
-    padding: 0 !important;
 }
 
 @media (max-width: 640px) {

@@ -68,9 +68,9 @@ npm install @byronjohnson/shutters-accordion
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.2.0/dist/core.css">
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.2.1/dist/core.css">
 <script type="module">
-  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.2.0/dist/shutters.es.js';
+  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.es.js';
   new ShuttersAccordion({ container: '.shutters-accordion' });
 </script>
 ```

@@ -1,6 +1,6 @@
 {
   "name": "shutters-accordion",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Shutters — vanilla JavaScript accordion component. Zero runtime dependencies. Smooth CSS Grid animations, ARIA, keyboard navigation, auto-close. Under 2KB gzip.",
   "main": "dist/shutters.umd.js",
   "module": "dist/shutters.es.js",

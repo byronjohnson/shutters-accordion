@@ -8,9 +8,18 @@
   --shutters-focus-color: -webkit-focus-ring-color;
   --shutters-divider-color: color-mix(in srgb, currentColor 12%, transparent);
   --shutters-text-color: inherit;
+  --shutters-padding-x: 0.25rem;
+  --shutters-padding-y: 0.75rem;
+  box-sizing: border-box;
   color: var(--shutters-text-color);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.5;
+}
+
+.shutters-accordion *,
+.shutters-accordion *::before,
+.shutters-accordion *::after {
+  box-sizing: inherit;
 }
 
 .shutters-item {
@@ -28,7 +37,7 @@
   justify-content: space-between;
   user-select: none;
   width: 100%;
-  padding: 0.75rem 0.25rem;
+  padding: var(--shutters-padding-y) var(--shutters-padding-x);
   border: none;
   background: transparent;
   color: inherit;
@@ -83,6 +92,7 @@
   min-height: 0;
   overflow: hidden;
   opacity: 0;
+  padding-inline: var(--shutters-padding-x);
   transition: opacity calc(var(--shutters-animation-duration) * 0.75) ease;
 }
 

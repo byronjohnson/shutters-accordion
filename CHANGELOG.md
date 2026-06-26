@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1] - 2026-06-26
+
+### Fixed
+- Accordion content area spans full width of the header (shared padding vars, `border-box`)
+- Removed extra vertical gap below closed panels and below open panel content
+- Theme content spacing no longer stacks body padding with last-child margins
+
+---
+
 ## [1.2.0] - 2026-06-26
 
 ### Added

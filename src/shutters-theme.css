@@ -11,6 +11,8 @@
 
 .shutters-accordion {
   background-color: var(--shutters-bg-color);
+  --shutters-padding-x: clamp(0.5rem, 2vw, 1rem);
+  --shutters-padding-y: clamp(0.5rem, 2vw, 1rem);
 }
 
 .shutters-item {
@@ -26,7 +28,7 @@
   color: var(--shutters-text-color);
   font-size: clamp(0.85rem, 2vw, 1rem);
   font-weight: 500;
-  padding: clamp(0.5rem, 2vw, 1rem);
+  padding: var(--shutters-padding-y) var(--shutters-padding-x);
   transition: background-color 0.15s ease, opacity 0.15s ease;
 }
 
@@ -45,31 +47,32 @@
   font-size: clamp(1rem, 2vw, 1.2rem);
 }
 
-.shutters-content {
-  padding: 0 clamp(0.5rem, 2vw, 1rem);
-}
-
 .shutters-body {
   color: var(--shutters-text-color);
   line-height: 1.6;
 }
 
-.shutters-body > *:first-child {
+.opened .shutters-body > *:first-child {
   margin-top: 1rem;
-}
-
-.shutters-body > *:last-child {
-  margin-bottom: 1rem;
 }
 
 .shutters-body p {
   margin: 0 0 1rem;
 }
 
+.shutters-body p:last-child {
+  margin-bottom: 0;
+}
+
 .shutters-body ul,
 .shutters-body ol {
   margin: 0 0 1rem;
   padding-left: 1.5rem;
+}
+
+.shutters-body ul:last-child,
+.shutters-body ol:last-child {
+  margin-bottom: 0;
 }
 
 .shutters-body li {
