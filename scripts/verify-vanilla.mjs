@@ -35,13 +35,17 @@ if (pkg.dependencies && Object.keys(pkg.dependencies).length > 0) {
   errors.push('package.json must not have runtime "dependencies" — vanilla JS, zero deps');
 }
 
-const forbiddenSourceExt = ['.ts', '.tsx', '.jsx', '.vue', '.svelte'];
 const libraryDirs = ['src', 'demo'].map((d) => path.join(ROOT, d));
 const rootEntries = ['index.js', 'auto.js'].map((f) => path.join(ROOT, f));
 
+function isForbiddenLibraryFile(file) {
+  const base = path.basename(file);
+  if (base.endsWith('.d.ts')) return false;
+  return ['.ts', '.tsx', '.jsx', '.vue', '.svelte'].includes(path.extname(file));
+}
+
 for (const file of [...libraryDirs.flatMap((d) => walk(d)), ...rootEntries.filter(fs.existsSync)]) {
-  const ext = path.extname(file);
-  if (forbiddenSourceExt.includes(ext)) {
+  if (isForbiddenLibraryFile(file)) {
     errors.push(`Non-vanilla source file: ${path.relative(ROOT, file)}`);
   }
 }

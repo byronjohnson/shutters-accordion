@@ -92,6 +92,31 @@ describe('ShuttersAccordion', () => {
     accordion.destroy();
     expect(container.style.getPropertyValue('--shutters-animation-duration')).toBe('');
   });
+
+  it('ArrowDown moves focus to next header', () => {
+    const accordion = new ShuttersAccordion({ container: '#acc' });
+    void accordion;
+    const headers = document.querySelectorAll('.shutters-header');
+    headers[0].focus();
+    headers[0].dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    expect(document.activeElement).toBe(headers[1]);
+  });
+
+  it('Space toggles panel open', () => {
+    new ShuttersAccordion({ container: '#acc' });
+    const headers = document.querySelectorAll('.shutters-header');
+    headers[0].focus();
+    headers[0].dispatchEvent(new KeyboardEvent('keydown', { key: ' ', bubbles: true, cancelable: true }));
+    expect(document.querySelector('.shutters-item').classList.contains('opened')).toBe(true);
+  });
+
+  it('Home focuses first header from last', () => {
+    new ShuttersAccordion({ container: '#acc' });
+    const headers = document.querySelectorAll('.shutters-header');
+    headers[1].focus();
+    headers[1].dispatchEvent(new KeyboardEvent('keydown', { key: 'Home', bubbles: true }));
+    expect(document.activeElement).toBe(headers[0]);
+  });
 });
 
 describe('initAll (auto-init)', () => {

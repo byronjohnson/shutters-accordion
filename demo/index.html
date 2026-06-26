@@ -39,7 +39,7 @@
     "programmingLanguage": ["JavaScript", "CSS"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "author": {
       "@type": "Person",
       "name": "Byron Johnson",
@@ -188,14 +188,125 @@
       <div class="project-taglines">
         <h2>A Lightweight, Accessible JavaScript Accordion Component</h2>
         <p>
-          Dependency-free accordion component with smooth CSS Grid animations,
-          full ARIA accessibility, keyboard navigation, and customizable theming.
+          Vanilla JavaScript accordion with CSS Grid motion, automatic ARIA,
+          opt-in auto-init, and a theme-less default that still looks great.
           Under 2KB gzipped.
         </p>
+        <p class="version-badge" aria-label="Current version">v1.2.0</p>
       </div>
     </header>
 
     <main>
+      <!-- Core vs Theme (v1.2) -->
+      <section class="demo-section" aria-labelledby="styling-heading">
+        <h2 id="styling-heading">Default CSS: Core vs Theme</h2>
+        <p>
+          v1.2 ships <strong>theme-less <code>core.css</code></strong> as the default npm import — clean dividers,
+          focus ring, and smooth motion. Add optional <code>theme.css</code> for a decorative black-and-white style.
+        </p>
+        <div class="styling-compare">
+          <div class="styling-panel">
+            <h3>Core only (<code>core.css</code>)</h3>
+            <p>Polished minimal presentation — ideal for custom design systems.</p>
+            <div class="shutters-accordion panel-core-only demo-accordion">
+              <div class="shutters-item">
+                <div class="shutters-header">
+                  <span class="shutters-title">Minimal default styling</span>
+                  <span class="shutters-icon"></span>
+                </div>
+                <div class="shutters-content">
+                  <div class="shutters-body"><p>Inherits your page typography and colors.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="styling-panel">
+            <h3>Core + theme (<code>theme.css</code>)</h3>
+            <p>Optional decorative layer — borders, hover fills, content spacing.</p>
+            <div class="shutters-accordion demo-accordion">
+              <div class="shutters-item">
+                <div class="shutters-header">
+                  <span class="shutters-title">Themed presentation</span>
+                  <span class="shutters-icon"></span>
+                </div>
+                <div class="shutters-content">
+                  <div class="shutters-body"><p>Drop-in visual style for prototypes and marketing pages.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Opt-in auto-init (v1.2) -->
+      <section class="demo-section" aria-labelledby="auto-init-heading">
+        <h2 id="auto-init-heading">Opt-in Auto-Init</h2>
+        <p>
+          No manual <code>new ShuttersAccordion()</code> required. Add <code>data-shutters</code> and import
+          <code>shutters-accordion/auto</code> (or call <code>initAll()</code> from this demo's source).
+        </p>
+        <div class="shutters-accordion demo-accordion shutters-autoclose" data-shutters data-shutters-default-open="first">
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Initialized via data-shutters</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>This container uses <code>data-shutters</code> and <code>data-shutters-default-open="first"</code>. Auto-close is enabled with <code>shutters-autoclose</code>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Zero boilerplate JavaScript</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>Perfect for static sites, CMS templates, and quick prototypes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Motion & a11y (v1.2) -->
+      <section class="demo-section" aria-labelledby="motion-heading">
+        <h2 id="motion-heading">Motion &amp; Accessibility</h2>
+        <div class="shutters-accordion demo-accordion">
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Fluid CSS Grid transitions</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>
+                  Uses <code>grid-template-rows: 0fr → 1fr</code> with
+                  <code>transition-behavior: allow-discrete</code>, separate open/close easing curves,
+                  and a subtle opacity fade on <code>.shutters-body</code>.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">prefers-reduced-motion</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>
+                  When reduced motion is requested at the OS level, Shutters disables transitions instantly —
+                  content remains fully accessible without animation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Why Shutters Section -->
       <section class="demo-section" aria-labelledby="why-shutters">
         <h2 id="why-shutters">Why Choose Shutters Accordion?</h2>
@@ -247,8 +358,8 @@
                 <p>
                   Instead of using JavaScript-driven height calculations or the jittery <code>max-height</code>
                   hack, Shutters leverages <strong>CSS Grid's <code>grid-template-rows</code> transition</strong>
-                  for buttery-smooth expand and collapse animations at 60fps. This approach is GPU-accelerated,
-                  avoids layout thrashing, and works with dynamic content heights — no fixed pixel values needed.
+                  with <code>transition-behavior: allow-discrete</code> for smooth expand and collapse at 60fps.
+                  Separate open/close easing curves and a body opacity fade make motion feel more natural.
                   On the JS side, Shutters uses <strong>event delegation</strong> — just one click listener
                   per container instead of one per header — keeping memory usage minimal even with many panels.
                 </p>
@@ -342,7 +453,13 @@
                     <strong>Smooth Animations:</strong> CSS Grid-based 60fps expand/collapse transitions
                   </li>
                   <li>
-                    <strong>Modular:</strong> Separate core functionality CSS from optional presentation theme
+                    <strong>Modular CSS:</strong> Default <code>core.css</code> (polished, theme-less) + optional <code>theme.css</code>
+                  </li>
+                  <li>
+                    <strong>Auto-init:</strong> Opt-in <code>data-shutters</code> + <code>shutters-accordion/auto</code>
+                  </li>
+                  <li>
+                    <strong>Motion:</strong> <code>allow-discrete</code> grid transitions, open/close easing, <code>prefers-reduced-motion</code>
                   </li>
                   <li>
                     <strong>Customizable:</strong> Theme via CSS custom properties — colors, timing, easing
@@ -432,10 +549,9 @@
           <h3>1. Installation</h3>
           <p>Install Shutters Accordion via npm, or include it directly from a CDN:</p>
           <pre><code>npm install shutters-accordion</code></pre>
-          <p>Or include the CSS and JavaScript files directly in your HTML:</p>
-          <pre><code>&lt;link rel="stylesheet" href="shutters-core.css" /&gt;
-&lt;link rel="stylesheet" href="shutters-theme.css" /&gt;
-&lt;script type="module" src="shutters-core.js"&gt;&lt;/script&gt;</code></pre>
+          <pre><code>&lt;link rel="stylesheet" href="core.css" /&gt;
+&lt;!-- optional: --&gt;
+&lt;link rel="stylesheet" href="theme.css" /&gt;</code></pre>
         </div>
 
         <div class="guide-section">
@@ -460,14 +576,17 @@
           <h3>3. Initialize JavaScript</h3>
           <p>Initialize the accordion with optional configuration options:</p>
           <pre><code>import ShuttersAccordion from 'shutters-accordion';
-import 'shutters-accordion/style.css';
+import 'shutters-accordion/core.css';
 
 const accordion = new ShuttersAccordion({
   container: '.shutters-accordion',
-  animationDuration: 300,
-  animationEasing: 'ease-in-out',
+  animationDuration: 350,
+  animationEasing: 'cubic-bezier(0.4, 0, 0.2, 1)',
   defaultOpen: 'none'
 });</code></pre>
+          <p>Or opt-in auto-init:</p>
+          <pre><code>import 'shutters-accordion/core.css';
+import 'shutters-accordion/auto';</code></pre>
         </div>
 
         <div class="guide-section">
@@ -524,13 +643,12 @@ accordion.on('shutters:close', (e) =&gt; {
           <h3>7. Customization via CSS Custom Properties</h3>
           <p>Override CSS custom properties to match your design system:</p>
           <pre><code>.shutters-accordion {
+  --shutters-animation-duration: 0.35s;
+  --shutters-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --shutters-animation-easing-close: cubic-bezier(0.4, 0, 1, 1);
   --shutters-bg-color: #fff;
   --shutters-border-color: #000;
   --shutters-focus-color: #0066cc;
-  --shutters-hover-bg: #f5f5f5;
-  --shutters-text-color: #000;
-  --shutters-animation-duration: 0.5s;
-  --shutters-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }</code></pre>
         </div>
       </section>
@@ -614,13 +732,16 @@ accordion.on('shutters:close', (e) =&gt; {
 
   <script type="module">
     import { ShuttersAccordion } from './shutters-core.js';
+    import { initAll } from './shutters-auto.js';
 
-    const accordion = new ShuttersAccordion({
-      container: '.shutters-accordion',
-      animationDuration: 400,
-      animationEasing: 'ease-in-out',
-      defaultOpen: 'first'
+    new ShuttersAccordion({
+      container: '.shutters-accordion:not([data-shutters])',
+      animationDuration: 350,
+      animationEasing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+      defaultOpen: 'none'
     });
+
+    initAll();
   </script>
 </body>
 

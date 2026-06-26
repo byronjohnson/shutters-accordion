@@ -9,20 +9,20 @@
 | Package | Version |
 |---|---|
 | Node (engines) | >=14.0.0 |
-| shutters-accordion | 1.1.1 |
+| shutters-accordion | 1.2.0 |
 | jsdom (dev) | ^26.1.0 |
 | vite (dev) | ^6.3.5 |
 | vitest (dev) | ^3.2.4 |
 
 ## Version Drift Report
 
-⚠️ **Versions are inconsistent** — sync before release.
+✅ All tracked version sources match.
 
 | Source | Version |
 |---|---|
-| package.json | 1.1.1 |
-| VERSION | 1.1.0 |
-| demo/index.html (JSON-LD) | 1.1.0 |
+| package.json | 1.2.0 |
+| VERSION | 1.2.0 |
+| demo/index.html (JSON-LD) | 1.2.0 |
 
 ## Project Type
 
@@ -38,10 +38,12 @@ Policy enforced by: `npm run verify:vanilla`
 - `src/shutters-core.js`
 - `src/shutters-demo.css`
 - `src/shutters-theme.css`
+- `src/shutters.d.ts`
 
 ## Demo Files
 
 - `demo/index.html`
+- `demo/shutters-auto.js`
 - `demo/shutters-core.css`
 - `demo/shutters-core.js`
 - `demo/shutters-demo.css`
@@ -133,6 +135,7 @@ Policy enforced by: `npm run verify:vanilla`
 - `preversion`
 - `preview`
 - `preview:demo`
+- `size`
 - `sync:demo`
 - `test`
 - `test:watch`
@@ -142,6 +145,7 @@ Policy enforced by: `npm run verify:vanilla`
 ## Scripts
 
 - `scripts/build-theme-css.mjs`
+- `scripts/check-size.mjs`
 - `scripts/generate-agent-context.mjs`
 - `scripts/sync-version.js`
 - `scripts/verify-vanilla.mjs`
@@ -160,10 +164,10 @@ Policy enforced by: `npm run verify:vanilla`
 
 | Category | Count |
 |---|---|
-| Source files | 5 |
-| Demo files | 5 |
+| Source files | 6 |
+| Demo files | 6 |
 | Public methods | 8 |
 | CSS custom properties | 9 |
 | HTML classes | 8 |
-| npm scripts | 18 |
+| npm scripts | 19 |
 | CI workflows | 2 |

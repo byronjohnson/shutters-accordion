@@ -1,9 +1,10 @@
 {
   "name": "shutters-accordion",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Shutters — vanilla JavaScript accordion component. Zero runtime dependencies. Smooth CSS Grid animations, ARIA, keyboard navigation, auto-close. Under 2KB gzip.",
   "main": "dist/shutters.umd.js",
   "module": "dist/shutters.es.js",
+  "types": "dist/shutters.d.ts",
   "style": "dist/core.css",
   "files": [
     "dist",
@@ -13,10 +14,12 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/shutters.d.ts",
       "import": "./dist/shutters.es.js",
       "require": "./dist/shutters.umd.js"
     },
     "./auto": {
+      "types": "./dist/shutters.d.ts",
       "import": "./dist/shutters.auto.es.js",
       "require": "./dist/shutters.auto.umd.js"
     },
@@ -92,8 +95,9 @@
     "test:watch": "vitest",
     "dev": "vite",
     "dev:demo": "vite --config vite.config.demo.js",
-    "build": "vite build && vite build --config vite.config.auto.js && node scripts/build-theme-css.mjs",
-    "sync:demo": "cp src/shutters-core.js demo/shutters-core.js && cp src/shutters-core.css demo/shutters-core.css && cp src/shutters-theme.css demo/shutters-theme.css",
+    "build": "vite build && vite build --config vite.config.auto.js && node scripts/build-theme-css.mjs && cp src/shutters.d.ts dist/shutters.d.ts",
+    "size": "npm run build && node scripts/check-size.mjs",
+    "sync:demo": "cp src/shutters-core.js demo/shutters-core.js && cp src/shutters-auto.js demo/shutters-auto.js && cp src/shutters-core.css demo/shutters-core.css && cp src/shutters-theme.css demo/shutters-theme.css",
     "prebuild:demo": "npm run sync:demo",
     "build:demo": "vite build --config vite.config.demo.js",
     "build:all": "npm run build && npm run build:demo",

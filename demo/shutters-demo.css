@@ -294,3 +294,67 @@ footer code {
     font-size: 0.85rem;
     color: #d63384;
 }
+
+/* v1.2 — core vs theme comparison */
+.version-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: #111;
+    color: #fff;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    margin-bottom: 0.75rem;
+}
+
+.styling-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.styling-panel {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    background: #fff;
+}
+
+.styling-panel h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+}
+
+.styling-panel p {
+    font-size: 0.85rem;
+    color: #555;
+    margin: 0 0 1rem;
+}
+
+.panel-core-only.shutters-accordion {
+    background: transparent;
+}
+
+.panel-core-only .shutters-header {
+    background: transparent !important;
+    font-weight: inherit !important;
+    padding: 0.75rem 0.25rem !important;
+}
+
+.panel-core-only .shutters-header:hover {
+    background: transparent !important;
+    opacity: 0.85;
+}
+
+.panel-core-only .shutters-content {
+    padding: 0 !important;
+}
+
+@media (max-width: 640px) {
+    .styling-compare {
+        grid-template-columns: 1fr;
+    }
+}

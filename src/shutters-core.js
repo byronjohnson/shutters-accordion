@@ -52,26 +52,26 @@ export class ShuttersAccordion {
   /** Set up ARIA attributes and attach delegated listeners */
   _init() {
     for (const container of this.containers) {
-      // Auto-setup ARIA on every header
-      for (const header of container.querySelectorAll('.shutters-header')) {
+      const headers = [...container.querySelectorAll('.shutters-header')];
+
+      for (const header of headers) {
         header.setAttribute('role', 'button');
         header.setAttribute('tabindex', '0');
         const item = header.closest('.shutters-item');
         header.setAttribute('aria-expanded', item?.classList.contains('opened') ? 'true' : 'false');
       }
 
-      // One delegated click listener per container
       const onClick = (e) => {
         const header = e.target.closest('.shutters-header');
         if (header && container.contains(header)) this._toggle(header, container);
       };
 
-      // One delegated keydown listener per container
       const onKey = (e) => {
         const header = e.target.closest('.shutters-header');
         if (!header || !container.contains(header)) return;
 
-        const headers = [...container.querySelectorAll('.shutters-header')];
+        const i = headers.indexOf(header);
+        if (i === -1) return;
 
         switch (e.key) {
           case 'Enter':
@@ -81,11 +81,11 @@ export class ShuttersAccordion {
             break;
           case 'ArrowDown':
             e.preventDefault();
-            headers[(headers.indexOf(header) + 1) % headers.length]?.focus();
+            headers[(i + 1) % headers.length]?.focus();
             break;
           case 'ArrowUp':
             e.preventDefault();
-            headers[(headers.indexOf(header) - 1 + headers.length) % headers.length]?.focus();
+            headers[(i - 1 + headers.length) % headers.length]?.focus();
             break;
           case 'Home':
             e.preventDefault();
@@ -100,8 +100,14 @@ export class ShuttersAccordion {
 
       container.addEventListener('click', onClick);
       container.addEventListener('keydown', onKey);
-      this._handlers.push({ container, onClick, onKey });
+      this._handlers.push({ container, onClick, onKey, headers });
     }
+  }
+
+  /** Cached headers for a container (falls back to live query) */
+  _headersFor(container) {
+    return this._handlers.find((h) => h.container === container)?.headers
+      ?? [...container.querySelectorAll('.shutters-header')];
   }
 
   /** Open default items after initialization */
@@ -139,7 +145,7 @@ export class ShuttersAccordion {
   /** In auto-close containers, close every item except the current one */
   _closeOthers(currentHeader, container) {
     if (!container.classList.contains('shutters-autoclose')) return;
-    for (const h of container.querySelectorAll('.shutters-header')) {
+    for (const h of this._headersFor(container)) {
       if (h === currentHeader) continue;
       const item = h.closest('.shutters-item');
       if (item?.classList.contains('opened')) {
