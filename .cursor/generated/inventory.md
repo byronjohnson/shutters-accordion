@@ -9,7 +9,7 @@
 | Package | Version |
 |---|---|
 | Node (engines) | >=14.0.0 |
-| shutters-accordion | 1.2.0 |
+| shutters-accordion | 1.2.1 |
 | jsdom (dev) | ^26.1.0 |
 | vite (dev) | ^6.3.5 |
 | vitest (dev) | ^3.2.4 |
@@ -20,9 +20,9 @@
 
 | Source | Version |
 |---|---|
-| package.json | 1.2.0 |
-| VERSION | 1.2.0 |
-| demo/index.html (JSON-LD) | 1.2.0 |
+| package.json | 1.2.1 |
+| VERSION | 1.2.1 |
+| demo/index.html (JSON-LD) | 1.2.1 |
 
 ## Project Type
 
@@ -42,10 +42,12 @@ Policy enforced by: `npm run verify:vanilla`
 
 ## Demo Files
 
+- `demo/cdn-integrity.json`
 - `demo/index.html`
 - `demo/shutters-auto.js`
 - `demo/shutters-core.css`
 - `demo/shutters-core.js`
+- `demo/shutters-demo-ui.js`
 - `demo/shutters-demo.css`
 - `demo/shutters-theme.css`
 
@@ -118,6 +120,8 @@ Policy enforced by: `npm run verify:vanilla`
 - `--shutters-divider-color`
 - `--shutters-focus-color`
 - `--shutters-hover-bg`
+- `--shutters-padding-x`
+- `--shutters-padding-y`
 - `--shutters-text-color`
 
 ## npm Scripts
@@ -136,6 +140,7 @@ Policy enforced by: `npm run verify:vanilla`
 - `preview`
 - `preview:demo`
 - `size`
+- `sri`
 - `sync:demo`
 - `test`
 - `test:watch`
@@ -147,6 +152,7 @@ Policy enforced by: `npm run verify:vanilla`
 - `scripts/build-theme-css.mjs`
 - `scripts/check-size.mjs`
 - `scripts/generate-agent-context.mjs`
+- `scripts/generate-sri.mjs`
 - `scripts/sync-version.js`
 - `scripts/verify-vanilla.mjs`
 
@@ -165,9 +171,9 @@ Policy enforced by: `npm run verify:vanilla`
 | Category | Count |
 |---|---|
 | Source files | 6 |
-| Demo files | 6 |
+| Demo files | 8 |
 | Public methods | 8 |
-| CSS custom properties | 9 |
+| CSS custom properties | 11 |
 | HTML classes | 8 |
-| npm scripts | 19 |
+| npm scripts | 20 |
 | CI workflows | 2 |
