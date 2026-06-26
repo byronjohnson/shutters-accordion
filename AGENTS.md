@@ -15,7 +15,8 @@ Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordi
 | **Live demo** | https://byronjohnson.github.io/shutters-accordion/demo |
 | **Active branch** | `develop` |
 | **Deploy branch** | `main` / `master` → GitHub Pages |
-| **Runtime deps** | None (Vite 6 dev-only) |
+| **Runtime deps** | **None** — vanilla JS + CSS only (Vite/Vitest dev-only) |
+| **Language** | **Vanilla JavaScript** — no TypeScript source, no framework runtime |
 
 ---
 
@@ -65,6 +66,7 @@ shutters/
 │   └── publish.yml               ← GitHub Packages on release
 ├── docs/PROJECT_BRAIN.md         ← deep reference
 ├── CHANGELOG.md                  ← public release notes
+├── ROADMAP.md                    ← product roadmap & progress tracking
 └── README.md                     ← user-facing docs
 ```
 
@@ -72,11 +74,29 @@ shutters/
 
 ---
 
+## Vanilla JavaScript — Permanent Policy
+
+Shutters **is and will remain** a vanilla JavaScript library. The phased roadmap must not change this.
+
+| In scope | Out of scope |
+|---|---|
+| Plain `.js` in `src/`, ES module + UMD builds | TypeScript source or TS compile step for library code |
+| Zero `dependencies` in `package.json` | Any runtime npm package |
+| DOM APIs (`classList`, `CustomEvent`, etc.) | React/Vue/Svelte components or wrappers in this repo |
+| CSS for animation and styling | Web Components / shadow DOM as primary API |
+| Optional hand-written `.d.ts` for consumers | Framework-specific export paths (`/react`, `/vue`) |
+| Dev-only: Vite, Vitest, jsdom | Shipping dev tools in `dist/` |
+
+Enforced by `npm run verify:vanilla` (runs before tests).
+
+---
+
 ## Non-Negotiables
 
+- **Vanilla JS only** — see policy above; run `npm run verify:vanilla` after structural changes
 - **Zero runtime dependencies** — vanilla JS + CSS only
 - **Never bundle CSS into JS** — consumers import CSS separately (`index.js` imports for Vite build only)
-- **Core vs theme CSS split** — mechanics in `shutters-core.css`, visuals in `shutters-theme.css`
+- **Separate core from theme** — `core.css` = default polished presentation; `theme.css` = optional decorative layer
 - **Event delegation** — one `click` + one `keydown` per container, not per header
 - **CSS Grid animation** — `grid-template-rows: 0fr → 1fr`; never `max-height` or JS height measurement
 - **Auto ARIA** — JS sets `role`, `tabindex`, `aria-expanded`; don't require them in HTML
@@ -93,14 +113,15 @@ shutters/
 |---|---|
 | `npm run dev` | Dev server → opens `/demo/index.html` (port 3000) |
 | `npm run dev:demo` | Demo-only dev server |
-| `npm run build` | Build library → `dist/` (ES + UMD + style.css) |
+| `npm run build` | Build library → `dist/` (ES + UMD + core.css + theme.css) |
 | `npm run build:demo` | Build demo → `dist-demo/` for GitHub Pages |
 | `npm run build:all` | Both builds |
 | `npm run preview` | Preview library build |
 | `npm run preview:demo` | Preview built demo |
 | `npm run agent:sync` | Regenerate `.cursor/generated/inventory.md` |
 | `npm run version:sync` | Sync VERSION file → package.json (script partially stale) |
-| `npm test` | **Not implemented** — exits with error |
+| `npm test` | Vitest unit tests |
+| `npm run sync:demo` | Copy `src/` library files → `demo/` |
 
 ---
 
@@ -114,7 +135,7 @@ shutters/
 | Demo/marketing change | `add-demo-section` skill |
 | Release | `release-package` skill |
 | Convention change | Relevant `.cursor/rules/*.mdc` |
-| Architecture/strategy shift | `docs/PROJECT_BRAIN.md` |
+| Architecture/strategy shift | `docs/PROJECT_BRAIN.md` or `ROADMAP.md` |
 | System itself changes | `docs/AGENT_CONTEXT_GUIDE.md` |
 
 ---
@@ -139,7 +160,7 @@ shutters/
 |---|---|
 | `add-api-method` | New public method, event, or constructor option |
 | `change-css-layers` | Core vs theme CSS, animation, custom properties |
-| `sync-demo-from-src` | After any `src/` library file change |
+| `sync-demo-from-src` | After any `src/` library file change (`npm run sync:demo`) |
 | `add-demo-section` | New demo section, usage example, SEO block |
 | `release-package` | Version bump, npm publish, GitHub release |
 
@@ -160,12 +181,13 @@ No auth, analytics, forms, or database in this repo.
 
 ## What NOT To Build
 
-- Framework wrappers (React/Vue components) — out of scope unless explicitly requested
+- **TypeScript source or framework migrations** — vanilla JS is permanent
+- **Framework wrappers** (React/Vue/Svelte packages) — document integration snippets only
+- **Web Component primary API** — plain class + DOM remains the interface
 - Runtime version constants — removed in Feb 2026 overhaul; version lives in `package.json`
-- Tests without explicit request — none exist yet
-- New build tools beyond Vite
+- New build tools beyond Vite (for dev/bundling only)
 - Bundling CSS into JS output
 - Per-header event listeners
-- Visual styling in core CSS
+- Decorative styling-only concerns in core CSS (use theme.css)
 
 For full architecture, history, and API reference → [docs/PROJECT_BRAIN.md](docs/PROJECT_BRAIN.md)

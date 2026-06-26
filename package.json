@@ -1,10 +1,10 @@
 {
   "name": "shutters-accordion",
   "version": "1.1.1",
-  "description": "Shutters — a lightweight, accessible, dependency-free JavaScript accordion component with smooth CSS Grid animations, ARIA support, keyboard navigation, auto-close mode, and full customization via CSS custom properties. Under 2KB gzipped.",
+  "description": "Shutters — vanilla JavaScript accordion component. Zero runtime dependencies. Smooth CSS Grid animations, ARIA, keyboard navigation, auto-close. Under 2KB gzip.",
   "main": "dist/shutters.umd.js",
   "module": "dist/shutters.es.js",
-  "style": "dist/style.css",
+  "style": "dist/core.css",
   "files": [
     "dist",
     "src",
@@ -16,8 +16,14 @@
       "import": "./dist/shutters.es.js",
       "require": "./dist/shutters.umd.js"
     },
-    "./css": "./dist/style.css",
-    "./style.css": "./dist/style.css"
+    "./auto": {
+      "import": "./dist/shutters.auto.es.js",
+      "require": "./dist/shutters.auto.umd.js"
+    },
+    "./core.css": "./dist/core.css",
+    "./theme.css": "./dist/theme.css",
+    "./css": "./dist/core.css",
+    "./style.css": "./dist/core.css"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -76,13 +82,19 @@
   "author": "Byron Johnson",
   "license": "MIT",
   "devDependencies": {
-    "vite": "^6.3.5"
+    "jsdom": "^26.1.0",
+    "vite": "^6.3.5",
+    "vitest": "^3.2.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "verify:vanilla": "node scripts/verify-vanilla.mjs",
+    "test": "npm run verify:vanilla && vitest run",
+    "test:watch": "vitest",
     "dev": "vite",
     "dev:demo": "vite --config vite.config.demo.js",
-    "build": "vite build",
+    "build": "vite build && vite build --config vite.config.auto.js && node scripts/build-theme-css.mjs",
+    "sync:demo": "cp src/shutters-core.js demo/shutters-core.js && cp src/shutters-core.css demo/shutters-core.css && cp src/shutters-theme.css demo/shutters-theme.css",
+    "prebuild:demo": "npm run sync:demo",
     "build:demo": "vite build --config vite.config.demo.js",
     "build:all": "npm run build && npm run build:demo",
     "build:analyze": "vite build --mode analyze",

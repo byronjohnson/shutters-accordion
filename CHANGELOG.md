@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2026-06-26
+
+### Added
+- Opt-in auto-init entry: `import 'shutters-accordion/auto'` with `[data-shutters]` containers
+- `initAll()`, `destroyAuto()`, `destroyAllAuto()` helpers in `src/shutters-auto.js`
+- Split CSS exports: `core.css` (default, theme-less + polished) and optional `theme.css`
+- `transition-behavior: allow-discrete` for smoother grid row transitions
+- Separate open/close easing curves via CSS custom properties
+- `prefers-reduced-motion` support — instant toggle when requested
+- Vitest unit tests for core API and auto-init
+- `npm run sync:demo` — keeps demo library files in sync with `src/`
+
+### Changed
+- Default npm CSS (`./css`, `./style.css`) now ships **core only** — theme is opt-in
+- Core CSS includes clean default presentation (focus ring, dividers, system typography)
+- Theme CSS is purely decorative (colors, hover fills, content typography)
+- Opacity fade moved to `.shutters-body` for a more fluid open sequence
+- Build outputs: `dist/core.css`, `dist/theme.css`, `dist/shutters.auto.es.js`
+
+### Breaking
+- `dist/style.css` renamed to `dist/core.css` ( `./style.css` export alias still resolves to core )
+- Combined core+theme bundle removed — import `theme.css` separately if needed
+
+---
 
 ## [1.1.0] - 2026-02-11
 

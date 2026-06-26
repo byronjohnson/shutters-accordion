@@ -1,0 +1,38 @@
+---
+description: Vanilla JS only — no TypeScript source, no frameworks, no runtime npm deps
+alwaysApply: true
+---
+
+# Vanilla JavaScript — Permanent Policy
+
+Shutters is and will remain a **vanilla JavaScript** library. This is not negotiable through the roadmap.
+
+## What “vanilla JS” means here
+
+- **Source:** plain `.js` files only in `src/`, `index.js`, `auto.js`, `demo/` library copies
+- **Runtime:** zero `dependencies` in `package.json` — consumers get JS + CSS, nothing else
+- **APIs:** browser DOM only (`classList`, `addEventListener`, `CustomEvent`, `querySelector`)
+- **Distribution:** ES module + UMD — no transpiler required on the consumer side
+- **Dev tooling:** Vite, Vitest, jsdom are **devDependencies only** — never shipped in `dist/`
+
+## Never add (unless the project owner explicitly reverses this policy)
+
+- TypeScript source (`.ts`, `.tsx`) or a TS build step for library code
+- React, Vue, Svelte, Angular, Lit, or jQuery — in source or as runtime deps
+- Web Component wrapper as the primary API (custom elements / shadow DOM)
+- Framework-specific packages or `/react` `/vue` export paths in this repo
+- Runtime npm dependencies of any kind
+
+## Allowed
+
+- Hand-written `*.d.ts` for TypeScript **consumers** (optional, no TS source)
+- JSDoc in `.js` files
+- Copy-paste integration snippets in README (React/Vue mount examples — docs only, not packages)
+- CSS for all animation and visual behavior
+
+## Verify before merge
+
+```bash
+npm run verify:vanilla
+npm test
+```

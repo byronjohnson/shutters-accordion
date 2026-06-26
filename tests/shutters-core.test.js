@@ -1,0 +1,163 @@
+/**
+ * @vitest-environment jsdom
+ */
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { ShuttersAccordion } from '../src/shutters-core.js';
+import { initAll, destroyAuto, destroyAllAuto } from '../src/shutters-auto.js';
+
+function accordionHTML({ autoclose = false, id = 'acc' } = {}) {
+  const ac = autoclose ? ' shutters-autoclose' : '';
+  return `
+    <div id="${id}" class="shutters-accordion${ac}">
+      <div class="shutters-item">
+        <div class="shutters-header"><span class="shutters-title">One</span><span class="shutters-icon"></span></div>
+        <div class="shutters-content"><div class="shutters-body"><p>A</p></div></div>
+      </div>
+      <div class="shutters-item">
+        <div class="shutters-header"><span class="shutters-title">Two</span><span class="shutters-icon"></span></div>
+        <div class="shutters-content"><div class="shutters-body"><p>B</p></div></div>
+      </div>
+    </div>
+  `;
+}
+
+describe('ShuttersAccordion', () => {
+  beforeEach(() => {
+    document.body.innerHTML = accordionHTML();
+  });
+
+  afterEach(() => {
+    document.body.innerHTML = '';
+  });
+
+  it('throws when no containers match', () => {
+    expect(() => new ShuttersAccordion({ container: '.missing' })).toThrow(/no containers found/);
+  });
+
+  it('applies ARIA attributes on init', () => {
+    new ShuttersAccordion({ container: '#acc' });
+    const header = document.querySelector('.shutters-header');
+    expect(header.getAttribute('role')).toBe('button');
+    expect(header.getAttribute('tabindex')).toBe('0');
+    expect(header.getAttribute('aria-expanded')).toBe('false');
+  });
+
+  it('opens and closes by index', () => {
+    const accordion = new ShuttersAccordion({ container: '#acc' });
+    const items = document.querySelectorAll('.shutters-item');
+
+    accordion.open(0);
+    expect(items[0].classList.contains('opened')).toBe(true);
+    expect(document.querySelector('.shutters-header').getAttribute('aria-expanded')).toBe('true');
+
+    accordion.close(0);
+    expect(items[0].classList.contains('opened')).toBe(false);
+  });
+
+  it('toggles panel state', () => {
+    const accordion = new ShuttersAccordion({ container: '#acc' });
+    accordion.toggle(1);
+    expect(document.querySelectorAll('.shutters-item')[1].classList.contains('opened')).toBe(true);
+    accordion.toggle(1);
+    expect(document.querySelectorAll('.shutters-item')[1].classList.contains('opened')).toBe(false);
+  });
+
+  it('closes other panels in autoclose mode', () => {
+    document.body.innerHTML = accordionHTML({ autoclose: true });
+    const accordion = new ShuttersAccordion({ container: '#acc' });
+    const items = () => document.querySelectorAll('.shutters-item');
+
+    accordion.open(0);
+    accordion.open(1);
+    expect(items()[0].classList.contains('opened')).toBe(false);
+    expect(items()[1].classList.contains('opened')).toBe(true);
+  });
+
+  it('dispatches custom events', () => {
+    const accordion = new ShuttersAccordion({ container: '#acc' });
+    const events = [];
+    accordion.on('shutters:open', (e) => events.push(e.type));
+    accordion.open(0);
+    expect(events).toEqual(['shutters:open']);
+  });
+
+  it('defaultOpen first opens index 0', () => {
+    new ShuttersAccordion({ container: '#acc', defaultOpen: 'first' });
+    expect(document.querySelector('.shutters-item').classList.contains('opened')).toBe(true);
+  });
+
+  it('destroy removes listeners and timing properties', () => {
+    const accordion = new ShuttersAccordion({ container: '#acc' });
+    const container = document.getElementById('acc');
+    accordion.destroy();
+    expect(container.style.getPropertyValue('--shutters-animation-duration')).toBe('');
+  });
+});
+
+describe('initAll (auto-init)', () => {
+  afterEach(() => {
+    destroyAllAuto();
+    document.body.innerHTML = '';
+  });
+
+  it('initializes [data-shutters] elements only', () => {
+    document.body.innerHTML = `
+      <div data-shutters class="shutters-accordion">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">A</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">x</div></div>
+        </div>
+      </div>
+      <div class="shutters-accordion" id="manual">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">B</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">y</div></div>
+        </div>
+      </div>
+    `;
+    const created = initAll();
+    expect(created).toHaveLength(1);
+    created[0].open(0);
+    expect(document.querySelector('[data-shutters] .shutters-item').classList.contains('opened')).toBe(true);
+  });
+
+  it('reads data-shutters-default-open', () => {
+    document.body.innerHTML = `
+      <div data-shutters data-shutters-default-open="first" class="shutters-accordion">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">A</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">x</div></div>
+        </div>
+      </div>
+    `;
+    initAll();
+    expect(document.querySelector('.shutters-item').classList.contains('opened')).toBe(true);
+  });
+
+  it('does not double-init the same element', () => {
+    document.body.innerHTML = `
+      <div data-shutters class="shutters-accordion">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">A</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">x</div></div>
+        </div>
+      </div>
+    `;
+    expect(initAll()).toHaveLength(1);
+    expect(initAll()).toHaveLength(0);
+  });
+
+  it('destroyAuto tears down an instance', () => {
+    document.body.innerHTML = `
+      <div data-shutters class="shutters-accordion" id="auto-acc">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">A</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">x</div></div>
+        </div>
+      </div>
+    `;
+    initAll();
+    destroyAuto(document.getElementById('auto-acc'));
+    expect(initAll()).toHaveLength(1);
+  });
+});

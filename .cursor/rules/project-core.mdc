@@ -17,6 +17,7 @@ Vanilla JS + CSS accordion library. **No framework, no runtime deps.** Node ≥ 
 
 ## Hard constraints
 
+- **Vanilla JS forever** — plain `.js` source, zero runtime npm deps, DOM APIs only (see `vanilla-js-only.mdc`)
 - Never add runtime npm dependencies
 - Never `import './shutters-core.css'` inside `shutters-core.js`
 - Never set `window.ShuttersAccordion` in ES module code (UMD build handles globals)

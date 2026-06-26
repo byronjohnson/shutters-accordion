@@ -6,7 +6,7 @@ alwaysApply: false
 
 # Library JavaScript
 
-Reference: `src/shutters-core.js` — copy patterns from existing methods.
+Reference: `src/shutters-core.js` — **vanilla JS only** (see `vanilla-js-only.mdc`).
 
 ## Class structure
 

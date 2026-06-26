@@ -2,6 +2,8 @@
 
 **A lightweight, accessible, dependency-free JavaScript accordion component with smooth CSS Grid animations.**
 
+Built as **vanilla JavaScript** — no TypeScript source, no framework runtime, no npm dependencies. Works everywhere: plain HTML, React, Vue, or any stack that can render DOM.
+
 [![npm version](https://img.shields.io/npm/v/shutters-accordion.svg)](https://www.npmjs.com/package/shutters-accordion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Bundle Size](https://img.shields.io/badge/gzip-<2KB-brightgreen.svg)](https://github.com/byronjohnson/shutters-accordion)
@@ -64,25 +66,24 @@ npm install @byronjohnson/shutters-accordion
 ### CDN
 
 ```html
-<!-- ES Module (CSS must be linked separately) -->
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.1.1/dist/core.css">
 <script type="module">
-  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.es.js';
+  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.1.1/dist/shutters.es.js';
+  new ShuttersAccordion({ container: '.shutters-accordion' });
 </script>
-<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.1.0/dist/style.css">
-
-<!-- UMD (CSS is auto-injected by the script) -->
-<script src="https://unpkg.com/shutters-accordion@1.1.0/dist/shutters.umd.js"></script>
 ```
+
+Optional decorative theme: `dist/theme.css`
 
 ### Direct Download
 
-Download `shutters-core.js` and `shutters-core.css` from the `src/` directory and include them in your project.
+Copy `src/shutters-core.js` and `src/shutters-core.css` from the repository.
 
 ---
 
-## Quick Start
+## Quick Start (60 seconds)
 
-### 1. Add the HTML Structure
+### 1. HTML
 
 ```html
 <div class="shutters-accordion">
@@ -92,52 +93,53 @@ Download `shutters-core.js` and `shutters-core.css` from the `src/` directory an
       <span class="shutters-icon"></span>
     </div>
     <div class="shutters-content">
-      <div class="shutters-body">
-        <p>Your content goes here</p>
-      </div>
+      <div class="shutters-body"><p>Your content here</p></div>
     </div>
   </div>
 </div>
 ```
 
-> **Note:** ARIA attributes (`role="button"`, `tabindex="0"`, `aria-expanded`) are added automatically by JavaScript at initialization — you don't need to write them in your HTML.
+ARIA attributes are added automatically — no need to write them in HTML.
 
-### 2. Include the CSS
-
-```html
-<!-- Core CSS (required) -->
-<link rel="stylesheet" href="shutters-core.css">
-
-<!-- Theme CSS (optional — provides default black-and-white styling) -->
-<link rel="stylesheet" href="shutters-theme.css">
-```
-
-### 3. Initialize with JavaScript
-
-#### ES Module
+### 2. CSS + JS (npm)
 
 ```javascript
 import ShuttersAccordion from 'shutters-accordion';
-import 'shutters-accordion/style.css';
+import 'shutters-accordion/core.css';
 
-const accordion = new ShuttersAccordion({
-  container: '.shutters-accordion',
-  animationDuration: 300,
-  animationEasing: 'ease-in-out',
-  defaultOpen: 'first'
-});
+new ShuttersAccordion({ container: '.shutters-accordion' });
 ```
 
-#### UMD (Browser Global)
+Default CSS is **theme-less but polished** (focus ring, dividers, smooth motion). Add optional theme:
+
+```javascript
+import 'shutters-accordion/theme.css';
+```
+
+### 3. Opt-in auto-init (no manual `new`)
 
 ```html
-<!-- UMD script auto-injects CSS — no separate stylesheet needed -->
-<script src="path/to/shutters.umd.js"></script>
+<div class="shutters-accordion" data-shutters data-shutters-default-open="first">
+  <!-- items… -->
+</div>
+```
 
+```javascript
+import 'shutters-accordion/core.css';
+import 'shutters-accordion/auto'; // scans [data-shutters] on DOMContentLoaded
+```
+
+Or call `initAll()` yourself from `'shutters-accordion/auto'`.
+
+**Data attributes:** `data-shutters-duration`, `data-shutters-easing`, `data-shutters-default-open` (`first` | `all` | `none` | `0,2`). Use class `shutters-autoclose` for single-panel mode.
+
+### UMD (script tag)
+
+```html
+<link rel="stylesheet" href="path/to/core.css">
+<script src="path/to/shutters.umd.js"></script>
 <script>
-  const accordion = new ShuttersAccordion({
-    container: '.shutters-accordion'
-  });
+  new ShuttersAccordion({ container: '.shutters-accordion' });
 </script>
 ```
 

@@ -1,33 +1,27 @@
 ---
-description: Shutters CSS layers — core mechanics vs theme, grid animation, custom properties
+description: Shutters CSS layers — core (default polish) vs optional theme
 globs: "**/*.css"
 alwaysApply: false
 ---
 
 # CSS Layers
 
-| File | Contains | Must NOT contain |
+| File | npm export | Contains |
 |---|---|---|
-| `src/shutters-core.css` | Grid animation, opacity, icon rotation, header flex, cursor | Colors, borders, padding, fonts |
-| `src/shutters-theme.css` | Colors, borders, padding, typography, `:focus-visible` | Grid mechanics duplication |
-| `demo/shutters-demo.css` | Demo page layout only | Library styles |
+| `src/shutters-core.css` | `core.css` | Grid animation, motion, focus ring, clean dividers |
+| `src/shutters-theme.css` | `theme.css` | Optional colors, hover, content typography |
+| `demo/shutters-demo.css` | — | Demo page layout only |
 
-## Animation pattern (do not change approach)
+Core is theme-less but visually polished. Never put decorative colors in core.
 
-```css
-.shutters-content { display: grid; grid-template-rows: 0fr; opacity: 0; }
-.opened .shutters-content { grid-template-rows: 1fr; opacity: 1; }
-.shutters-body { min-height: 0; overflow: hidden; }
-```
+## Motion (do not revert to max-height)
 
-## Theme custom properties
-
-`--shutters-bg-color`, `--shutters-border-color`, `--shutters-focus-color`, `--shutters-hover-bg`, `--shutters-text-color`
-
-JS also sets `--shutters-animation-duration` and `--shutters-animation-easing` inline on containers.
+- `grid-template-rows: 0fr → 1fr` with `transition-behavior: allow-discrete`
+- Opacity on `.shutters-body`, not `.shutters-content`
+- `--shutters-animation-easing` (open) vs `--shutters-animation-easing-close`
 
 ## After CSS changes
 
-- [ ] Sync matching file to `demo/` if it's a library CSS file
-- [ ] `npm run build` and visually check demo
+- [ ] `npm run sync:demo`
+- [ ] `npm run build` && `npm test`
 - [ ] `npm run agent:sync`
