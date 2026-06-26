@@ -184,7 +184,7 @@ npm run sync:demo    # copy src → demo
 
 ## Version
 
-**1.2.0** — see [CHANGELOG.md](CHANGELOG.md)
+**1.2.1** — see [CHANGELOG.md](CHANGELOG.md)
 
 ---
 
