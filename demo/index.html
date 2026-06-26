@@ -552,6 +552,8 @@
           <pre><code>&lt;link rel="stylesheet" href="core.css" /&gt;
 &lt;!-- optional: --&gt;
 &lt;link rel="stylesheet" href="theme.css" /&gt;</code></pre>
+          <p>CDN with Subresource Integrity (hashes refreshed via <code>npm run sri</code> after each release build):</p>
+          <pre><code data-cdn-sri>Loading CDN integrity snippet…</code></pre>
         </div>
 
         <div class="guide-section">
@@ -574,8 +576,23 @@
 
         <div class="guide-section">
           <h3>3. Initialize JavaScript</h3>
-          <p>Initialize the accordion with optional configuration options:</p>
-          <pre><code>import ShuttersAccordion from 'shutters-accordion';
+          <p>Initialize the accordion with optional configuration options. Pick a framework tab or use vanilla JS:</p>
+
+          <div class="snippet-tabs" data-snippet-tabs role="tablist" aria-label="Framework integration examples">
+            <button type="button" role="tab" id="tab-vanilla" class="snippet-tab" data-snippet-tab="vanilla"
+              aria-selected="true" aria-controls="panel-vanilla">Vanilla</button>
+            <button type="button" role="tab" id="tab-react" class="snippet-tab" data-snippet-tab="react"
+              aria-selected="false" aria-controls="panel-react" tabindex="-1">React</button>
+            <button type="button" role="tab" id="tab-vue" class="snippet-tab" data-snippet-tab="vue"
+              aria-selected="false" aria-controls="panel-vue" tabindex="-1">Vue</button>
+            <button type="button" role="tab" id="tab-svelte" class="snippet-tab" data-snippet-tab="svelte"
+              aria-selected="false" aria-controls="panel-svelte" tabindex="-1">Svelte</button>
+          </div>
+
+          <div class="snippet-panels">
+            <div class="snippet-panel" role="tabpanel" id="panel-vanilla" data-snippet-panel="vanilla"
+              aria-labelledby="tab-vanilla">
+              <pre><code>import ShuttersAccordion from 'shutters-accordion';
 import 'shutters-accordion/core.css';
 
 const accordion = new ShuttersAccordion({
@@ -584,7 +601,75 @@ const accordion = new ShuttersAccordion({
   animationEasing: 'cubic-bezier(0.4, 0, 0.2, 1)',
   defaultOpen: 'none'
 });</code></pre>
-          <p>Or opt-in auto-init:</p>
+            </div>
+            <div class="snippet-panel" role="tabpanel" id="panel-react" data-snippet-panel="react"
+              aria-labelledby="tab-react" hidden>
+              <pre><code>import { useEffect, useRef } from 'react';
+import ShuttersAccordion from 'shutters-accordion';
+import 'shutters-accordion/core.css';
+
+export function FaqAccordion() {
+  const ref = useRef(null);
+
+  useEffect(() =&gt; {
+    const accordion = new ShuttersAccordion({ container: ref.current });
+    return () =&gt; accordion.destroy();
+  }, []);
+
+  return (
+    &lt;div ref={ref} className="shutters-accordion"&gt;
+      {/* items… */}
+    &lt;/div&gt;
+  );
+}</code></pre>
+            </div>
+            <div class="snippet-panel" role="tabpanel" id="panel-vue" data-snippet-panel="vue"
+              aria-labelledby="tab-vue" hidden>
+              <pre><code>&lt;script setup&gt;
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import ShuttersAccordion from 'shutters-accordion';
+import 'shutters-accordion/core.css';
+
+const root = ref(null);
+let accordion;
+
+onMounted(() =&gt; {
+  accordion = new ShuttersAccordion({ container: root.value });
+});
+
+onBeforeUnmount(() =&gt; accordion?.destroy());
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div ref="root" class="shutters-accordion"&gt;
+    &lt;!-- items… --&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+            </div>
+            <div class="snippet-panel" role="tabpanel" id="panel-svelte" data-snippet-panel="svelte"
+              aria-labelledby="tab-svelte" hidden>
+              <pre><code>&lt;script&gt;
+  import { onMount, onDestroy } from 'svelte';
+  import ShuttersAccordion from 'shutters-accordion';
+  import 'shutters-accordion/core.css';
+
+  let root;
+  let accordion;
+
+  onMount(() =&gt; {
+    accordion = new ShuttersAccordion({ container: root });
+  });
+
+  onDestroy(() =&gt; accordion?.destroy());
+&lt;/script&gt;
+
+&lt;div bind:this={root} class="shutters-accordion"&gt;
+  &lt;!-- items… --&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          </div>
+
+          <p>Or opt-in auto-init (no manual <code>new ShuttersAccordion()</code>):</p>
           <pre><code>import 'shutters-accordion/core.css';
 import 'shutters-accordion/auto';</code></pre>
         </div>
@@ -733,6 +818,7 @@ accordion.on('shutters:close', (e) =&gt; {
   <script type="module">
     import { ShuttersAccordion } from './shutters-core.js';
     import { initAll } from './shutters-auto.js';
+    import { initDemoUi } from './shutters-demo-ui.js';
 
     new ShuttersAccordion({
       container: '.shutters-accordion:not([data-shutters])',
@@ -742,6 +828,7 @@ accordion.on('shutters:close', (e) =&gt; {
     });
 
     initAll();
+    initDemoUi();
   </script>
 </body>
 

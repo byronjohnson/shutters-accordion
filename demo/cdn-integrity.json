@@ -1,0 +1,27 @@
+{
+  "version": "1.2.1",
+  "baseUrl": "https://unpkg.com/shutters-accordion@1.2.1/dist",
+  "files": {
+    "core.css": {
+      "url": "https://unpkg.com/shutters-accordion@1.2.1/dist/core.css",
+      "integrity": "sha384-Xn6FUpphevJWNJwT2IpycxCiP9xZFzroC6qwALNndF94A3kH3a7oYqIjZx8fkDaM"
+    },
+    "theme.css": {
+      "url": "https://unpkg.com/shutters-accordion@1.2.1/dist/theme.css",
+      "integrity": "sha384-rDH1EX6TieVcTt5/uzYBqpz80BEvXS2V3QDnnJNzShiR/j73QfTjGxnqszJy6Fnl"
+    },
+    "shutters.es.js": {
+      "url": "https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.es.js",
+      "integrity": "sha384-nU6Kd81Dm5bT1cibusV2rPn3Q0uID3BmtN8N/MI8788CQYMNhQnkXOBxADgIYJ4i"
+    },
+    "shutters.umd.js": {
+      "url": "https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.umd.js",
+      "integrity": "sha384-2oU8U+6UGsAgQf4JoVkLDsPk7XWdKLfzUppSFhuzUXHlYBKb5xnocTZd0WVbqSmv"
+    },
+    "shutters.auto.es.js": {
+      "url": "https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.auto.es.js",
+      "integrity": "sha384-K4xnGVTQGaswYI+3KF5KFBvGprd28Wsj6fsRZbt1MBY11ioWDQAVtovMOFnpkRSy"
+    }
+  },
+  "snippet": "<link rel=\"stylesheet\" href=\"https://unpkg.com/shutters-accordion@1.2.1/dist/core.css\"\n  integrity=\"sha384-Xn6FUpphevJWNJwT2IpycxCiP9xZFzroC6qwALNndF94A3kH3a7oYqIjZx8fkDaM\" crossorigin=\"anonymous\">\n<!-- optional theme -->\n<link rel=\"stylesheet\" href=\"https://unpkg.com/shutters-accordion@1.2.1/dist/theme.css\"\n  integrity=\"sha384-rDH1EX6TieVcTt5/uzYBqpz80BEvXS2V3QDnnJNzShiR/j73QfTjGxnqszJy6Fnl\" crossorigin=\"anonymous\">\n<script src=\"https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.umd.js\"\n  integrity=\"sha384-2oU8U+6UGsAgQf4JoVkLDsPk7XWdKLfzUppSFhuzUXHlYBKb5xnocTZd0WVbqSmv\" crossorigin=\"anonymous\"></script>\n<script>\n  new ShuttersAccordion({ container: '.shutters-accordion' });\n</script>"
+}

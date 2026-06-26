@@ -38,7 +38,7 @@
   "bugs": {
     "url": "https://github.com/byronjohnson/shutters-accordion/issues"
   },
-  "homepage": "https://byronjohnson.github.io/shutters-accordion",
+  "homepage": "https://byronjohnson.github.io/shutters-accordion/demo",
   "keywords": [
     "accordion",
     "accordion-component",
@@ -97,8 +97,9 @@
     "dev:demo": "vite --config vite.config.demo.js",
     "build": "vite build && vite build --config vite.config.auto.js && node scripts/build-theme-css.mjs && cp src/shutters.d.ts dist/shutters.d.ts",
     "size": "npm run build && node scripts/check-size.mjs",
+    "sri": "npm run build && node scripts/generate-sri.mjs",
     "sync:demo": "cp src/shutters-core.js demo/shutters-core.js && cp src/shutters-auto.js demo/shutters-auto.js && cp src/shutters-core.css demo/shutters-core.css && cp src/shutters-theme.css demo/shutters-theme.css",
-    "prebuild:demo": "npm run sync:demo",
+    "prebuild:demo": "npm run sync:demo && node scripts/generate-sri.mjs 2>/dev/null || true",
     "build:demo": "vite build --config vite.config.demo.js",
     "build:all": "npm run build && npm run build:demo",
     "build:analyze": "vite build --mode analyze",

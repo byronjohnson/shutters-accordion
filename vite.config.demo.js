@@ -4,7 +4,7 @@ import { resolve } from 'path';
 // Vite config for building the demo site for GitHub Pages
 export default defineConfig({
   root: 'demo',
-  base: './', // Use relative paths for GitHub Pages
+  base: '/shutters-accordion/demo/',
   publicDir: false,
   build: {
     outDir: '../dist-demo',

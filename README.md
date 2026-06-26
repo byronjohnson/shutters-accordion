@@ -77,6 +77,22 @@ npm install @byronjohnson/shutters-accordion
 
 Optional decorative theme: `dist/theme.css`
 
+### CDN with Subresource Integrity (SRI)
+
+After `npm run build`, run `npm run sri` to generate `demo/cdn-integrity.json` with `sha384` hashes for CDN assets. Example (UMD, copy-paste ready):
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.2.1/dist/core.css"
+  integrity="sha384-…" crossorigin="anonymous">
+<script src="https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.umd.js"
+  integrity="sha384-…" crossorigin="anonymous"></script>
+<script>
+  new ShuttersAccordion({ container: '.shutters-accordion' });
+</script>
+```
+
+See `demo/cdn-integrity.json` for current hashes after running `npm run sri`.
+
 ### Direct Download
 
 Copy `src/shutters-core.js` and `src/shutters-core.css` from the repository.
@@ -176,6 +192,7 @@ Auto-close: add class `shutters-autoclose` to the container.
 npm run dev          # dev server + demo
 npm test             # verify:vanilla + vitest
 npm run build        # dist/
+npm run sri          # CDN Subresource Integrity hashes → demo/cdn-integrity.json
 npm run size         # gzip budget check
 npm run sync:demo    # copy src → demo
 ```

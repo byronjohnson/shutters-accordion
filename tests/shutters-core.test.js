@@ -185,4 +185,51 @@ describe('initAll (auto-init)', () => {
     destroyAuto(document.getElementById('auto-acc'));
     expect(initAll()).toHaveLength(1);
   });
+
+  it('reads data-shutters-duration', () => {
+    document.body.innerHTML = `
+      <div data-shutters data-shutters-duration="500" class="shutters-accordion" id="dur-acc">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">A</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">x</div></div>
+        </div>
+      </div>
+    `;
+    initAll();
+    const el = document.getElementById('dur-acc');
+    expect(el.style.getPropertyValue('--shutters-animation-duration')).toBe('0.5s');
+  });
+
+  it('reads data-shutters-easing', () => {
+    document.body.innerHTML = `
+      <div data-shutters data-shutters-easing="ease-out" class="shutters-accordion" id="ease-acc">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">A</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">x</div></div>
+        </div>
+      </div>
+    `;
+    initAll();
+    const el = document.getElementById('ease-acc');
+    expect(el.style.getPropertyValue('--shutters-animation-easing')).toBe('ease-out');
+  });
+
+  it('reads data-shutters-default-open index list', () => {
+    document.body.innerHTML = `
+      <div data-shutters data-shutters-default-open="1" class="shutters-accordion">
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">A</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">x</div></div>
+        </div>
+        <div class="shutters-item">
+          <div class="shutters-header"><span class="shutters-title">B</span><span class="shutters-icon"></span></div>
+          <div class="shutters-content"><div class="shutters-body">y</div></div>
+        </div>
+      </div>
+    `;
+    initAll();
+    const items = document.querySelectorAll('.shutters-item');
+    expect(items[0].classList.contains('opened')).toBe(false);
+    expect(items[1].classList.contains('opened')).toBe(true);
+  });
 });
