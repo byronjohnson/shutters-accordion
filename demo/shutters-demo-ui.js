@@ -87,8 +87,30 @@ export function loadCdnSriSnippet(root = document) {
   if (el) el.textContent = cdnIntegrity.snippet;
 }
 
+export function initMotionLab(root = document) {
+  for (const accordion of root.querySelectorAll('[data-maxheight-accordion]')) {
+    accordion.addEventListener('click', (e) => {
+      const btn = e.target.closest('.maxheight-header');
+      if (!btn || !accordion.contains(btn)) return;
+
+      const item = btn.closest('.maxheight-item');
+      if (!item) return;
+
+      const opening = !item.classList.contains('is-open');
+      for (const other of accordion.querySelectorAll('.maxheight-item.is-open')) {
+        if (other === item) continue;
+        other.classList.remove('is-open');
+        other.querySelector('.maxheight-header')?.setAttribute('aria-expanded', 'false');
+      }
+      item.classList.toggle('is-open', opening);
+      btn.setAttribute('aria-expanded', String(opening));
+    });
+  }
+}
+
 export function initDemoUi() {
   initCopyButtons();
   initSnippetTabs();
   loadCdnSriSnippet();
+  initMotionLab();
 }

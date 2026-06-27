@@ -9,7 +9,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
 
 const BUDGETS = {
-  'shutters.es.js': 2200,
+  'shutters.es.js': 2320,
   'shutters.umd.js': 2200,
   'core.css': 900,
   'theme.css': 1200,

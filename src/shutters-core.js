@@ -2,6 +2,8 @@
  * ShuttersAccordion - A minimal, accessible accordion component
  * @license MIT
  */
+let _panelId = 0;
+
 export class ShuttersAccordion {
   /**
    * @param {Object} opts
@@ -58,6 +60,9 @@ export class ShuttersAccordion {
         header.setAttribute('role', 'button');
         header.setAttribute('tabindex', '0');
         const item = header.closest('.shutters-item');
+        const content = item?.querySelector('.shutters-content');
+        if (content && !content.id) content.id = `sp-${++_panelId}`;
+        if (content) header.setAttribute('aria-controls', content.id);
         header.setAttribute('aria-expanded', item?.classList.contains('opened') ? 'true' : 'false');
       }
 
@@ -209,6 +214,12 @@ export class ShuttersAccordion {
     const r = this._byIndex(index);
     if (!r) return;
     r.item.classList.contains('opened') ? this.close(index) : this.open(index);
+  }
+
+  /** Return whether a panel is open by index */
+  isOpen(index) {
+    const r = this._byIndex(index);
+    return !!r?.item.classList.contains('opened');
   }
 
   /** Open every item in all containers */

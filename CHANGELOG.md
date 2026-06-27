@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2026-06-26
+
+Minor release — new API method, stronger ARIA wiring, and a redesigned demo site. Safe upgrade from 1.2.x.
+
+### Added
+
+- **`isOpen(index)`** — returns whether a panel is open by zero-based index.
+- **`aria-controls` / panel `id` pairing** — headers link to `.shutters-content` panels at init; existing panel `id`s are preserved; auto-assigned ids use `sp-{n}`.
+
+### Changed
+
+- ES module gzip budget raised to 2320 B (from 2200 B) to accommodate the new API surface.
+
+### Demo
+
+- **Motion Lab** — side-by-side comparison of CSS Grid (Shutters), `max-height` hack, and native `<details>`.
+- **Page layout** — four labeled zones (Overview, Demos, Comparisons, Documentation) with section cards and anchor navigation.
+- GitHub and npm icon links in the hero; package link styling and icon sizing.
+- Skip link focus styles, `theme-color` meta, and contrast fixes for Lighthouse 100 across all categories.
+
+### Docs
+
+- README bundle size badge via [Bundlephobia](https://bundlephobia.com/package/shutters-accordion).
+- README and API quick reference updated for `isOpen()`.
+
 ## [1.2.1] - 2026-06-26
 
 Patch release — CSS layout fixes only. No JavaScript or API changes. Safe upgrade from 1.2.0 or 1.1.x.

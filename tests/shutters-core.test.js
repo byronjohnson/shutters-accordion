@@ -37,9 +37,32 @@ describe('ShuttersAccordion', () => {
   it('applies ARIA attributes on init', () => {
     new ShuttersAccordion({ container: '#acc' });
     const header = document.querySelector('.shutters-header');
+    const content = document.querySelector('.shutters-content');
     expect(header.getAttribute('role')).toBe('button');
     expect(header.getAttribute('tabindex')).toBe('0');
     expect(header.getAttribute('aria-expanded')).toBe('false');
+    expect(header.getAttribute('aria-controls')).toBe(content.id);
+    expect(content.id).toBeTruthy();
+  });
+
+  it('preserves existing content id for aria-controls', () => {
+    document.body.innerHTML = accordionHTML({ id: 'acc' }).replace(
+      '<div class="shutters-content">',
+      '<div class="shutters-content" id="custom-panel">'
+    );
+    new ShuttersAccordion({ container: '#acc' });
+    const header = document.querySelector('.shutters-header');
+    expect(header.getAttribute('aria-controls')).toBe('custom-panel');
+  });
+
+  it('isOpen returns panel state', () => {
+    const accordion = new ShuttersAccordion({ container: '#acc' });
+    expect(accordion.isOpen(0)).toBe(false);
+    accordion.open(0);
+    expect(accordion.isOpen(0)).toBe(true);
+    accordion.close(0);
+    expect(accordion.isOpen(0)).toBe(false);
+    expect(accordion.isOpen(99)).toBe(false);
   });
 
   it('opens and closes by index', () => {

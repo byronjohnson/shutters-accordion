@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#111111" />
 
   <!-- Primary SEO Meta Tags -->
   <title>Shutters — Lightweight Accessible JavaScript Accordion Component</title>
@@ -12,6 +13,7 @@
   <meta name="author" content="Byron Johnson" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="canonical" href="https://byronjohnson.github.io/shutters-accordion/demo" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23111'/%3E%3C/svg%3E" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -39,7 +41,7 @@
     "programmingLanguage": ["JavaScript", "CSS"],
     "runtimePlatform": "Browser",
     "license": "https://opensource.org/licenses/MIT",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "author": {
       "@type": "Person",
       "name": "Byron Johnson",
@@ -180,9 +182,9 @@
 
 <body>
   <!-- Skip Navigation for Accessibility -->
-  <a href="#main-content" class="visually-hidden" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to main content</a>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <div class="container" id="main-content">
+  <div class="container">
     <header>
       <h1 class="project-logo">SHUTTERS</h1>
       <div class="project-taglines">
@@ -192,124 +194,43 @@
           opt-in auto-init, and a theme-less default that still looks great.
           Under 2KB gzipped.
         </p>
-        <p class="version-badge" aria-label="Current version">v1.2.1</p>
+        <p class="version-badge" aria-label="Current version">v1.3.0</p>
+        <div class="package-links">
+          <a href="https://github.com/byronjohnson/shutters-accordion" aria-label="View on GitHub"
+            rel="noopener noreferrer" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path fill="currentColor"
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.515.12-3.15 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.635.24 2.85.12 3.15.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+          </a>
+          <a href="https://www.npmjs.com/package/shutters-accordion" aria-label="View on npm"
+            rel="noopener noreferrer" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" aria-hidden="true"
+              focusable="false">
+              <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
+                d="M5 21C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H5ZM6 18V6H18V18H15V9H12V18H6Z" />
+            </svg>
+          </a>
+        </div>
+        <nav class="page-nav" aria-label="Page sections">
+          <a href="#overview">Overview</a>
+          <a href="#demos">Demos</a>
+          <a href="#comparisons">Comparisons</a>
+          <a href="#documentation">Documentation</a>
+        </nav>
       </div>
     </header>
 
-    <main>
-      <!-- Core vs Theme (v1.2) -->
-      <section class="demo-section" aria-labelledby="styling-heading">
-        <h2 id="styling-heading">Default CSS: Core vs Theme</h2>
-        <p>
-          v1.2 ships <strong>theme-less <code>core.css</code></strong> as the default npm import — clean dividers,
-          focus ring, and smooth motion. Add optional <code>theme.css</code> for a decorative black-and-white style.
-        </p>
-        <div class="styling-compare">
-          <div class="styling-panel">
-            <h3>Core only (<code>core.css</code>)</h3>
-            <p>Polished minimal presentation — ideal for custom design systems.</p>
-            <div class="shutters-accordion panel-core-only demo-accordion">
-              <div class="shutters-item">
-                <div class="shutters-header">
-                  <span class="shutters-title">Minimal default styling</span>
-                  <span class="shutters-icon"></span>
-                </div>
-                <div class="shutters-content">
-                  <div class="shutters-body"><p>Inherits your page typography and colors.</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="styling-panel">
-            <h3>Core + theme (<code>theme.css</code>)</h3>
-            <p>Optional decorative layer — borders, hover fills, content spacing.</p>
-            <div class="shutters-accordion demo-accordion">
-              <div class="shutters-item">
-                <div class="shutters-header">
-                  <span class="shutters-title">Themed presentation</span>
-                  <span class="shutters-icon"></span>
-                </div>
-                <div class="shutters-content">
-                  <div class="shutters-body"><p>Drop-in visual style for prototypes and marketing pages.</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    <main id="main-content">
 
-      <!-- Opt-in auto-init (v1.2) -->
-      <section class="demo-section" aria-labelledby="auto-init-heading">
-        <h2 id="auto-init-heading">Opt-in Auto-Init</h2>
-        <p>
-          No manual <code>new ShuttersAccordion()</code> required. Add <code>data-shutters</code> and import
-          <code>shutters-accordion/auto</code> (or call <code>initAll()</code> from this demo's source).
-        </p>
-        <div class="shutters-accordion demo-accordion shutters-autoclose" data-shutters data-shutters-default-open="first">
-          <div class="shutters-item">
-            <div class="shutters-header">
-              <span class="shutters-title">Initialized via data-shutters</span>
-              <span class="shutters-icon"></span>
-            </div>
-            <div class="shutters-content">
-              <div class="shutters-body">
-                <p>This container uses <code>data-shutters</code> and <code>data-shutters-default-open="first"</code>. Auto-close is enabled with <code>shutters-autoclose</code>.</p>
-              </div>
-            </div>
-          </div>
-          <div class="shutters-item">
-            <div class="shutters-header">
-              <span class="shutters-title">Zero boilerplate JavaScript</span>
-              <span class="shutters-icon"></span>
-            </div>
-            <div class="shutters-content">
-              <div class="shutters-body">
-                <p>Perfect for static sites, CMS templates, and quick prototypes.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Motion & a11y (v1.2) -->
-      <section class="demo-section" aria-labelledby="motion-heading">
-        <h2 id="motion-heading">Motion &amp; Accessibility</h2>
-        <div class="shutters-accordion demo-accordion">
-          <div class="shutters-item">
-            <div class="shutters-header">
-              <span class="shutters-title">Fluid CSS Grid transitions</span>
-              <span class="shutters-icon"></span>
-            </div>
-            <div class="shutters-content">
-              <div class="shutters-body">
-                <p>
-                  Uses <code>grid-template-rows: 0fr → 1fr</code> with
-                  <code>transition-behavior: allow-discrete</code>, separate open/close easing curves,
-                  and a subtle opacity fade on <code>.shutters-body</code>.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="shutters-item">
-            <div class="shutters-header">
-              <span class="shutters-title">prefers-reduced-motion</span>
-              <span class="shutters-icon"></span>
-            </div>
-            <div class="shutters-content">
-              <div class="shutters-body">
-                <p>
-                  When reduced motion is requested at the OS level, Shutters disables transitions instantly —
-                  content remains fully accessible without animation.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Why Shutters Section -->
-      <section class="demo-section" aria-labelledby="why-shutters">
-        <h2 id="why-shutters">Why Choose Shutters Accordion?</h2>
+      <div class="page-zone" id="overview">
+        <header class="zone-header">
+          <p class="zone-label">Overview</p>
+          <h2 class="zone-title">Why choose Shutters</h2>
+          <p class="zone-desc">Highlights of what makes this accordion different.</p>
+        </header>
+      <section class="section-card demo-section" aria-labelledby="why-shutters">
+        <h3 id="why-shutters" class="section-title">Why Choose Shutters Accordion?</h3>
         <div class="shutters-accordion demo-accordion">
           <div class="shutters-item">
             <div class="shutters-header">
@@ -338,7 +259,8 @@
                 <p>
                   Accessibility isn't an afterthought — it's built into the core of Shutters. The component
                   automatically applies <strong>WAI-ARIA Accordion Pattern</strong> attributes — <code>role="button"</code>,
-                  <code>tabindex="0"</code>, and <code>aria-expanded</code> — on every header at initialization,
+                  <code>tabindex="0"</code>, <code>aria-expanded</code>, and <code>aria-controls</code> linked to panel
+                  <code>id</code>s — on every header at initialization,
                   so you never need to write them in your HTML. Full keyboard navigation
                   is supported via <kbd>Enter</kbd>, <kbd>Space</kbd>, <kbd>Arrow Up</kbd>, <kbd>Arrow Down</kbd>,
                   <kbd>Home</kbd>, and <kbd>End</kbd> keys, with visible <code>:focus-visible</code> indicators
@@ -379,7 +301,8 @@
                   and <strong>UMD bundle</strong> formats, so it works with Vite, Webpack, Rollup, or a simple
                   <code>&lt;script&gt;</code> tag. The programmatic API offers <code>open()</code>,
                   <code>close()</code>, <code>toggle()</code>, <code>openAll()</code>, <code>closeAll()</code>,
-                  and <code>destroy()</code> methods for full control. Subscribe to state changes with
+                  and <code>destroy()</code> methods for full control. Query state with
+                  <code>isOpen(index)</code>. Subscribe to state changes with
                   <code>on('shutters:open', callback)</code> and <code>on('shutters:close', callback)</code>.
                 </p>
               </div>
@@ -388,8 +311,18 @@
         </div>
       </section>
 
-      <section class="demo-section" aria-labelledby="basic-demo-heading">
-        <h2 id="basic-demo-heading">Basic Accordion Demo</h2>
+      
+      </div>
+
+
+      <div class="page-zone" id="demos">
+        <header class="zone-header">
+          <p class="zone-label">Live demos</p>
+          <h2 class="zone-title">Try Shutters in the browser</h2>
+          <p class="zone-desc">Interactive examples — click panels, use keyboard navigation, and explore each feature.</p>
+        </header>
+<section class="section-card demo-section" aria-labelledby="basic-demo-heading">
+        <h3 id="basic-demo-heading" class="section-title">Basic Accordion Demo</h3>
         <div class="shutters-accordion demo-accordion">
           <div class="shutters-item">
             <div class="shutters-header">
@@ -486,8 +419,9 @@
         </div>
       </section>
 
-      <section class="demo-section" aria-labelledby="autoclose-demo-heading">
-        <h2 id="autoclose-demo-heading">Auto-Close Accordion Demo</h2>
+      
+<section class="section-card demo-section" aria-labelledby="autoclose-demo-heading">
+        <h3 id="autoclose-demo-heading" class="section-title">Auto-Close Accordion Demo</h3>
         <p>In auto-close mode, only one accordion panel can be open at a time. Opening a new section automatically collapses the previously open one — ideal for FAQs and settings panels.</p>
         <div class="shutters-accordion demo-accordion shutters-autoclose">
           <div class="shutters-item">
@@ -542,8 +476,294 @@
         </div>
       </section>
 
-      <section class="how-to-use" aria-labelledby="how-to-use-heading">
-        <h2 id="how-to-use-heading">How to Use Shutters Accordion</h2>
+      
+<!-- Core vs Theme (v1.2) -->
+      <section class="section-card demo-section" aria-labelledby="styling-heading">
+        <h3 id="styling-heading" class="section-title">Default CSS: Core vs Theme</h3>
+        <p>
+          v1.2 ships <strong>theme-less <code>core.css</code></strong> as the default npm import — clean dividers,
+          focus ring, and smooth motion. Add optional <code>theme.css</code> for a decorative black-and-white style.
+        </p>
+        <div class="styling-compare">
+          <div class="styling-panel">
+            <h3>Core only (<code>core.css</code>)</h3>
+            <p>Polished minimal presentation — ideal for custom design systems.</p>
+            <div class="shutters-accordion panel-core-only demo-accordion">
+              <div class="shutters-item">
+                <div class="shutters-header">
+                  <span class="shutters-title">Minimal default styling</span>
+                  <span class="shutters-icon"></span>
+                </div>
+                <div class="shutters-content">
+                  <div class="shutters-body"><p>Inherits your page typography and colors.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="styling-panel">
+            <h3>Core + theme (<code>theme.css</code>)</h3>
+            <p>Optional decorative layer — borders, hover fills, content spacing.</p>
+            <div class="shutters-accordion demo-accordion">
+              <div class="shutters-item">
+                <div class="shutters-header">
+                  <span class="shutters-title">Themed presentation</span>
+                  <span class="shutters-icon"></span>
+                </div>
+                <div class="shutters-content">
+                  <div class="shutters-body"><p>Drop-in visual style for prototypes and marketing pages.</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+<!-- Opt-in auto-init (v1.2) -->
+      <section class="section-card demo-section" aria-labelledby="auto-init-heading">
+        <h3 id="auto-init-heading" class="section-title">Opt-in Auto-Init</h3>
+        <p>
+          No manual <code>new ShuttersAccordion()</code> required. Add <code>data-shutters</code> and import
+          <code>shutters-accordion/auto</code> (or call <code>initAll()</code> from this demo's source).
+        </p>
+        <div class="shutters-accordion demo-accordion shutters-autoclose" data-shutters data-shutters-default-open="first">
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Initialized via data-shutters</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>This container uses <code>data-shutters</code> and <code>data-shutters-default-open="first"</code>. Auto-close is enabled with <code>shutters-autoclose</code>.</p>
+              </div>
+            </div>
+          </div>
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Zero boilerplate JavaScript</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>Perfect for static sites, CMS templates, and quick prototypes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+<!-- Motion & a11y (v1.2) -->
+      <section class="section-card demo-section" aria-labelledby="motion-heading">
+        <h3 id="motion-heading" class="section-title">Motion &amp; Accessibility</h3>
+        <div class="shutters-accordion demo-accordion">
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Fluid CSS Grid transitions</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>
+                  Uses <code>grid-template-rows: 0fr → 1fr</code> with
+                  <code>transition-behavior: allow-discrete</code>, separate open/close easing curves,
+                  and a subtle opacity fade on <code>.shutters-body</code>.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">prefers-reduced-motion</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content">
+              <div class="shutters-body">
+                <p>
+                  When reduced motion is requested at the OS level, Shutters disables transitions instantly —
+                  content remains fully accessible without animation.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+      </div>
+
+
+      <div class="page-zone" id="comparisons">
+        <header class="zone-header">
+          <p class="zone-label">Comparisons</p>
+          <h2 class="zone-title">How Shutters stacks up</h2>
+          <p class="zone-desc">Side-by-side motion techniques and library alternatives.</p>
+        </header>
+<!-- Motion Lab (Phase 3) -->
+      <section class="section-card demo-section motion-lab-section" aria-labelledby="motion-lab-heading">
+        <h3 id="motion-lab-heading" class="section-title">Motion Lab</h3>
+        <p class="motion-lab-intro">
+          Compare three expand/collapse techniques side by side. Open the same panel in each column
+          and notice how timing and smoothness differ.
+        </p>
+        <div class="motion-lab" role="group" aria-label="Expand and collapse technique comparison">
+          <div class="motion-lab-col">
+            <h3 id="motion-lab-grid">CSS Grid (Shutters)</h3>
+            <p class="motion-lab-note">True content height — no arbitrary cap</p>
+            <div class="shutters-accordion motion-lab-accordion" aria-labelledby="motion-lab-grid">
+              <div class="shutters-item">
+                <div class="shutters-header">
+                  <span class="shutters-title">Panel A</span>
+                  <span class="shutters-icon"></span>
+                </div>
+                <div class="shutters-content">
+                  <div class="shutters-body">
+                    <p>Grid <code>0fr → 1fr</code> transition tracks actual height at 60fps.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="shutters-item">
+                <div class="shutters-header">
+                  <span class="shutters-title">Panel B</span>
+                  <span class="shutters-icon"></span>
+                </div>
+                <div class="shutters-content">
+                  <div class="shutters-body">
+                    <p>Separate open/close easing and a body opacity fade.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="motion-lab-col">
+            <h3 id="motion-lab-maxheight">max-height hack</h3>
+            <p class="motion-lab-note">Fixed cap — fast open, sluggish close</p>
+            <div class="maxheight-accordion" data-maxheight-accordion aria-labelledby="motion-lab-maxheight">
+              <div class="maxheight-item">
+                <button type="button" class="maxheight-header" aria-expanded="false"
+                  aria-controls="maxheight-panel-a" id="maxheight-trigger-a">
+                  Panel A
+                </button>
+                <div class="maxheight-panel" id="maxheight-panel-a" role="region"
+                  aria-labelledby="maxheight-trigger-a">
+                  <div class="maxheight-body">
+                    <p>Animates to a guessed max height — often feels uneven.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="maxheight-item">
+                <button type="button" class="maxheight-header" aria-expanded="false"
+                  aria-controls="maxheight-panel-b" id="maxheight-trigger-b">
+                  Panel B
+                </button>
+                <div class="maxheight-panel" id="maxheight-panel-b" role="region"
+                  aria-labelledby="maxheight-trigger-b">
+                  <div class="maxheight-body">
+                    <p>Content taller than the cap still clips or stalls mid-animation.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="motion-lab-col">
+            <h3 id="motion-lab-details">&lt;details&gt; native</h3>
+            <p class="motion-lab-note">Instant toggle — no CSS height transition</p>
+            <div class="details-accordion" aria-labelledby="motion-lab-details">
+              <details>
+                <summary>Panel A</summary>
+                <div class="details-body">
+                  <p>Built-in semantics with zero JavaScript — but no smooth animation.</p>
+                </div>
+              </details>
+              <details>
+                <summary>Panel B</summary>
+                <div class="details-body">
+                  <p>Keyboard support is partial compared to a full accordion pattern.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+<!-- Comparison section -->
+      <section class="section-card demo-section" aria-labelledby="comparison-heading">
+        <h3 id="comparison-heading" class="section-title">Shutters vs Other Accordion Libraries</h3>
+        <p>
+          When choosing an accordion component for your website, key factors include bundle size,
+          accessibility compliance, animation quality, and dependency requirements. Here's how
+          Shutters compares to common alternatives:
+        </p>
+        <div class="shutters-accordion demo-accordion">
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Shutters vs jQuery UI Accordion</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content" id="compare-1">
+              <div class="shutters-body">
+                <p>
+                  jQuery UI's accordion requires jQuery as a dependency (~90KB minified), making it
+                  significantly heavier. Shutters has <strong>zero dependencies</strong> and weighs
+                  under 2KB gzipped. Shutters also uses modern CSS Grid animations instead of
+                  jQuery's JavaScript-driven height calculations, resulting in smoother 60fps transitions.
+                  For new projects, Shutters offers a modern, lightweight alternative.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Shutters vs HTML &lt;details&gt;/&lt;summary&gt;</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content" id="compare-2">
+              <div class="shutters-body">
+                <p>
+                  The native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> elements provide
+                  basic expand/collapse without JavaScript, but lack smooth animated transitions,
+                  auto-close behavior, custom events, and programmatic control. Shutters adds <strong>smooth CSS Grid
+                  animations</strong>, an auto-close mode, custom events (<code>shutters:open</code>/<code>shutters:close</code>),
+                  a full programmatic API with <code>on()</code>/<code>off()</code> listeners, and consistent
+                  cross-browser styling — while maintaining the same level of accessibility.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="shutters-item">
+            <div class="shutters-header">
+              <span class="shutters-title">Shutters vs Framework-Specific Accordions</span>
+              <span class="shutters-icon"></span>
+            </div>
+            <div class="shutters-content" id="compare-3">
+              <div class="shutters-body">
+                <p>
+                  Framework-specific accordions (React Aria, Radix UI, Headless UI) are tightly
+                  coupled to their ecosystems. Shutters is <strong>framework-agnostic</strong> — it works
+                  with vanilla HTML, React, Vue, Svelte, Angular, Astro, or any other framework.
+                  If you need a single accordion component that works everywhere without lock-in,
+                  Shutters is the pragmatic choice.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      </div>
+
+
+      <div class="page-zone" id="documentation">
+        <header class="zone-header">
+          <p class="zone-label">Documentation</p>
+          <h2 class="zone-title">Get started</h2>
+          <p class="zone-desc">Installation, HTML structure, API reference, and customization.</p>
+        </header>
+      <section class="section-card how-to-use" aria-labelledby="how-to-use-heading">
+        <h3 id="how-to-use-heading" class="section-title">How to Use Shutters Accordion</h3>
 
         <div class="guide-section">
           <h3>1. Installation</h3>
@@ -738,71 +958,8 @@ accordion.on('shutters:close', (e) =&gt; {
         </div>
       </section>
 
-      <!-- Comparison section -->
-      <section class="demo-section" aria-labelledby="comparison-heading">
-        <h2 id="comparison-heading">Shutters vs Other Accordion Libraries</h2>
-        <p>
-          When choosing an accordion component for your website, key factors include bundle size,
-          accessibility compliance, animation quality, and dependency requirements. Here's how
-          Shutters compares to common alternatives:
-        </p>
-        <div class="shutters-accordion demo-accordion">
-          <div class="shutters-item">
-            <div class="shutters-header">
-              <span class="shutters-title">Shutters vs jQuery UI Accordion</span>
-              <span class="shutters-icon"></span>
-            </div>
-            <div class="shutters-content" id="compare-1">
-              <div class="shutters-body">
-                <p>
-                  jQuery UI's accordion requires jQuery as a dependency (~90KB minified), making it
-                  significantly heavier. Shutters has <strong>zero dependencies</strong> and weighs
-                  under 2KB gzipped. Shutters also uses modern CSS Grid animations instead of
-                  jQuery's JavaScript-driven height calculations, resulting in smoother 60fps transitions.
-                  For new projects, Shutters offers a modern, lightweight alternative.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="shutters-item">
-            <div class="shutters-header">
-              <span class="shutters-title">Shutters vs HTML &lt;details&gt;/&lt;summary&gt;</span>
-              <span class="shutters-icon"></span>
-            </div>
-            <div class="shutters-content" id="compare-2">
-              <div class="shutters-body">
-                <p>
-                  The native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> elements provide
-                  basic expand/collapse without JavaScript, but lack smooth animated transitions,
-                  auto-close behavior, custom events, and programmatic control. Shutters adds <strong>smooth CSS Grid
-                  animations</strong>, an auto-close mode, custom events (<code>shutters:open</code>/<code>shutters:close</code>),
-                  a full programmatic API with <code>on()</code>/<code>off()</code> listeners, and consistent
-                  cross-browser styling — while maintaining the same level of accessibility.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="shutters-item">
-            <div class="shutters-header">
-              <span class="shutters-title">Shutters vs Framework-Specific Accordions</span>
-              <span class="shutters-icon"></span>
-            </div>
-            <div class="shutters-content" id="compare-3">
-              <div class="shutters-body">
-                <p>
-                  Framework-specific accordions (React Aria, Radix UI, Headless UI) are tightly
-                  coupled to their ecosystems. Shutters is <strong>framework-agnostic</strong> — it works
-                  with vanilla HTML, React, Vue, Svelte, Angular, Astro, or any other framework.
-                  If you need a single accordion component that works everywhere without lock-in,
-                  Shutters is the pragmatic choice.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
+      </div>
     </main>
 
     <footer>
