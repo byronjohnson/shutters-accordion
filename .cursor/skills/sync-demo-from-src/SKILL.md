@@ -1,45 +1,21 @@
 ---
 name: sync-demo-from-src
-description: Syncs demo library copies from src/ after library source changes. Use after editing src/shutters-core.js, shutters-auto.js, shutters-core.css, or shutters-theme.css.
+description: Deprecated — demo moved to shutters-site. After library src changes, release to npm and update shutters-site dependency. Use shutters-site sync-library-release skill.
 ---
 
-# Sync Demo From Source
+# Sync Demo From Src (deprecated)
 
-The demo ships standalone copies of library files (excluded from npm). They must match `src/`.
+The `demo/` folder and `npm run sync:demo` were removed from this repo.
 
-## Checklist
+## Current workflow
 
-- [ ] Identify which `src/` files changed
-- [ ] Run sync:
+1. Change library in `src/` (this repo)
+2. `npm test && npm run build`
+3. Release to npm (see `release-package` skill)
+4. In **shutters-site** sibling repo:
+   - Bump `shutters-accordion` version in `package.json`
+   - `npm install` / `npm update shutters-accordion`
+   - `npm run sri && npm run build`
+   - Deploy to Vercel → https://shuttersjs.com/
 
-```bash
-npm run sync:demo
-```
-
-Equivalent manual copies:
-
-```bash
-cp src/shutters-core.js demo/shutters-core.js
-cp src/shutters-auto.js demo/shutters-auto.js
-cp src/shutters-core.css demo/shutters-core.css
-cp src/shutters-theme.css demo/shutters-theme.css
-```
-
-- [ ] Do **not** copy `src/shutters-demo.css` — demo uses `demo/shutters-demo.css`
-- [ ] Demo-only files (`shutters-demo-ui.js`, `shutters-demo.css`) are **not** synced from `src/`
-- [ ] Open `npm run dev` → verify demo accordions work
-- [ ] Run `npm run build:demo` — verify production build
-- [ ] Run `npm run agent:sync`
-
-## Files that must stay in sync
-
-| src/ | demo/ |
-|---|---|
-| `shutters-core.js` | `shutters-core.js` |
-| `shutters-auto.js` | `shutters-auto.js` |
-| `shutters-core.css` | `shutters-core.css` |
-| `shutters-theme.css` | `shutters-theme.css` |
-
-## Auto vs manual updates
-
-`npm run sync:demo` handles library copies. Demo HTML/CSS/JS (`shutters-demo-ui.js`) are edited directly in `demo/`.
+See shutters-site `.cursor/skills/sync-library-release/SKILL.md`.

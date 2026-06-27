@@ -10,7 +10,8 @@ alwaysApply: false
 |---|---|---|
 | `src/shutters-core.css` | `core.css` | Grid animation, motion, focus ring, clean dividers |
 | `src/shutters-theme.css` | `theme.css` | Optional colors, hover, content typography |
-| `demo/shutters-demo.css` | — | Demo page layout only (page zones, section cards) |
+| `src/shutters-theme.css` | `dist/theme.css` | Optional decorative theme |
+| shutters-site `src/shutters-demo.css` | — | Marketing site layout only (sibling repo) |
 
 Core is theme-less but visually polished. Never put decorative colors in core.
 
@@ -22,6 +23,6 @@ Core is theme-less but visually polished. Never put decorative colors in core.
 
 ## After CSS changes
 
-- [ ] `npm run sync:demo`
+- [ ] If library CSS changed: release library, then verify on https://shuttersjs.com/
 - [ ] `npm run build` && `npm test`
 - [ ] `npm run agent:sync`

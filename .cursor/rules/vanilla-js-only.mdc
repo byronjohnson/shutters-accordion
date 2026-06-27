@@ -9,7 +9,7 @@ Shutters is and will remain a **vanilla JavaScript** library. This is not negoti
 
 ## What “vanilla JS” means here
 
-- **Source:** plain `.js` files only in `src/`, `index.js`, `auto.js`, `demo/` library copies
+- **Source:** plain `.js` files only in `src/`, `index.js`, `auto.js`
 - **Runtime:** zero `dependencies` in `package.json` — consumers get JS + CSS, nothing else
 - **APIs:** browser DOM only (`classList`, `addEventListener`, `CustomEvent`, `querySelector`)
 - **Distribution:** ES module + UMD — no transpiler required on the consumer side

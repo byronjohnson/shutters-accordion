@@ -4,7 +4,7 @@
 
 ## What This Project Is
 
-Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordion library** published as `shutters-accordion` on npm (**latest: 1.3.0**). It uses CSS Grid `grid-template-rows` transitions for smooth expand/collapse, WAI-ARIA accordion patterns, and event delegation. Bundle target: **~2.3 KB gzip (ES)** / **~1.6 KB (UMD)**. There is no app server, no database, and no framework runtime — only `src/` library code, a static `demo/` marketing site, and Vite build tooling.
+Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordion library** published as `shutters-accordion` on npm (**latest: 1.3.0**). It uses CSS Grid `grid-template-rows` transitions for smooth expand/collapse, WAI-ARIA accordion patterns, and event delegation. Bundle target: **~2.3 KB gzip (ES)** / **~1.6 KB (UMD)**. This repo is **library source only** — demo, docs, and SEO live at [shuttersjs.com](https://shuttersjs.com/) in the sibling **shutters-site** repo.
 
 | Fact | Value |
 |---|---|
@@ -12,9 +12,10 @@ Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordi
 | **License** | MIT |
 | **npm** | `shutters-accordion` |
 | **Version** | See `package.json` (run `npm run agent:sync` for drift report) |
-| **Live demo** | https://byronjohnson.github.io/shutters-accordion/demo |
+| **Demo & docs** | https://shuttersjs.com/ |
+| **About / FAQ** | https://shuttersjs.com/about/ |
 | **Active branch** | `develop` |
-| **Deploy branch** | `main` / `master` → GitHub Pages |
+| **Legacy Pages URL** | https://byronjohnson.github.io/shutters-accordion/demo/ → redirects to shuttersjs.com |
 | **Runtime deps** | **None** — vanilla JS + CSS only (Vite/Vitest dev-only) |
 | **Language** | **Vanilla JavaScript** — no TypeScript source, no framework runtime |
 
@@ -39,7 +40,7 @@ Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordi
 ## Key File Map
 
 ```
-shutters/
+shutters/                         ← this repo (library only)
 ├── AGENTS.md                     ← you are here
 ├── index.js                      ← Vite library entry (imports CSS, exports class)
 ├── src/
@@ -48,36 +49,30 @@ shutters/
 │   ├── shutters-core.css         ← mechanics only (grid animation, no visuals)
 │   ├── shutters-theme.css        ← default theme (colors, padding, focus ring)
 │   └── shutters.d.ts             ← TypeScript declarations (copied to dist/)
-├── demo/
-│   ├── index.html                ← marketing demo + SEO/JSON-LD + page zones
-│   ├── shutters-core.js          ← synced from src/ (`npm run sync:demo`)
-│   ├── shutters-auto.js          ← synced from src/
-│   ├── shutters-core.css         ← synced from src/
-│   ├── shutters-theme.css        ← synced from src/
-│   ├── shutters-demo-ui.js       ← demo-only (copy buttons, snippet tabs, motion lab)
-│   ├── shutters-demo.css         ← demo layout only (page zones, section cards)
-│   └── cdn-integrity.json        ← SRI hashes (`npm run sri`)
 ├── scripts/
 │   ├── generate-agent-context.mjs
-│   ├── generate-sri.mjs
 │   ├── check-size.mjs            ← gzip budget gate (`npm run size`)
-│   └── sync-version.js           ← VERSION → package.json, README, demo, docs/
+│   └── sync-version.js           ← VERSION → package.json, README, shutters-site, docs/
 ├── .cursor/
 │   ├── rules/                    ← always-on + scoped agent rules
 │   ├── skills/                   ← workflow checklists
 │   └── generated/inventory.md    ← auto-generated; do not edit
 ├── vite.config.js                ← library build → dist/
-├── vite.config.demo.js           ← demo build → dist-demo/
 ├── .github/workflows/
-│   ├── deploy-demo.yml           ← Pages on push to main/master
+│   ├── deploy-demo.yml           ← legacy GitHub Pages → shuttersjs.com redirect
 │   └── publish.yml               ← GitHub Packages on release
 ├── docs/PROJECT_BRAIN.md         ← deep reference
 ├── CHANGELOG.md                  ← public release notes
 ├── ROADMAP.md                    ← product roadmap & progress tracking
 └── README.md                     ← user-facing docs
+
+shutters-site/                    ← sibling repo (not in this workspace path)
+├── index.html                    ← https://shuttersjs.com/
+├── about/index.html              ← https://shuttersjs.com/about/
+└── …                             ← Vercel deploy, SEO, marketing demos
 ```
 
-**No routing model.** This is a library + static demo — there are no app routes, API endpoints, or database models.
+**No routing model in the library.** Demo/docs routing lives on shuttersjs.com.
 
 ---
 
@@ -110,7 +105,7 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 - **No `window.ShuttersAccordion` in ES builds** — UMD only
 - **Accessibility** — visible `:focus-visible`; keyboard: Enter, Space, Arrows, Home, End
 - **Minimal diff** — resist feature creep; keep bundle tiny
-- **Sync demo copies** — after changing `src/` library files, run `npm run sync:demo`
+- **Marketing site** — demo/docs/SEO changes go in **shutters-site** → https://shuttersjs.com/
 
 ---
 
@@ -118,19 +113,14 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 
 | Command | Purpose |
 |---|---|
-| `npm run dev` | Dev server → opens `/demo/index.html` (port 3000) |
-| `npm run dev:demo` | Demo-only dev server |
 | `npm run build` | Build library → `dist/` (ES + UMD + core.css + theme.css) |
-| `npm run build:demo` | Build demo → `dist-demo/` for GitHub Pages |
-| `npm run build:all` | Both builds |
 | `npm run preview` | Preview library build |
-| `npm run preview:demo` | Preview built demo |
 | `npm run agent:sync` | Regenerate `.cursor/generated/inventory.md` |
 | `npm run size` | Gzip budget check (`scripts/check-size.mjs`) |
-| `npm run sri` | CDN Subresource Integrity hashes → `demo/cdn-integrity.json` |
-| `npm run version:sync` | Sync `VERSION` → package.json, README, demo, local docs |
-| `npm test` | `verify:vanilla` + Vitest (20 tests) |
-| `npm run sync:demo` | Copy `src/` library files → `demo/` |
+| `npm run version:sync` | Sync `VERSION` → package.json, README, shutters-site, local docs |
+| `npm test` | `verify:vanilla` + Vitest |
+
+**shutters-site** (sibling repo): `npm run dev`, `npm run build`, `npm run sri` — see that repo's `AGENTS.md`.
 
 ---
 
@@ -140,8 +130,8 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 |---|---|
 | New source file or export | `npm run agent:sync` |
 | New public API method | `add-api-method` skill + README + CHANGELOG |
-| CSS layer change | `change-css-layers` skill + sync demo copies |
-| Demo/marketing change | `add-demo-section` skill |
+| CSS layer change | `change-css-layers` skill + update shutters-site if visuals changed |
+| Demo/marketing change | **shutters-site** repo — `add-site-section` skill |
 | Release | `release-package` skill |
 | Convention change | Relevant `.cursor/rules/*.mdc` |
 | Architecture/strategy shift | `docs/PROJECT_BRAIN.md` or `ROADMAP.md` |
@@ -156,7 +146,7 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 | **Small fix** (bug, typo, one method) | `@src/shutters-core.js` + relevant scoped rule |
 | **CSS change** | `@src/shutters-core.css` or `@src/shutters-theme.css` + `@styling` rule |
 | **New API feature** | `@.cursor/skills/add-api-method/SKILL.md` + `@src/shutters-core.js` |
-| **Demo update** | `@demo/index.html` + `@.cursor/skills/add-demo-section/SKILL.md` |
+| **Demo/docs update** | shutters-site `@index.html` + `@.cursor/skills/add-site-section/SKILL.md` |
 | **Release** | `@.cursor/skills/release-package/SKILL.md` + `@CHANGELOG.md` |
 | **Returning after time away** | `@AGENTS.md` + `@.cursor/generated/inventory.md` + run `npm run agent:sync` |
 | **Architecture deep dive** | `@docs/PROJECT_BRAIN.md` |
@@ -169,8 +159,6 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 |---|---|
 | `add-api-method` | New public method, event, or constructor option |
 | `change-css-layers` | Core vs theme CSS, animation, custom properties |
-| `sync-demo-from-src` | After any `src/` library file change (`npm run sync:demo`) |
-| `add-demo-section` | New demo section, usage example, SEO block |
 | `release-package` | Version bump, npm publish, GitHub release |
 
 ---
@@ -179,10 +167,11 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 
 | Service | Usage |
 |---|---|
-| **npm** | Primary registry (`registry.npmjs.org`) |
+| **npm** | Primary registry (`registry.npmjs.org`) — `homepage` → https://shuttersjs.com/ |
 | **GitHub Packages** | Optional (`@byronjohnson/shutters-accordion`) — see `docs/GITHUB_PACKAGES.md` |
-| **GitHub Pages** | Demo hosting via `deploy-demo.yml` |
-| **unpkg CDN** | Documented in README for consumers |
+| **shuttersjs.com** | Demo & documentation (shutters-site on Vercel) |
+| **GitHub Pages** | Legacy URL redirect only (`deploy-demo.yml` → shuttersjs.com) |
+| **unpkg CDN** | Documented in README and shuttersjs.com |
 
 No auth, analytics, forms, or database in this repo.
 

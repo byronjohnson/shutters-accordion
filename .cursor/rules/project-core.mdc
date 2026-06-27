@@ -13,7 +13,7 @@ Vanilla JS + CSS accordion library. **No framework, no runtime deps.** Node ≥ 
 - Library entry: `index.js` (imports CSS for Vite; re-exports class)
 - CSS mechanics: `src/shutters-core.css`
 - CSS theme: `src/shutters-theme.css`
-- Demo copies in `demo/` must stay identical to `src/` library files
+- Marketing site: sibling **shutters-site** repo (`file:../shutters` npm dependency — no synced copies)
 
 ## Hard constraints
 

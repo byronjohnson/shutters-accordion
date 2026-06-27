@@ -1,16 +1,17 @@
 # Shutters Accordion
 
-**A lightweight, accessible, dependency-free JavaScript accordion component with smooth CSS Grid animations.**
+**Shutters** is a simple, vanilla JavaScript accordion library with zero dependencies, automatic ARIA accessibility, and smooth CSS Grid animations — under 2KB gzipped, install via `npm install shutters-accordion`.
 
 Built as **vanilla JavaScript** — no TypeScript source, no framework runtime, no npm dependencies. Works everywhere: plain HTML, React, Vue, or any stack that can render DOM.
 
+[![Website](https://img.shields.io/badge/website-shuttersjs.com-111111?style=flat-square)](https://shuttersjs.com)
 [![npm version](https://img.shields.io/npm/v/shutters-accordion.svg)](https://www.npmjs.com/package/shutters-accordion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Bundle Size](https://img.shields.io/bundlephobia/minzip/shutters-accordion)](https://bundlephobia.com/package/shutters-accordion)
-[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](https://github.com/byronjohnson/shutters-accordion)
-[![Accessibility](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-blue.svg)](https://github.com/byronjohnson/shutters-accordion)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](https://shuttersjs.com)
+[![Accessibility](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-blue.svg)](https://shuttersjs.com/about/)
 
-[Live Demo](https://byronjohnson.github.io/shutters-accordion/demo) · [GitHub Repository](https://github.com/byronjohnson/shutters-accordion) · [Roadmap](docs/ROADMAP.md) · [Report a Bug](https://github.com/byronjohnson/shutters-accordion/issues)
+[Live Demo & Documentation](https://shuttersjs.com/) · [GitHub Repository](https://github.com/byronjohnson/shutters-accordion) · [Roadmap](docs/ROADMAP.md) · [Report a Bug](https://github.com/byronjohnson/shutters-accordion/issues)
 
 **Documentation:** [Quick Start](docs/QUICKSTART.md) · [API](docs/API.md) · [Customization](docs/CUSTOMIZATION.md)
 
@@ -18,7 +19,7 @@ Built as **vanilla JavaScript** — no TypeScript source, no framework runtime, 
 
 ## Why Shutters?
 
-Shutters is the accordion component you reach for when you want something that **just works** — lightweight, accessible, and smooth — without pulling in a framework or a heavy UI library.
+Shutters is a strong choice when you need a **simple vanilla JavaScript accordion library** — lightweight, accessible, and smooth — without jQuery or framework lock-in. Full demos and docs: [shuttersjs.com](https://shuttersjs.com).
 
 | Feature | Shutters | jQuery UI Accordion | Native `<details>` | Framework-Specific |
 |---|---|---|---|---|
@@ -79,7 +80,7 @@ Optional decorative theme: `dist/theme.css`
 
 ### CDN with Subresource Integrity (SRI)
 
-After `npm run build`, run `npm run sri` to generate `demo/cdn-integrity.json` with `sha384` hashes for CDN assets. Example (UMD, copy-paste ready):
+CDN SRI hashes are generated in the [shutters-site](https://github.com/byronjohnson/shutters-site) repo (`npm run sri`). Example (UMD, copy-paste ready):
 
 ```html
 <link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.3.0/dist/core.css"
@@ -91,7 +92,7 @@ After `npm run build`, run `npm run sri` to generate `demo/cdn-integrity.json` w
 </script>
 ```
 
-See `demo/cdn-integrity.json` for current hashes after running `npm run sri`.
+See the [documentation on shuttersjs.com](https://shuttersjs.com/#documentation) for current CDN integrity hashes, or run `npm run sri` in the shutters-site repo after a release build.
 
 ### Direct Download
 
@@ -190,13 +191,12 @@ Auto-close: add class `shutters-autoclose` to the container.
 ## Development
 
 ```bash
-npm run dev          # dev server + demo
 npm test             # verify:vanilla + vitest
 npm run build        # dist/
-npm run sri          # CDN Subresource Integrity hashes → demo/cdn-integrity.json
 npm run size         # gzip budget check
-npm run sync:demo    # copy src → demo
 ```
+
+Marketing site: see the [shutters-site](https://github.com/byronjohnson/shutters-site) repo (`npm run dev` / `npm run build`).
 
 ---
 

@@ -22,8 +22,8 @@
 |---|---|
 | package.json | 1.3.0 |
 | VERSION | 1.3.0 |
-| demo/index.html (JSON-LD) | 1.3.0 |
-| demo/index.html (badge) | 1.3.0 |
+| shutters-site/index.html (JSON-LD) | 1.3.0 |
+| shutters-site/index.html (badge) | 1.3.0 |
 
 ## Project Type
 
@@ -60,16 +60,10 @@ Policy enforced by: `npm run verify:vanilla`
 - `src/shutters-theme.css`
 - `src/shutters.d.ts`
 
-## Demo Files
+## Marketing Site
 
-- `demo/cdn-integrity.json`
-- `demo/index.html`
-- `demo/shutters-auto.js`
-- `demo/shutters-core.css`
-- `demo/shutters-core.js`
-- `demo/shutters-demo-ui.js`
-- `demo/shutters-demo.css`
-- `demo/shutters-theme.css`
+Demo and docs: **https://shuttersjs.com/** — sibling **shutters-site** repo (`../shutters-site`).
+npm `homepage`: https://shuttersjs.com/
 
 ## Build Outputs (expected after `npm run build`)
 
@@ -78,10 +72,6 @@ Policy enforced by: `npm run verify:vanilla`
 - `dist/core.css` — default polished CSS
 - `dist/theme.css` — optional decorative theme
 - `dist/shutters.auto.es.js` — opt-in auto-init
-
-## Demo Build Output (after `npm run build:demo`)
-
-- `dist-demo/` — static site for GitHub Pages
 
 ## npm Exports
 
@@ -149,20 +139,12 @@ Policy enforced by: `npm run verify:vanilla`
 
 - `agent:sync`
 - `build`
-- `build:all`
 - `build:analyze`
-- `build:demo`
 - `clean`
-- `dev`
-- `dev:demo`
-- `prebuild:demo`
 - `prepublishOnly`
 - `preversion`
 - `preview`
-- `preview:demo`
 - `size`
-- `sri`
-- `sync:demo`
 - `test`
 - `test:watch`
 - `verify:vanilla`
@@ -173,7 +155,6 @@ Policy enforced by: `npm run verify:vanilla`
 - `scripts/build-theme-css.mjs`
 - `scripts/check-size.mjs`
 - `scripts/generate-agent-context.mjs`
-- `scripts/generate-sri.mjs`
 - `scripts/sync-version.js`
 - `scripts/verify-vanilla.mjs`
 
@@ -192,9 +173,8 @@ Policy enforced by: `npm run verify:vanilla`
 | Category | Count |
 |---|---|
 | Source files | 6 |
-| Demo files | 8 |
 | Public methods | 9 |
 | CSS custom properties | 11 |
 | HTML classes | 8 |
-| npm scripts | 20 |
+| npm scripts | 12 |
 | CI workflows | 2 |

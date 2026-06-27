@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Sync VERSION file → package.json, README, demo, public docs
+ * Sync VERSION file → package.json, README, shutters-site, public docs
  */
 const fs = require('fs');
 const path = require('path');
@@ -33,16 +33,25 @@ function updateReadme() {
   console.log(`✓ README.md → ${VERSION}`);
 }
 
-function updateDemo() {
-  const file = path.join(ROOT, 'demo/index.html');
-  let html = fs.readFileSync(file, 'utf8');
-  html = html.replace(/("version":\s*")[^"]+(")/, `$1${VERSION}$2`);
-  html = html.replace(
-    /(<p class="version-badge"[^>]*>v)[\d.]+(<\/p>)/,
-    `$1${VERSION}$2`
-  );
-  fs.writeFileSync(file, html);
-  console.log(`✓ demo/index.html → ${VERSION}`);
+function updateSite() {
+  const siteFiles = [
+    path.join(ROOT, '../shutters-site/index.html'),
+    path.join(ROOT, '../shutters-site/about/index.html'),
+  ];
+  for (const file of siteFiles) {
+    if (!fs.existsSync(file)) continue;
+    let html = fs.readFileSync(file, 'utf8');
+    html = html.replace(/("version":\s*")[^"]+(")/, `$1${VERSION}$2`);
+    html = html.replace(
+      /(<p class="version-badge"[^>]*>v)[\d.]+(<\/p>)/,
+      `$1${VERSION}$2`
+    );
+    fs.writeFileSync(file, html);
+    console.log(`✓ ${path.relative(ROOT, file)} → ${VERSION}`);
+  }
+  if (!siteFiles.some((file) => fs.existsSync(file))) {
+    console.log('⚠ shutters-site HTML not found — skipped');
+  }
 }
 
 function updatePublicDocs() {
@@ -67,6 +76,6 @@ function updatePublicDocs() {
 console.log(`\nSyncing version: ${VERSION}\n`);
 updatePackageJson();
 updateReadme();
-updateDemo();
+updateSite();
 updatePublicDocs();
 console.log('\n✅ Version sync complete\n');

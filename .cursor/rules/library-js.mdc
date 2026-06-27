@@ -1,6 +1,6 @@
 ---
 description: ShuttersAccordion JS patterns — API, events, delegation, JSDoc
-globs: src/**/*.js,index.js,demo/shutters-core.js
+globs: src/**/*.js,index.js
 alwaysApply: false
 ---
 
@@ -19,7 +19,6 @@ Reference: `src/shutters-core.js` — **vanilla JS only** (see `vanilla-js-only.
 ## Adding a public method checklist
 
 - [ ] Implement in `src/shutters-core.js` with JSDoc
-- [ ] Copy `src/shutters-core.js` → `demo/shutters-core.js`
 - [ ] Document in root `README.md` API section
 - [ ] Add `CHANGELOG.md` entry
 - [ ] `npm run build` — verify bundle size

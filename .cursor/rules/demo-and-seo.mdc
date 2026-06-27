@@ -1,69 +1,22 @@
 ---
-description: Demo site — HTML structure, page zones, JSON-LD, SEO, GitHub Pages build
+description: Marketing site moved to shutters-site — see site-html-seo rule there
 globs: demo/**
 alwaysApply: false
 ---
 
-# Demo & SEO
+# Demo & SEO (migrated)
 
-Reference: `demo/index.html` — follow existing **page zone** and **section card** patterns.
+The in-repo `demo/` folder was removed. **Demo, documentation, and SEO** live at:
 
-## Page layout (v1.3+)
+- **Site:** https://shuttersjs.com/
+- **Repo:** sibling `shutters-site` (Vercel)
 
-Four labeled zones in `#main-content`, each with `.zone-header` (label + title + desc):
+Edit marketing HTML, JSON-LD, and page zones in **shutters-site** — use that repo's `.cursor/rules/site-html-seo.mdc` and `update-seo` skill.
 
-| Zone id | Purpose |
-|---|---|
-| `#overview` | Why choose Shutters (accordion content) |
-| `#demos` | Interactive feature demos |
-| `#comparisons` | Motion Lab + library comparisons |
-| `#documentation` | How-to-use guide with snippet tabs |
+## Legacy URL
 
-- Individual blocks: `.section-card` inside `.page-zone` (spacing via `.page-zone > .section-card`)
-- Hero: `.version-badge`, `.package-links` (GitHub + npm icons), `.page-nav` anchor pills
-- Demo-only UI: `demo/shutters-demo-ui.js` (copy buttons, framework tabs, CDN SRI, motion lab)
+https://byronjohnson.github.io/shutters-accordion/demo/ redirects to https://shuttersjs.com/ via `deploy-demo.yml`.
 
-## HTML accordion markup
+## Library releases
 
-Authors omit ARIA — JS adds it. Required classes: `shutters-accordion`, `shutters-item`, `shutters-header`, `shutters-title`, `shutters-icon`, `shutters-content`, `shutters-body`.
-
-## Init pattern
-
-```html
-<script type="module">
-  import { ShuttersAccordion } from './shutters-core.js';
-  import { initAll } from './shutters-auto.js';
-  import { initDemoUi } from './shutters-demo-ui.js';
-
-  new ShuttersAccordion({
-    container: '.shutters-accordion:not([data-shutters])',
-    animationDuration: 350,
-    animationEasing: 'cubic-bezier(0.4, 0, 0.2, 1)',
-    defaultOpen: 'none'
-  });
-  initAll();
-  initDemoUi();
-</script>
-```
-
-- **Never** load `shutters-core.js` twice (no duplicate script tag + import)
-- `[data-shutters]` containers use `initAll()` only — exclude from manual instance selector
-
-## SEO blocks in demo/index.html
-
-- Primary meta, Open Graph, Twitter Card, favicon
-- JSON-LD: `SoftwareSourceCode` + `FAQPage` + `HowTo` + `BreadcrumbList`
-- Update JSON-LD `version` and `.version-badge` on release (`npm run version:sync`)
-
-## Build & deploy
-
-- Dev: `npm run dev` or `npm run dev:demo`
-- Production: `npm run build:demo` → `dist-demo/`
-- GitHub Pages base: `/shutters-accordion/demo/` (`vite.config.demo.js`)
-- Deploy: push to `main`/`master` triggers `.github/workflows/deploy-demo.yml`
-- Pre-build: `npm run sri` refreshes `demo/cdn-integrity.json`
-
-## After demo changes
-
-- [ ] `npm run build:demo`
-- [ ] `npm run agent:sync`
+After changing `src/` library files, release to npm then update shutters-site dependency — see shutters-site `sync-library-release` skill.

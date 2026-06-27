@@ -13,12 +13,8 @@ AGENTS.md
 docs/
 scripts/
 
-# Demo site (GitHub Pages only)
-demo/
-
 # Build tooling & config
 vite.config.js
-vite.config.demo.js
 index.html
 
 # Version & changelog (consumers use npm version / registry metadata)
@@ -62,4 +58,3 @@ Thumbs.db
 
 # Local artifacts
 *.tgz
-dist-demo/

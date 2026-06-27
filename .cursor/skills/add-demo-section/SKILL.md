@@ -1,58 +1,17 @@
 ---
 name: add-demo-section
-description: Adds a new section, usage example, or FAQ block to the Shutters marketing demo page. Use when editing demo/index.html, adding showcase accordions, or updating SEO/JSON-LD.
+description: Deprecated for this repo — marketing sections live in shutters-site at shuttersjs.com. Use shutters-site add-site-section skill instead.
 ---
 
-# Add Demo Section
+# Add Demo Section (deprecated in library repo)
 
-Reference existing sections in `demo/index.html` for markup patterns.
+Demo and documentation pages moved to **shutters-site** → https://shuttersjs.com/
 
-## Page zones (v1.3+)
+## Where to edit
 
-Place new content in the correct `.page-zone`:
-
-| Zone | Use for |
+| Page | File |
 |---|---|
-| `#overview` | Product highlights (accordion content) |
-| `#demos` | Interactive Shutters examples |
-| `#comparisons` | Side-by-side or vs-library content |
-| `#documentation` | Install/API/customization guide blocks |
+| Home (demos, docs) | `../shutters-site/index.html` |
+| About / FAQ | `../shutters-site/about/index.html` |
 
-Each block: `<section class="section-card demo-section">` with `<h3 class="section-title">`.
-
-## Checklist
-
-- [ ] Add HTML using standard accordion class structure (no manual ARIA attributes)
-- [ ] Wrap in `.section-card` inside the appropriate `.page-zone`
-- [ ] If new accordion group with auto-close: add `shutters-autoclose` class on container
-- [ ] If `[data-shutters]`: exclude from manual `ShuttersAccordion` selector
-- [ ] Update JSON-LD FAQ entries if adding FAQ content
-- [ ] Style demo-only UI in `demo/shutters-demo.css` (not `src/`)
-- [ ] Run `npm run dev:demo` — visual check
-- [ ] Run `npm run build:demo` — verify GitHub Pages output in `dist-demo/`
-- [ ] Run `npm run agent:sync`
-
-## Accordion markup template
-
-```html
-<section class="section-card demo-section" aria-labelledby="my-heading">
-  <h3 id="my-heading" class="section-title">Section Title</h3>
-  <div class="shutters-accordion demo-accordion">
-    <div class="shutters-item">
-      <div class="shutters-header">
-        <span class="shutters-title">Title</span>
-        <span class="shutters-icon"></span>
-      </div>
-      <div class="shutters-content">
-        <div class="shutters-body"><p>Content</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-```
-
-## Auto vs manual updates
-
-| Auto | Manual |
-|---|---|
-| Inventory demo file list | HTML content, JSON-LD text, demo CSS |
+Use shutters-site `.cursor/skills/add-site-section/SKILL.md` and `site-html-seo.mdc`.

@@ -11,7 +11,7 @@ description: Modifies Shutters accordion CSS — core mechanics or theme styling
 |---|---|
 | Grid animation, opacity, icon rotation, header layout | `src/shutters-core.css` |
 | Colors, borders, padding, fonts, focus ring | `src/shutters-theme.css` |
-| Demo page layout | `demo/shutters-demo.css` |
+| Demo page layout | shutters-site `src/shutters-demo.css` (sibling repo) |
 
 ## Checklist
 
@@ -19,9 +19,8 @@ description: Modifies Shutters accordion CSS — core mechanics or theme styling
 - [ ] Preserve grid animation: `grid-template-rows: 0fr → 1fr` on `.shutters-content`
 - [ ] Keep `.shutters-body { min-height: 0; overflow: hidden; }`
 - [ ] Maintain `:focus-visible` ring in theme (never bare `outline: none`)
-- [ ] If library CSS changed: copy to matching `demo/shutters-core.css` or `demo/shutters-theme.css`
-- [ ] Run `npm run dev` — verify expand/collapse animation
-- [ ] Run `npm run build` — check `dist/style.css` output
+- [ ] If library CSS changed: verify on https://shuttersjs.com/ after shutters-site deploy
+- [ ] Run `npm run build` — check `dist/core.css` / `dist/theme.css` output
 - [ ] Run `npm run agent:sync`
 
 ## Custom property reference

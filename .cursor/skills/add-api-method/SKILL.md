@@ -12,10 +12,10 @@ description: Adds a new public method, event, or constructor option to ShuttersA
 - [ ] Wire through internal helpers if needed (`_setState`, `_emit`, `_byIndex`)
 - [ ] Update `src/shutters.d.ts` (copied to `dist/` on build)
 - [ ] Add tests in `tests/shutters-core.test.js`
-- [ ] Run `npm run sync:demo`
+- [ ] Run `npm test`
 - [ ] Add usage example to root `README.md` → **API at a glance**
 - [ ] Update local `docs/API.md` (via release sync or manually)
-- [ ] Add demo example in `demo/index.html` if user-visible
+- [ ] Add demo example on https://shuttersjs.com/ (shutters-site) if user-visible
 - [ ] Add entry under `## [Unreleased]` or new version in `CHANGELOG.md`
 - [ ] Run `npm run build && npm run size` — ES gzip must stay ≤ 2320 B
 - [ ] Run `npm run agent:sync`
@@ -35,4 +35,4 @@ methodName(arg) {
 
 | Auto | Manual |
 |---|---|
-| `inventory.md` public API list (via `agent:sync`) | README, CHANGELOG, demo HTML, `.d.ts`, tests |
+| `inventory.md` public API list (via `agent:sync`) | README, CHANGELOG, shutters-site, `.d.ts`, tests |

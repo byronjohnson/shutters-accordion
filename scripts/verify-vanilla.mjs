@@ -20,7 +20,7 @@ function walk(dir, acc = []) {
     const full = path.join(dir, name);
     const stat = fs.statSync(full);
     if (stat.isDirectory()) {
-      if (name === 'node_modules' || name === 'dist' || name === 'dist-demo') continue;
+      if (name === 'node_modules' || name === 'dist') continue;
       walk(full, acc);
     } else {
       acc.push(full);
@@ -35,7 +35,7 @@ if (pkg.dependencies && Object.keys(pkg.dependencies).length > 0) {
   errors.push('package.json must not have runtime "dependencies" — vanilla JS, zero deps');
 }
 
-const libraryDirs = ['src', 'demo'].map((d) => path.join(ROOT, d));
+const libraryDirs = ['src'].map((d) => path.join(ROOT, d));
 const rootEntries = ['index.js', 'auto.js'].map((f) => path.join(ROOT, f));
 
 function isForbiddenLibraryFile(file) {

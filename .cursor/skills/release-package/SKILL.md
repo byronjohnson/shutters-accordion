@@ -8,11 +8,10 @@ description: Bumps version and publishes shutters-accordion to npm or GitHub Pac
 ## Pre-release checklist
 
 - [ ] All changes merged to `master` (deploy) / `develop` (active dev)
-- [ ] Demo copies synced (`npm run sync:demo`)
+- [ ] shutters-site updated if user-facing demo/docs changed (sibling repo)
 - [ ] `npm test` passes (20 tests + `verify:vanilla`)
 - [ ] `npm run build` succeeds
 - [ ] `npm run size` passes (ES ≤ 2320 B gzip, UMD ≤ 2200 B)
-- [ ] `npm run sri && npm run build:demo` succeeds
 - [ ] `CHANGELOG.md` updated with release notes
 
 ## Version bump
@@ -21,9 +20,10 @@ description: Bumps version and publishes shutters-accordion to npm or GitHub Pac
 2. Run `npm run version:sync` — syncs:
    - `package.json`
    - README CDN pins + version footer
-   - `demo/index.html` JSON-LD + `.version-badge`
+   - `../shutters-site/index.html` + `about/index.html` badges (if sibling exists)
    - Local `docs/QUICKSTART.md`, `docs/API.md`
-3. Run `npm run agent:sync` — verify no version drift in inventory
+3. In **shutters-site**: bump `shutters-accordion` dependency, `npm run sri`, `npm run sync-version`
+4. Run `npm run agent:sync` — verify no version drift in inventory
 
 ## Publish to npm
 
@@ -49,14 +49,16 @@ Tag format: `1.3.0` (no `v` prefix — matches existing tags).
 
 Create a GitHub Release → triggers `.github/workflows/publish.yml`. See `docs/GITHUB_PACKAGES.md`.
 
-## GitHub Pages demo
+## Legacy GitHub Pages redirect
 
-Push to `main` or `master` → `deploy-demo.yml` builds and deploys `dist-demo/` to `/shutters-accordion/demo/`.
+Push to `main` or `master` → `deploy-demo.yml` updates redirect stubs so  
+https://byronjohnson.github.io/shutters-accordion/demo/ → https://shuttersjs.com/
 
 ## Post-release
 
-- [ ] Verify package on https://www.npmjs.com/package/shutters-accordion
-- [ ] Verify live demo: https://byronjohnson.github.io/shutters-accordion/demo/
+- [ ] Verify package on https://www.npmjs.com/package/shutters-accordion (`homepage` → https://shuttersjs.com/)
+- [ ] Verify live site: https://shuttersjs.com/
+- [ ] Deploy shutters-site to Vercel if version/SRI changed
 - [ ] Update `docs/ROADMAP.md` release status (local, gitignored)
 - [ ] Run `npm run agent:sync`
 

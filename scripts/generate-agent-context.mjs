@@ -73,21 +73,22 @@ function main() {
   const coreJs = exists('src/shutters-core.js') ? read('src/shutters-core.js') : '';
   const coreCss = exists('src/shutters-core.css') ? read('src/shutters-core.css') : '';
   const themeCss = exists('src/shutters-theme.css') ? read('src/shutters-theme.css') : '';
-  const demoHtml = exists('demo/index.html') ? read('demo/index.html') : '';
+  const siteHtmlPath = path.join(ROOT, '../shutters-site/index.html');
+  const siteHtml = fs.existsSync(siteHtmlPath) ? fs.readFileSync(siteHtmlPath, 'utf8') : '';
 
   const versions = {
     'package.json': readVersionFrom('package.json'),
     VERSION: readVersionFrom('VERSION'),
-    'demo/index.html (JSON-LD)': (demoHtml.match(/"version":\s*"([^"]+)"/) || [])[1] ?? null,
+    'shutters-site/index.html (JSON-LD)': (siteHtml.match(/"version":\s*"([^"]+)"/) || [])[1] ?? null,
   };
 
-  const versionBadge = (demoHtml.match(/class="version-badge"[^>]*>v([\d.]+)/) || [])[1] ?? null;
-  versions['demo/index.html (badge)'] = versionBadge;
+  const versionBadge = (siteHtml.match(/class="version-badge"[^>]*>v([\d.]+)/) || [])[1] ?? null;
+  versions['shutters-site/index.html (badge)'] = versionBadge;
 
   const drift = Object.values(versions).filter(Boolean);
   const versionDrift = new Set(drift).size > 1;
 
-  const pageZones = [...demoHtml.matchAll(/id="(overview|demos|comparisons|documentation)"/g)].map(m => m[1]);
+  const pageZones = [...siteHtml.matchAll(/id="(overview|demos|comparisons|documentation)"/g)].map(m => m[1]);
 
   const bundleBudgets = exists('scripts/check-size.mjs')
     ? [...read('scripts/check-size.mjs').matchAll(/'([^']+\.(?:js|css))':\s*(\d+)/g)].map(([, f, b]) => `${f}: ${b} B`)
@@ -95,11 +96,10 @@ function main() {
 
   const publicMethods = extractPublicMethods(coreJs);
   const customProps = extractCustomProperties(coreCss + themeCss);
-  const htmlClasses = extractHtmlClasses(demoHtml);
+  const htmlClasses = extractHtmlClasses(siteHtml);
 
   const workflows = listFiles('.github/workflows', '.yml');
   const srcFiles = listFiles('src');
-  const demoFiles = listFiles('demo');
   const scripts = listFiles('scripts');
 
   const npmScripts = Object.keys(pkg.scripts || {}).sort();
@@ -151,9 +151,10 @@ function main() {
     '',
     ...srcFiles.map(f => `- \`${f}\``),
     '',
-    '## Demo Files',
+    '## Marketing Site',
     '',
-    ...demoFiles.map(f => `- \`${f}\``),
+    'Demo and docs: **https://shuttersjs.com/** — sibling **shutters-site** repo (`../shutters-site`).',
+    'npm `homepage`: https://shuttersjs.com/',
     '',
     '## Build Outputs (expected after `npm run build`)',
     '',
@@ -162,10 +163,6 @@ function main() {
     '- `dist/core.css` — default polished CSS',
     '- `dist/theme.css` — optional decorative theme',
     '- `dist/shutters.auto.es.js` — opt-in auto-init',
-    '',
-    '## Demo Build Output (after `npm run build:demo`)',
-    '',
-    '- `dist-demo/` — static site for GitHub Pages',
     '',
     '## npm Exports',
     '',
@@ -224,7 +221,6 @@ function main() {
     `| Category | Count |`,
     `|---|---|`,
     `| Source files | ${srcFiles.length} |`,
-    `| Demo files | ${demoFiles.length} |`,
     `| Public methods | ${publicMethods.length} |`,
     `| CSS custom properties | ${customProps.length} |`,
     `| HTML classes | ${htmlClasses.length} |`,
