@@ -6,7 +6,7 @@ Built as **vanilla JavaScript** — no TypeScript source, no framework runtime, 
 
 [![npm version](https://img.shields.io/npm/v/shutters-accordion.svg)](https://www.npmjs.com/package/shutters-accordion)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Bundle Size](https://img.shields.io/badge/gzip-<2KB-brightgreen.svg)](https://github.com/byronjohnson/shutters-accordion)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/shutters-accordion)](https://bundlephobia.com/package/shutters-accordion)
 [![Zero Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](https://github.com/byronjohnson/shutters-accordion)
 [![Accessibility](https://img.shields.io/badge/a11y-WCAG%202.1%20AA-blue.svg)](https://github.com/byronjohnson/shutters-accordion)
 
@@ -28,7 +28,7 @@ Shutters is the accordion component you reach for when you want something that *
 | **Auto-Close Mode** | Built-in | Built-in | Not available | Varies |
 | **Keyboard Accessible** | Full (Enter/Space/Arrow/Home/End) | Full | Partial | Varies |
 | **ARIA Support** | Automatic (auto-applied by JS) | Manual | Partial | Varies |
-| **Programmatic API** | open/close/toggle/openAll/closeAll/on/off/destroy | Full API | None | Varies |
+| **Programmatic API** | open/close/toggle/isOpen/openAll/closeAll/on/off/destroy | Full API | None | Varies |
 | **Custom Events** | shutters:open / shutters:close | Yes | toggle event | Varies |
 | **Framework Agnostic** | Yes | Yes (needs jQuery) | Yes | No |
 | **CSS Custom Properties** | Full theming | Limited | N/A | Varies |
@@ -44,7 +44,7 @@ Shutters is the accordion component you reach for when you want something that *
 - **Event delegation** — one listener per container for optimal performance at any scale
 - **Framework agnostic** — works with vanilla HTML, React, Vue, Svelte, Angular, Astro, or any framework
 - **Customizable** — theme everything via CSS custom properties
-- **Programmatic control** — `open()`, `close()`, `toggle()`, `openAll()`, `closeAll()`, `destroy()` API methods
+- **Programmatic control** — `open()`, `close()`, `toggle()`, `isOpen()`, `openAll()`, `closeAll()`, `destroy()` API methods
 - **ES Module + UMD** — works with Vite, Webpack, Rollup, or a `<script>` tag
 - **Modular CSS** — separate core functionality from optional presentation theme
 
@@ -68,9 +68,9 @@ npm install @byronjohnson/shutters-accordion
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.2.1/dist/core.css">
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.3.0/dist/core.css">
 <script type="module">
-  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.es.js';
+  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.3.0/dist/shutters.es.js';
   new ShuttersAccordion({ container: '.shutters-accordion' });
 </script>
 ```
@@ -82,9 +82,9 @@ Optional decorative theme: `dist/theme.css`
 After `npm run build`, run `npm run sri` to generate `demo/cdn-integrity.json` with `sha384` hashes for CDN assets. Example (UMD, copy-paste ready):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.2.1/dist/core.css"
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.3.0/dist/core.css"
   integrity="sha384-…" crossorigin="anonymous">
-<script src="https://unpkg.com/shutters-accordion@1.2.1/dist/shutters.umd.js"
+<script src="https://unpkg.com/shutters-accordion@1.3.0/dist/shutters.umd.js"
   integrity="sha384-…" crossorigin="anonymous"></script>
 <script>
   new ShuttersAccordion({ container: '.shutters-accordion' });
@@ -178,6 +178,7 @@ Or call `initAll()` yourself from `'shutters-accordion/auto'`.
 accordion.open(0);
 accordion.close(0);
 accordion.toggle(0);
+accordion.isOpen(0); // → boolean
 accordion.on('shutters:open', (e) => console.log(e.detail.item));
 accordion.destroy();
 ```
@@ -201,7 +202,7 @@ npm run sync:demo    # copy src → demo
 
 ## Version
 
-**1.2.1** — see [CHANGELOG.md](CHANGELOG.md)
+**1.3.0** — see [CHANGELOG.md](CHANGELOG.md)
 
 ---
 

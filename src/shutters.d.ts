@@ -26,6 +26,7 @@ export declare class ShuttersAccordion {
   open(index: number): void;
   close(index: number): void;
   toggle(index: number): void;
+  isOpen(index: number): boolean;
   openAll(): void;
   closeAll(): void;
   on(event: 'shutters:open' | 'shutters:close', callback: (e: ShuttersEvent) => void): this;
