@@ -23,7 +23,7 @@ Vanilla JS + CSS accordion library. **No framework, no runtime deps.** Node ≥ 
 - Never set `window.ShuttersAccordion` in ES module code (UMD build handles globals)
 - Event delegation only: one click + one keydown listener per container
 - Animate with CSS Grid `grid-template-rows: 0fr/1fr` — not max-height or scrollHeight JS
-- JS auto-applies ARIA (`role="button"`, `tabindex="0"`, `aria-expanded`)
+- JS auto-applies ARIA (`role="button"`, `tabindex="0"`, `aria-expanded`, `aria-controls` + panel `id`)
 - Keep `:focus-visible` visible — never `outline: none` without replacement
 
 ## After structural changes

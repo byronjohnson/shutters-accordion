@@ -2,14 +2,14 @@
 
 > **Do not edit manually.** Run `npm run agent:sync` after structural changes.
 
-**Generated:** 2026-06-26
+**Generated:** 2026-06-27
 
 ## Stack Versions
 
 | Package | Version |
 |---|---|
 | Node (engines) | >=14.0.0 |
-| shutters-accordion | 1.2.1 |
+| shutters-accordion | 1.3.0 |
 | jsdom (dev) | ^26.1.0 |
 | vite (dev) | ^6.3.5 |
 | vitest (dev) | ^3.2.4 |
@@ -20,9 +20,10 @@
 
 | Source | Version |
 |---|---|
-| package.json | 1.2.1 |
-| VERSION | 1.2.1 |
-| demo/index.html (JSON-LD) | 1.2.1 |
+| package.json | 1.3.0 |
+| VERSION | 1.3.0 |
+| demo/index.html (JSON-LD) | 1.3.0 |
+| demo/index.html (badge) | 1.3.0 |
 
 ## Project Type
 
@@ -30,6 +31,25 @@
 No application routes, API server, or database. Dev-only: Vite, Vitest, jsdom.
 
 Policy enforced by: `npm run verify:vanilla`
+
+## Demo Page Zones
+
+- `#overview`
+- `#demos`
+- `#comparisons`
+- `#documentation`
+
+## Gzip Budgets (`npm run size`)
+
+- shutters.es.js: 2320 B
+- shutters.umd.js: 2200 B
+- core.css: 900 B
+- theme.css: 1200 B
+
+## Auto ARIA (applied at init)
+
+- `role="button"`, `tabindex="0"`, `aria-expanded` on `.shutters-header`
+- `aria-controls` → `.shutters-content` id (auto `sp-{n}` if missing)
 
 ## Library Source Files
 
@@ -88,6 +108,7 @@ Policy enforced by: `npm run verify:vanilla`
 - `open()`
 - `close()`
 - `toggle()`
+- `isOpen()`
 - `openAll()`
 - `closeAll()`
 - `on()`
@@ -172,7 +193,7 @@ Policy enforced by: `npm run verify:vanilla`
 |---|---|
 | Source files | 6 |
 | Demo files | 8 |
-| Public methods | 8 |
+| Public methods | 9 |
 | CSS custom properties | 11 |
 | HTML classes | 8 |
 | npm scripts | 20 |

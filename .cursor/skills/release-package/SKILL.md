@@ -7,30 +7,43 @@ description: Bumps version and publishes shutters-accordion to npm or GitHub Pac
 
 ## Pre-release checklist
 
-- [ ] All changes merged to `develop`
-- [ ] Demo copies synced (`sync-demo-from-src` skill)
+- [ ] All changes merged to `master` (deploy) / `develop` (active dev)
+- [ ] Demo copies synced (`npm run sync:demo`)
+- [ ] `npm test` passes (20 tests + `verify:vanilla`)
 - [ ] `npm run build` succeeds
-- [ ] `npm run build:demo` succeeds
-- [ ] CHANGELOG.md updated with release notes
+- [ ] `npm run size` passes (ES ≤ 2320 B gzip, UMD ≤ 2200 B)
+- [ ] `npm run sri && npm run build:demo` succeeds
+- [ ] `CHANGELOG.md` updated with release notes
 
 ## Version bump
 
-**Note:** `scripts/sync-version.js` is partially stale (expects removed runtime VERSION constants). Until fixed, sync manually:
-
-- [ ] Update `VERSION` file
-- [ ] Update `package.json` version (or `npm version patch|minor|major`)
-- [ ] Update CDN version pins in `README.md`
-- [ ] Update JSON-LD `version` in `demo/index.html`
-- [ ] Run `npm run agent:sync` — check drift report
+1. Update `VERSION` file (e.g. `1.3.0`)
+2. Run `npm run version:sync` — syncs:
+   - `package.json`
+   - README CDN pins + version footer
+   - `demo/index.html` JSON-LD + `.version-badge`
+   - Local `docs/QUICKSTART.md`, `docs/API.md`
+3. Run `npm run agent:sync` — verify no version drift in inventory
 
 ## Publish to npm
 
 ```bash
-npm run build
-npm publish
+npm publish --otp=YOUR_6_DIGIT_CODE   # if 2FA enabled
 ```
 
-`prepublishOnly` runs clean + build automatically.
+`prepublishOnly` runs `clean` + `build` automatically.
+
+## Git tag & push
+
+```bash
+git add -A   # tracked files only — docs/ is gitignored
+git commit -m "Release X.Y.Z — …"
+git tag X.Y.Z
+git push Github master
+git push Github X.Y.Z
+```
+
+Tag format: `1.3.0` (no `v` prefix — matches existing tags).
 
 ## GitHub Packages
 
@@ -38,13 +51,13 @@ Create a GitHub Release → triggers `.github/workflows/publish.yml`. See `docs/
 
 ## GitHub Pages demo
 
-Merge/push to `main` or `master` → `deploy-demo.yml` builds and deploys `dist-demo/`.
+Push to `main` or `master` → `deploy-demo.yml` builds and deploys `dist-demo/` to `/shutters-accordion/demo/`.
 
 ## Post-release
 
-- [ ] Verify package on npmjs.com
-- [ ] Verify live demo URL
-- [ ] Tag pushed: `git push origin --tags`
+- [ ] Verify package on https://www.npmjs.com/package/shutters-accordion
+- [ ] Verify live demo: https://byronjohnson.github.io/shutters-accordion/demo/
+- [ ] Update `docs/ROADMAP.md` release status (local, gitignored)
 - [ ] Run `npm run agent:sync`
 
 ## Reference docs

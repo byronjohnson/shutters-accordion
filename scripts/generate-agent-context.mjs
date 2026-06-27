@@ -81,8 +81,17 @@ function main() {
     'demo/index.html (JSON-LD)': (demoHtml.match(/"version":\s*"([^"]+)"/) || [])[1] ?? null,
   };
 
+  const versionBadge = (demoHtml.match(/class="version-badge"[^>]*>v([\d.]+)/) || [])[1] ?? null;
+  versions['demo/index.html (badge)'] = versionBadge;
+
   const drift = Object.values(versions).filter(Boolean);
   const versionDrift = new Set(drift).size > 1;
+
+  const pageZones = [...demoHtml.matchAll(/id="(overview|demos|comparisons|documentation)"/g)].map(m => m[1]);
+
+  const bundleBudgets = exists('scripts/check-size.mjs')
+    ? [...read('scripts/check-size.mjs').matchAll(/'([^']+\.(?:js|css))':\s*(\d+)/g)].map(([, f, b]) => `${f}: ${b} B`)
+    : [];
 
   const publicMethods = extractPublicMethods(coreJs);
   const customProps = extractCustomProperties(coreCss + themeCss);
@@ -124,6 +133,19 @@ function main() {
     'No application routes, API server, or database. Dev-only: Vite, Vitest, jsdom.',
     '',
     'Policy enforced by: `npm run verify:vanilla`',
+    '',
+    '## Demo Page Zones',
+    '',
+    ...(pageZones.length ? pageZones.map(z => `- \`#${z}\``) : ['- (none detected)']),
+    '',
+    '## Gzip Budgets (`npm run size`)',
+    '',
+    ...(bundleBudgets.length ? bundleBudgets.map(b => `- ${b}`) : ['- Run `npm run build && npm run size`']),
+    '',
+    '## Auto ARIA (applied at init)',
+    '',
+    '- `role="button"`, `tabindex="0"`, `aria-expanded` on `.shutters-header`',
+    '- `aria-controls` → `.shutters-content` id (auto `sp-{n}` if missing)',
     '',
     '## Library Source Files',
     '',

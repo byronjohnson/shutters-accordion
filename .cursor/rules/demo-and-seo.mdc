@@ -1,12 +1,27 @@
 ---
-description: Demo site — HTML structure, JSON-LD, SEO, GitHub Pages build
+description: Demo site — HTML structure, page zones, JSON-LD, SEO, GitHub Pages build
 globs: demo/**
 alwaysApply: false
 ---
 
 # Demo & SEO
 
-Reference: `demo/index.html` — follow existing section patterns.
+Reference: `demo/index.html` — follow existing **page zone** and **section card** patterns.
+
+## Page layout (v1.3+)
+
+Four labeled zones in `#main-content`, each with `.zone-header` (label + title + desc):
+
+| Zone id | Purpose |
+|---|---|
+| `#overview` | Why choose Shutters (accordion content) |
+| `#demos` | Interactive feature demos |
+| `#comparisons` | Motion Lab + library comparisons |
+| `#documentation` | How-to-use guide with snippet tabs |
+
+- Individual blocks: `.section-card` inside `.page-zone` (spacing via `.page-zone > .section-card`)
+- Hero: `.version-badge`, `.package-links` (GitHub + npm icons), `.page-nav` anchor pills
+- Demo-only UI: `demo/shutters-demo-ui.js` (copy buttons, framework tabs, CDN SRI, motion lab)
 
 ## HTML accordion markup
 
@@ -17,24 +32,36 @@ Authors omit ARIA — JS adds it. Required classes: `shutters-accordion`, `shutt
 ```html
 <script type="module">
   import { ShuttersAccordion } from './shutters-core.js';
-  new ShuttersAccordion({ container: '.shutters-accordion', ... });
+  import { initAll } from './shutters-auto.js';
+  import { initDemoUi } from './shutters-demo-ui.js';
+
+  new ShuttersAccordion({
+    container: '.shutters-accordion:not([data-shutters])',
+    animationDuration: 350,
+    animationEasing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+    defaultOpen: 'none'
+  });
+  initAll();
+  initDemoUi();
 </script>
 ```
 
 - **Never** load `shutters-core.js` twice (no duplicate script tag + import)
-- One instance per independent auto-close group if behavior must differ
+- `[data-shutters]` containers use `initAll()` only — exclude from manual instance selector
 
 ## SEO blocks in demo/index.html
 
-- Primary meta, Open Graph, Twitter Card
-- JSON-LD: `SoftwareSourceCode` + `FAQPage`
-- Update JSON-LD `version` on release
+- Primary meta, Open Graph, Twitter Card, favicon
+- JSON-LD: `SoftwareSourceCode` + `FAQPage` + `HowTo` + `BreadcrumbList`
+- Update JSON-LD `version` and `.version-badge` on release (`npm run version:sync`)
 
 ## Build & deploy
 
-- Dev: `npm run dev:demo`
+- Dev: `npm run dev` or `npm run dev:demo`
 - Production: `npm run build:demo` → `dist-demo/`
+- GitHub Pages base: `/shutters-accordion/demo/` (`vite.config.demo.js`)
 - Deploy: push to `main`/`master` triggers `.github/workflows/deploy-demo.yml`
+- Pre-build: `npm run sri` refreshes `demo/cdn-integrity.json`
 
 ## After demo changes
 

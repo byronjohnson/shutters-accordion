@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [1.3.0] - 2026-06-26
 
-Minor release — new API method, stronger ARIA wiring, and a redesigned demo site. Safe upgrade from 1.2.x.
+Minor release — new API method, stronger ARIA wiring, and a redesigned demo site. Safe upgrade from 1.2.x. **Published to npm.**
 
 ### Added
 

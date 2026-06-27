@@ -11,9 +11,10 @@ Reference: `src/shutters-core.js` — **vanilla JS only** (see `vanilla-js-only.
 ## Class structure
 
 - Private helpers prefixed `_` (e.g. `_toggle`, `_setState`, `_emit`)
-- Public API: `open`, `close`, `toggle`, `openAll`, `closeAll`, `on`, `off`, `destroy`
+- Public API: `open`, `close`, `toggle`, `isOpen`, `openAll`, `closeAll`, `on`, `off`, `destroy`
 - Custom events: `shutters:open`, `shutters:close` on container with `detail: { header, item }`
 - Index `_byIndex()` flattens headers across all managed containers in DOM order
+- Init assigns `aria-controls` on headers; auto-generates panel `id` as `sp-{n}` when missing
 
 ## Adding a public method checklist
 

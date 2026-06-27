@@ -10,7 +10,7 @@ alwaysApply: false
 |---|---|---|
 | `src/shutters-core.css` | `core.css` | Grid animation, motion, focus ring, clean dividers |
 | `src/shutters-theme.css` | `theme.css` | Optional colors, hover, content typography |
-| `demo/shutters-demo.css` | — | Demo page layout only |
+| `demo/shutters-demo.css` | — | Demo page layout only (page zones, section cards) |
 
 Core is theme-less but visually polished. Never put decorative colors in core.
 

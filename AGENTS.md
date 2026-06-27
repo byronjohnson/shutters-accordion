@@ -4,7 +4,7 @@
 
 ## What This Project Is
 
-Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordion library** published as `shutters-accordion` on npm. It uses CSS Grid `grid-template-rows` transitions for smooth expand/collapse, WAI-ARIA accordion patterns, and event delegation. Bundle target: **< 2 KB gzip**. There is no app server, no database, and no framework runtime — only `src/` library code, a static `demo/` marketing site, and Vite build tooling.
+Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordion library** published as `shutters-accordion` on npm (**latest: 1.3.0**). It uses CSS Grid `grid-template-rows` transitions for smooth expand/collapse, WAI-ARIA accordion patterns, and event delegation. Bundle target: **~2.3 KB gzip (ES)** / **~1.6 KB (UMD)**. There is no app server, no database, and no framework runtime — only `src/` library code, a static `demo/` marketing site, and Vite build tooling.
 
 | Fact | Value |
 |---|---|
@@ -44,17 +44,24 @@ shutters/
 ├── index.js                      ← Vite library entry (imports CSS, exports class)
 ├── src/
 │   ├── shutters-core.js          ← ShuttersAccordion class (source of truth)
+│   ├── shutters-auto.js          ← opt-in auto-init (initAll, data-shutters)
 │   ├── shutters-core.css         ← mechanics only (grid animation, no visuals)
-│   └── shutters-theme.css        ← default theme (colors, padding, focus ring)
+│   ├── shutters-theme.css        ← default theme (colors, padding, focus ring)
+│   └── shutters.d.ts             ← TypeScript declarations (copied to dist/)
 ├── demo/
-│   ├── index.html                ← marketing demo + SEO/JSON-LD
-│   ├── shutters-core.js          ← must match src/ (manual sync)
-│   ├── shutters-core.css         ← must match src/
-│   ├── shutters-theme.css        ← must match src/
-│   └── shutters-demo.css         ← demo layout only
+│   ├── index.html                ← marketing demo + SEO/JSON-LD + page zones
+│   ├── shutters-core.js          ← synced from src/ (`npm run sync:demo`)
+│   ├── shutters-auto.js          ← synced from src/
+│   ├── shutters-core.css         ← synced from src/
+│   ├── shutters-theme.css        ← synced from src/
+│   ├── shutters-demo-ui.js       ← demo-only (copy buttons, snippet tabs, motion lab)
+│   ├── shutters-demo.css         ← demo layout only (page zones, section cards)
+│   └── cdn-integrity.json        ← SRI hashes (`npm run sri`)
 ├── scripts/
 │   ├── generate-agent-context.mjs
-│   └── sync-version.js           ← partially stale; see PROJECT_BRAIN
+│   ├── generate-sri.mjs
+│   ├── check-size.mjs            ← gzip budget gate (`npm run size`)
+│   └── sync-version.js           ← VERSION → package.json, README, demo, docs/
 ├── .cursor/
 │   ├── rules/                    ← always-on + scoped agent rules
 │   ├── skills/                   ← workflow checklists
@@ -99,11 +106,11 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 - **Separate core from theme** — `core.css` = default polished presentation; `theme.css` = optional decorative layer
 - **Event delegation** — one `click` + one `keydown` per container, not per header
 - **CSS Grid animation** — `grid-template-rows: 0fr → 1fr`; never `max-height` or JS height measurement
-- **Auto ARIA** — JS sets `role`, `tabindex`, `aria-expanded`; don't require them in HTML
+- **Auto ARIA** — JS sets `role`, `tabindex`, `aria-expanded`, `aria-controls` (+ panel `id` if missing); don't require them in HTML
 - **No `window.ShuttersAccordion` in ES builds** — UMD only
 - **Accessibility** — visible `:focus-visible`; keyboard: Enter, Space, Arrows, Home, End
 - **Minimal diff** — resist feature creep; keep bundle tiny
-- **Sync demo copies** — after changing `src/shutters-core.*`, copy to `demo/`
+- **Sync demo copies** — after changing `src/` library files, run `npm run sync:demo`
 
 ---
 
@@ -119,8 +126,10 @@ Enforced by `npm run verify:vanilla` (runs before tests).
 | `npm run preview` | Preview library build |
 | `npm run preview:demo` | Preview built demo |
 | `npm run agent:sync` | Regenerate `.cursor/generated/inventory.md` |
-| `npm run version:sync` | Sync VERSION file → package.json (script partially stale) |
-| `npm test` | Vitest unit tests |
+| `npm run size` | Gzip budget check (`scripts/check-size.mjs`) |
+| `npm run sri` | CDN Subresource Integrity hashes → `demo/cdn-integrity.json` |
+| `npm run version:sync` | Sync `VERSION` → package.json, README, demo, local docs |
+| `npm test` | `verify:vanilla` + Vitest (20 tests) |
 | `npm run sync:demo` | Copy `src/` library files → `demo/` |
 
 ---
