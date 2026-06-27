@@ -4,7 +4,7 @@
 
 ## What This Project Is
 
-Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordion library** published as `shutters-accordion` on npm (**latest: 1.3.0**). It uses CSS Grid `grid-template-rows` transitions for smooth expand/collapse, WAI-ARIA accordion patterns, and event delegation. Bundle target: **~2.3 KB gzip (ES)** / **~1.6 KB (UMD)**. This repo is **library source only** — demo, docs, and SEO live at [shuttersjs.com](https://shuttersjs.com/) in the sibling **shutters-site** repo.
+Shutters Accordion is a **zero-dependency, framework-agnostic JavaScript accordion library** published as `shutters-accordion` on npm (**latest: 1.3.1**). It uses CSS Grid `grid-template-rows` transitions for smooth expand/collapse, WAI-ARIA accordion patterns, and event delegation. Bundle target: **~2.3 KB gzip (ES)** / **~1.6 KB (UMD)**. This repo is **library source only** — demo, docs, and SEO live at [shuttersjs.com](https://shuttersjs.com/) in the sibling **shutters-site** repo.
 
 | Fact | Value |
 |---|---|

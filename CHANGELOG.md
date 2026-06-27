@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.1] - 2026-06-27
+
+Patch release — npm metadata and documentation URLs only. No JavaScript, CSS, or API changes. Safe upgrade from 1.3.0.
+
+### Changed
+
+- **npm `homepage`** → https://shuttersjs.com/
+- **npm description and keywords** — SEO-aligned package metadata
+- **README** — live demo and docs links point to shuttersjs.com instead of GitHub Pages
+
+### Docs & repo
+
+- Demo and marketing site live in sibling **shutters-site** repo (https://shuttersjs.com/)
+- Legacy GitHub Pages demo URL redirects to shuttersjs.com
+- Agent context, release docs, and deploy workflow updated for the site split
+
 ## [1.3.0] - 2026-06-26
 
 Minor release — new API method, stronger ARIA wiring, and a redesigned demo site. Safe upgrade from 1.2.x. **Published to npm.**

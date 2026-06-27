@@ -69,9 +69,9 @@ npm install @byronjohnson/shutters-accordion
 ### CDN
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.3.0/dist/core.css">
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.3.1/dist/core.css">
 <script type="module">
-  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.3.0/dist/shutters.es.js';
+  import ShuttersAccordion from 'https://unpkg.com/shutters-accordion@1.3.1/dist/shutters.es.js';
   new ShuttersAccordion({ container: '.shutters-accordion' });
 </script>
 ```
@@ -83,9 +83,9 @@ Optional decorative theme: `dist/theme.css`
 CDN SRI hashes are generated in the [shutters-site](https://github.com/byronjohnson/shutters-site) repo (`npm run sri`). Example (UMD, copy-paste ready):
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.3.0/dist/core.css"
+<link rel="stylesheet" href="https://unpkg.com/shutters-accordion@1.3.1/dist/core.css"
   integrity="sha384-…" crossorigin="anonymous">
-<script src="https://unpkg.com/shutters-accordion@1.3.0/dist/shutters.umd.js"
+<script src="https://unpkg.com/shutters-accordion@1.3.1/dist/shutters.umd.js"
   integrity="sha384-…" crossorigin="anonymous"></script>
 <script>
   new ShuttersAccordion({ container: '.shutters-accordion' });
@@ -202,7 +202,7 @@ Marketing site: see the [shutters-site](https://github.com/byronjohnson/shutters
 
 ## Version
 
-**1.3.0** — see [CHANGELOG.md](CHANGELOG.md)
+**1.3.1** — see [CHANGELOG.md](CHANGELOG.md)
 
 ---
 

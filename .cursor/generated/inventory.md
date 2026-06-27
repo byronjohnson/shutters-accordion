@@ -9,7 +9,7 @@
 | Package | Version |
 |---|---|
 | Node (engines) | >=14.0.0 |
-| shutters-accordion | 1.3.0 |
+| shutters-accordion | 1.3.1 |
 | jsdom (dev) | ^26.1.0 |
 | vite (dev) | ^6.3.5 |
 | vitest (dev) | ^3.2.4 |
@@ -20,10 +20,10 @@
 
 | Source | Version |
 |---|---|
-| package.json | 1.3.0 |
-| VERSION | 1.3.0 |
-| shutters-site/index.html (JSON-LD) | 1.3.0 |
-| shutters-site/index.html (badge) | 1.3.0 |
+| package.json | 1.3.1 |
+| VERSION | 1.3.1 |
+| shutters-site/index.html (JSON-LD) | 1.3.1 |
+| shutters-site/index.html (badge) | 1.3.1 |
 
 ## Project Type
 
